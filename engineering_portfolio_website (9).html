@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ayush Ghosh | Mechanical Engineering Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #020617;
+      --panel: #020617;
+      --card: rgba(15, 23, 42, 0.85);
+      --accent: #38bdf8;
+      --accent2: #22d3ee;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top, #020617, #000);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 2.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(2, 6, 23, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(56,189,248,0.15);
+    }
+
+    nav h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 600;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      color: var(--accent);
+    }
+
+    nav button {
+      background: none;
+      border: 1px solid rgba(56,189,248,0.4);
+      color: var(--text);
+      padding: 0.5rem 1rem;
+      margin-left: 0.75rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    nav button:hover {
+      background: rgba(56,189,248,0.15);
+      color: var(--accent);
+    }
+
+    section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      display: none;
+    }
+
+    section.active { display: block; }
+
+    /* ABOUT */
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--accent2);
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+
+    .stat {
+      background: linear-gradient(145deg, rgba(56,189,248,0.15), rgba(15,23,42,0.9));
+      padding: 1.25rem;
+      border-radius: 14px;
+      text-align: center;
+      border: 1px solid rgba(56,189,248,0.25);
+    }
+
+    .stat h3 {
+      margin: 0;
+      font-size: 1.6rem;
+      color: var(--accent);
+    }
+
+    .stat span {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* ABOUT IMAGE EFFECTS */
+.about-image-wrapper {
+  position: relative;
+  border-radius: 22px;
+  padding: 6px;
+  background: linear-gradient(135deg, rgba(56,189,248,0.9), rgba(34,211,238,0.4));
+  box-shadow: 0 0 40px rgba(56,189,248,0.35), 0 0 140px rgba(34,211,238,0.2);
+  overflow: hidden;
+  transition: transform 0.45s ease, box-shadow 0.45s ease;
+}
+
+.about-image-wrapper:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 0 70px rgba(56,189,248,0.6), 0 0 200px rgba(34,211,238,0.4);
+}
+
+.about-image-wrapper img {
+  width: 100%;
+  display: block;
+  border-radius: 18px;
+  filter: contrast(1.1) saturate(1.2);
+  position: relative;
+  z-index: 2;
+}
+
+.hud-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(56,189,248,0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56,189,248,0.15) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.3;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.award-badge {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background: rgba(2,6,23,0.85);
+  border: 1px solid rgba(56,189,248,0.6);
+  padding: 0.45rem 0.9rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  letter-spacing: 0.6px;
+  color: var(--accent);
+  z-index: 3;
+  backdrop-filter: blur(6px);
+}
+
+/* PROJECTS */
+    .projects-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .projects-header h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--accent2);
+      font-size: 2.2rem;
+    }
+
+    .projects-vertical {
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+    }
+
+    .project-block h3 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--accent);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-images {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-images img {
+      width: 100%;
+      height: 360px;
+      object-fit: contain;
+      border-radius: 16px;
+      border: 1px solid rgba(56,189,248,0.3);
+      box-shadow: 0 0 30px rgba(56,189,248,0.15);
+      background: rgba(2,6,23,0.75);
+      padding: 1rem;
+    }
+
+    .project-block p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1.75;
+      max-width: 900px;
+      margin-bottom: 1.2rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      nav { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <h1>AYUSH GHOSH \ MECHANICAL ENGINEERING</h1>
+  <div>
+    <button onclick="showSection('about')">About</button>
+    <button onclick="showSection('projects')">Projects</button>
+  </div>
+</nav>
+
+<!-- ABOUT PAGE -->
+<section id="about" class="active">
+  <div class="hero">
+    <div>
+      <h2>About Me</h2>
+      <p>
+        I am a mechanical engineer with a strong interest in designing, analyzing, and building physical systems. My work focuses on translating engineering principles into practical, manufacturable solutions through CAD modeling, prototyping, and system-level thinking. I enjoy tackling open-ended engineering problems and refining designs through iteration and analysis.
+      </p>
+    </div>
+
+    <div class="about-image-wrapper">
+  <div class="hud-overlay"></div>
+  <img src="images/ayush_ghosh_about.jpg" alt="Ayush Ghosh">
+  <div class="award-badge">ACTE Trophy Winner</div>
+</div>
+    
+  </div>
+</section>
+
+<!-- PROJECTS PAGE -->
+<section id="projects">
+  <div class="projects-header">
+    <h2>Projects</h2>
+  </div>
+
+  <div class="projects-vertical">
+
+  <div class="project-block">
+    <h3>Raspberry Pi Sodium Bicarbonate Dispenser</h3>
+    <div class="project-images">
+      <img src="images/sodium_bicarbonate_dispenser_1.jpg" alt="Sodium Bicarbonate Dispenser CAD">
+      <img src="images/sodium_bicarbonate_dispenser_2.jpg" alt="Sodium Bicarbonate Dispenser System">
+    </div>
+    <p>
+      This project focused on the design and implementation of an automated chemical dosing system intended to regulate and stabilize pH levels in aquatic tank environments.
+    </p>
+    <p>
+      A Raspberry Pi served as the central embedded controller, interfaced via a breadboard with discrete electrical components including a control switch, LED status indicators, and a DC pump powered by a 12 V battery supply.
+    </p>
+    <p>
+      Custom Python scripts were developed to manage system logic and control pump actuation, enabling consistent and repeatable sodium bicarbonate delivery. Visual feedback was provided through LED indicators to communicate real-time system status and improve operational reliability.
+    </p>
+    <div style="margin-top:1.5rem; max-width:900px;">
+      <a href="https://www.youtube.com/watch?v=t889_P_oynA" target="_blank" style="display:inline-block; margin-top:1.2rem; color: var(--accent); font-size: 1.1rem; text-decoration: none; border: 1px solid rgba(56,189,248,0.4); padding: 0.6rem 1.2rem; border-radius: 10px; transition: all 0.3s ease;">▶ Watch System Demonstration on YouTube</a>
+    </div>
+  </div>
+
+  <div class="project-block">
+    <h3>Solar-Powered Portable Phone Charger</h3>
+    <div class="project-images">
+      <img src="images/piezoelectric_phone_case_1.png" alt="Solar Phone Charger CAD">
+      <img src="images/piezoelectric_phone_case_2.jpg" alt="Solar Phone Charger Prototype">
+    </div>
+    <p>
+      This project involved the mechanical design and prototyping of a foldable, solar-powered portable phone charging system intended to maximize charging efficiency while maintaining portability.
+    </p>
+    <p>
+      The enclosure was fully modeled in CAD and fabricated using additive manufacturing, with a five-fold mechanical layout designed to optimize solar exposure while securely housing a mobile device.
+    </p>
+    <p>
+      The system integrates ten miniature photovoltaic panels electrically configured in parallel to increase current output while maintaining a stable voltage. Each panel was rated for approximately 0.3 W at 2 V under direct sunlight, yielding a total theoretical output of up to 3 W.
+    </p>
+    <p style="margin-top:1rem;">
+      <a href="https://docs.google.com/document/d/1n_8q3erkfbCeA58_gz6mWNhS6H3lkFZ4HfkatPpRxys/edit" target="_blank" style="color: var(--accent);">View Full Project Portfolio →</a>
+    </p>
+  </div>
+
+  <div class="project-block">
+    <h3>ACTE Trophy Design</h3>
+    <div class="project-images">
+      <img src="images/acte_trophy_1.jpg" alt="ACTE Trophy CAD">
+      <img src="images/acte_trophy_2.jpg" alt="ACTE Trophy Render">
+    </div>
+    <p>
+      This award-winning project involved the end-to-end design of a national-level trophy using advanced CAD and digital modeling workflows.
+    </p>
+    <p>
+      Onshape was utilized for parametric and structural modeling of the primary geometry, while Blender was employed to generate complex surface features, organic curves, and refined aesthetic elements.
+    </p>
+    <p>
+      The final design received the National ACTE Student Trophy Design Award, resulting in a $1,000 scholarship, the donation of a professional-grade 3D printer to the school, and an invitation to present the project at a national conference in Texas.
+    </p>
+    <p style="margin-top:1rem;">
+      <a href="https://www.acteonline.org/blog/press/maryland-students-win-acte-national-student-trophy-design-contest-3/" target="_blank" style="color: var(--accent);">Read Official ACTE Article →</a>
+    </p>
+  </div>
+
+</div>
+</section>
+
+<footer>
+  © 2026 Ayush Ghosh · Mechanical Engineering Portfolio
+</footer>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+</script>
+
+</body>
+</html>
