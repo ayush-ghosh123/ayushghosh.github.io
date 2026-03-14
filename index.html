@@ -366,7 +366,9 @@
 
     <!-- Research Project 1 -->
     <div class="project-block">
-      <h3>Research Project Title Placeholder</h3>
+      <h3>Design for Emerging
+and Nanoscale
+Manufacturing, UC Berkeley</h3>
 
       <div class="project-images">
         <img src="images/research_placeholder_1.jpg" alt="Research Image 1">
@@ -374,19 +376,15 @@
       </div>
 
       <p>
-        This section will describe the first research project. Replace this text with a clear overview
-        explaining the problem the research addresses, the methods used, and the broader engineering
-        context of the work.
+        This research focuses on Computed Axial Lithography (CAL), a volumetric additive manufacturing technique that fabricates three-dimensional objects by tomographically synthesizing light within a rotating volume of photopolymer precursor solution. Unlike conventional layer-by-layer 3D printing methods, CAL generates an entire object simultaneously by projecting dynamically computed light patterns into the rotating resin volume. When the integrated light dose within the resin reaches a polymerization threshold, the desired geometry solidifies throughout the volume at once, enabling extremely rapid fabrication of complex structures.
       </p>
 
       <p>
-        You can also explain the specific technical contributions you made, such as modeling,
-        experimental design, data analysis, machine learning development, or fabrication.
+My work in the Design for Emerging and Nanoscale Manufacturing research group focuses on integrating machine learning and data infrastructure into the CAL workflow. I developed an MLOps-based data pipeline to manage and preprocess experimental and simulated datasets produced during volumetric printing experiments. This pipeline standardizes data ingestion, formatting, and preprocessing, allowing machine learning models to be trained and evaluated efficiently on large collections of print and simulation data.
       </p>
 
       <p>
-        This placeholder text can later be replaced with a full explanation of the research system,
-        the methodology used, and the key outcomes or insights obtained from the work.
+Building on this infrastructure, I designed and trained neural network models to address the inverse problem inherent in CAL printing. Rather than directly projecting a model of the target object, CAL requires computing a set of tomographic light projections whose integrated dose will polymerize the desired geometry within the rotating resin volume. The neural networks I developed learn to map target 3D geometries to optimized light dose distributions that produce accurate volumetric prints.
       </p>
     </div>
 
