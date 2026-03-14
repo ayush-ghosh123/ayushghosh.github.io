@@ -393,26 +393,23 @@
 
     <!-- Research Project 2 -->
     <div class="project-block">
-      <h3>Research Project Title Placeholder</h3>
+      <h3>Computational Mechanics Research Group, University of Maryland, Baltimore County</h3>
 
       <div class="project-images">
-        <img src="images/research_placeholder_3.jpg" alt="Research Image 3">
-        <img src="images/research_placeholder_4.jpg" alt="Research Image 4">
+        <img src="ye_1.jpg" alt="Research Image 3">
+        <img src="ye_2.jpg" alt="Research Image 4">
       </div>
 
       <p>
-        This section can describe a second research project or a different component of the same
-        research effort.
+        This research focused on accelerating digital image correlation (DIC), a widely used experimental mechanics technique for measuring full-field displacement and strain in deforming materials. DIC typically works by comparing images of a speckle pattern applied to a specimen before and after deformation and computing the displacement of the speckle features between the two images. While highly accurate, traditional DIC algorithms are computationally intensive and can require several hours to process large datasets.
       </p>
 
       <p>
-        Replace this with a description of the engineering challenge, experimental setup, computational
-        model, or algorithm you developed as part of the research work.
+        To address this limitation, I developed a convolutional neural network (CNN) capable of predicting full-field displacement maps directly from paired speckle images representing the undeformed and deformed states of a material. The model was trained on a large dataset of synthetically generated speckle images with known displacement fields. These datasets were generated and curated in MATLAB, producing more than 10,000 training image pairs with controlled deformation patterns.
       </p>
 
       <p>
-        You may also include discussion of results, performance improvements, or implications for
-        manufacturing, robotics, materials science, or other engineering fields.
+        Preliminary testing suggests that the neural network can reproduce displacement fields with high fidelity while reducing computation time by approximately 98 percent, decreasing processing time from roughly six hours to around six minutes for comparable analyses. The model is currently undergoing further validation by researchers in the Computational Mechanics Research Group to evaluate its performance across a broader range of deformation conditions and experimental datasets.
       </p>
     </div>
 
