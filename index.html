@@ -23,7 +23,6 @@
       font-family: 'Inter', sans-serif;
       background: radial-gradient(circle at top, #020617, #000);
       color: var(--text);
-      min-height: 100vh;
     }
 
     nav {
@@ -41,9 +40,7 @@
 
     nav h1 {
       font-family: 'Orbitron', sans-serif;
-      font-weight: 600;
       font-size: 1.2rem;
-      letter-spacing: 1px;
       color: var(--accent);
     }
 
@@ -55,12 +52,6 @@
       margin-left: 0.75rem;
       border-radius: 8px;
       cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    nav button:hover {
-      background: rgba(56,189,248,0.15);
-      color: var(--accent);
     }
 
     section {
@@ -72,7 +63,7 @@
 
     section.active { display: block; }
 
-    /* ABOUT */
+    /* HERO */
     .hero {
       display: grid;
       grid-template-columns: 1.2fr 1fr;
@@ -83,102 +74,15 @@
     .hero h2 {
       font-family: 'Orbitron', sans-serif;
       font-size: 2.5rem;
-      margin-bottom: 1rem;
       color: var(--accent2);
     }
 
     .hero p {
       color: var(--muted);
-      font-size: 1.05rem;
       line-height: 1.6;
     }
 
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem;
-      margin-top: 2rem;
-    }
-
-    .stat {
-      background: linear-gradient(145deg, rgba(56,189,248,0.15), rgba(15,23,42,0.9));
-      padding: 1.25rem;
-      border-radius: 14px;
-      text-align: center;
-      border: 1px solid rgba(56,189,248,0.25);
-    }
-
-    .stat h3 {
-      margin: 0;
-      font-size: 1.6rem;
-      color: var(--accent);
-    }
-
-    .stat span {
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    /* ABOUT IMAGE EFFECTS */
-.about-image-wrapper {
-  position: relative;
-  border-radius: 22px;
-  padding: 6px;
-  background: linear-gradient(135deg, rgba(56,189,248,0.9), rgba(34,211,238,0.4));
-  box-shadow: 0 0 40px rgba(56,189,248,0.35), 0 0 140px rgba(34,211,238,0.2);
-  overflow: hidden;
-  transition: transform 0.45s ease, box-shadow 0.45s ease;
-}
-
-.about-image-wrapper:hover {
-  transform: translateY(-8px) scale(1.03);
-  box-shadow: 0 0 70px rgba(56,189,248,0.6), 0 0 200px rgba(34,211,238,0.4);
-}
-
-.about-image-wrapper img {
-  width: 100%;
-  display: block;
-  border-radius: 18px;
-  filter: contrast(1.1) saturate(1.2);
-  position: relative;
-  z-index: 2;
-}
-
-.hud-overlay {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(56,189,248,0.15) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(56,189,248,0.15) 1px, transparent 1px);
-  background-size: 32px 32px;
-  opacity: 0.3;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.award-badge {
-  position: absolute;
-  bottom: 16px;
-  right: 16px;
-  background: rgba(2,6,23,0.85);
-  border: 1px solid rgba(56,189,248,0.6);
-  padding: 0.45rem 0.9rem;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  letter-spacing: 0.6px;
-  color: var(--accent);
-  z-index: 3;
-  backdrop-filter: blur(6px);
-}
-
-/* PROJECTS */
-    .projects-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2.5rem;
-    }
-
+    /* PROJECTS */
     .projects-header h2 {
       font-family: 'Orbitron', sans-serif;
       color: var(--accent2);
@@ -191,22 +95,29 @@
       gap: 4rem;
     }
 
+    .project-block {
+      text-align: center;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
     .project-block h3 {
       font-family: 'Orbitron', sans-serif;
       color: var(--accent);
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
 
     .project-images {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
       gap: 2rem;
       margin-bottom: 1.5rem;
     }
 
     .project-images img {
       width: 100%;
+      max-width: 420px;
       height: 360px;
       object-fit: contain;
       border-radius: 16px;
@@ -218,15 +129,14 @@
 
     .project-block p {
       color: var(--muted);
-      font-size: 1.1rem;
-      line-height: 1.75;
-      max-width: 900px;
-      margin-bottom: 1.2rem;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 800px;
+      margin: 0 auto 1.2rem auto;
     }
 
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; }
-      nav { padding: 1rem; }
     }
   </style>
 </head>
@@ -241,122 +151,49 @@
   </div>
 </nav>
 
-<!-- ABOUT PAGE -->
 <section id="about" class="active">
   <div class="hero">
     <div>
       <h2>About Me</h2>
       <p>
-        I am a student at UC Berkeley studying mechanical engineering with a strong interest in designing, analyzing, and building physical systems. My work focuses on translating engineering principles into practical, manufacturable solutions through CAD modeling, prototyping, and system-level thinking. I enjoy tackling open-ended engineering problems and refining designs through iteration and analysis.
+        I am a student at UC Berkeley studying mechanical engineering with a strong interest in designing, analyzing, and building physical systems.
       </p>
     </div>
-
-    <div class="about-image-wrapper">
-  <div class="hud-overlay"></div>
-  <img src="images/ayush_ghosh_about.jpg" alt="Ayush Ghosh">
-  <div class="award-badge">ACTE Trophy Winner</div>
-</div>
-    
+    <img src="images/ayush_ghosh_about.jpg" style="width:100%; border-radius:20px;">
   </div>
 </section>
 
-<!-- PROJECTS PAGE -->
 <section id="projects">
   <div class="projects-header">
     <h2>Projects</h2>
   </div>
 
   <div class="projects-vertical">
-    
-  <div class="project-block">
-  <h3>Formula SAE Accumulator Attic Electrical Architecture</h3>
 
-  <div class="project-images">
-    <img src="images/attic.jpg" alt="Formula SAE Accumulator Attic CAD">
-    <img src="images/attic_2.jpg" alt="Formula SAE Accumulator Attic Assembly">
-  </div>
+    <div class="project-block">
+      <h3>Solar-Powered Portable Phone Charger</h3>
 
-  <p>
-    In this project, I designed the accumulator attic for a Formula SAE electric race car, which houses the vehicle’s high-voltage (HV) and low-voltage (LV) power distribution components. I developed the enclosure and internal electrical architecture in CAD to integrate safety systems, sensing electronics, and high-current interfaces while accounting for packaging constraints and electrical isolation requirements.
-  </p>
+      <div class="project-images">
+        <img src="images/piezoelectric_phone_case_1.png">
+        <img src="images/piezoelectric_phone_case_2.jpg">
+      </div>
 
-  <p>
-    I fabricated custom copper busbars and sheet-metal mounting components using FabLight laser cutting and DIWIRE CNC wire bending to achieve precise conductor geometry and reliable electrical connections. While developing the layout, I evaluated current paths, electrical interfaces, and potential regions of increased resistive heating within the busbar network.
-  </p>
+      <p>
+        This project involved the mechanical design and prototyping of a foldable, solar-powered portable phone charging system intended to maximize charging efficiency while maintaining portability.
+      </p>
 
-  <p>
-    I am also developing an Arduino-based instrumentation system with thermocouples to measure busbar temperature rise under controlled load conditions. The data from these tests will be used to analyze the thermal behavior of the conductors and iteratively redesign the busbar geometry to mitigate hotspots and improve the reliability of the accumulator power distribution system. Currently, the accumulator attic and its electrical hardware are being assembled.
-  </p>
-</div>
+      <p>
+        The enclosure was fully modeled in CAD and fabricated using additive manufacturing, with a five-fold mechanical layout designed to optimize solar exposure while securely housing a mobile device. Finite element analysis (FEA) was conducted on the hinge mechanisms to evaluate stress distribution and ensure structural integrity under repeated folding cycles.
+      </p>
 
-  <div class="project-block">
-    <h3>Raspberry Pi Sodium Bicarbonate Dispenser</h3>
-    <div class="project-images">
-      <img src="images/sodium_bicarbonate_dispenser_1.jpg" alt="Sodium Bicarbonate Dispenser CAD">
-      <img src="images/sodium_bicarbonate_dispenser_2.jpg" alt="Sodium Bicarbonate Dispenser System">
+      <p>
+        The system integrates ten miniature photovoltaic panels electrically configured in parallel to increase current output while maintaining a stable voltage. Each panel was rated for approximately 0.6 W at 2 V under direct sunlight, yielding a total theoretical output of up to 6 W. A voltage regulation module was incorporated to ensure consistent and safe power delivery despite fluctuations in solar input.
+      </p>
     </div>
-    <p>
-      This project focused on the design and implementation of an automated chemical dosing system intended to regulate and stabilize pH levels in aquatic tank environments.
-    </p>
-    <p>
-      A Raspberry Pi served as the central embedded controller, interfaced via a breadboard with discrete electrical components including a control switch, LED status indicators, and a DC pump powered by a 12 V battery supply.
-    </p>
-    <p>
-      Custom Python scripts were developed to manage system logic and control pump actuation, enabling consistent and repeatable sodium bicarbonate delivery. Visual feedback was provided through LED indicators to communicate real-time system status and improve operational reliability.
-    </p>
-    <div style="margin-top:1.5rem; max-width:900px;">
-      <a href="https://www.youtube.com/watch?v=t889_P_oynA" target="_blank" style="display:inline-block; margin-top:1.2rem; color: var(--accent); font-size: 1.1rem; text-decoration: none; border: 1px solid rgba(56,189,248,0.4); padding: 0.6rem 1.2rem; border-radius: 10px; transition: all 0.3s ease;">▶ Watch System Demonstration on YouTube</a>
-    </div>
-  </div>
 
-  <div class="project-block">
-    <h3>Solar-Powered Portable Phone Charger</h3>
-    <div class="project-images">
-      <img src="images/piezoelectric_phone_case_1.png" alt="Solar Phone Charger CAD">
-      <img src="images/piezoelectric_phone_case_2.jpg" alt="Solar Phone Charger Prototype">
-    </div>
-   <p>
-  This project involved the mechanical design and prototyping of a foldable, solar-powered portable phone charging system intended to maximize charging efficiency while maintaining portability.
-</p>
-<p>
-  The enclosure was fully modeled in CAD and fabricated using additive manufacturing, with a five-fold mechanical layout designed to optimize solar exposure while securely housing a mobile device. Finite element analysis (FEA) was conducted on the hinge mechanisms to evaluate stress distribution and ensure structural integrity under repeated folding cycles.
-</p>
-<p>
-  The system integrates ten miniature photovoltaic panels electrically configured in parallel to increase current output while maintaining a stable voltage. Each panel was rated for approximately 0.6 W at 2 V under direct sunlight, yielding a total theoretical output of up to 6 W. A voltage regulation module was incorporated to ensure consistent and safe power delivery despite fluctuations in solar input.
-</p>
-    <p style="margin-top:1rem;">
-  <a href="pdfs/Solar%20Power%20Bank%20Project%20Portfolio.pdf"
-     target="_blank"
-     style="color: var(--accent);">
-   
-  </a>
-</p>
   </div>
-
-  <div class="project-block">
-    <h3>ACTE Trophy Design</h3>
-    <div class="project-images">
-      <img src="images/acte_trophy_1.jpg" alt="ACTE Trophy CAD">
-      <img src="images/acte_trophy_2.jpg" alt="ACTE Trophy Render">
-    </div>
-    <p>
-      This award-winning project involved the end-to-end design of a national-level trophy using advanced CAD and digital modeling workflows.
-    </p>
-    <p>
-      Onshape was utilized for parametric and structural modeling of the primary geometry, while Blender was employed to generate complex surface features, organic curves, and refined aesthetic elements.
-    </p>
-    <p>
-      The final design received the National ACTE Student Trophy Design Award, resulting in a $1,000 scholarship, the donation of a professional-grade 3D printer to the school, and an invitation to present the project at a national conference in Texas.
-    </p>
-    <p style="margin-top:1rem;">
-      <a href="https://www.acteonline.org/blog/press/maryland-students-win-acte-national-student-trophy-design-contest-3/" target="_blank" style="color: var(--accent);">Read Official ACTE Article →</a>
-    </p>
-  </div>
-
-</div>
 </section>
 
-  <!-- RESEARCH PAGE -->
 <section id="research">
   <div class="projects-header">
     <h2>Research</h2>
@@ -364,59 +201,22 @@
 
   <div class="projects-vertical">
 
-    <!-- Research Project 1 -->
     <div class="project-block">
-      <h3>Design for Emerging
-and Nanoscale
-Manufacturing, UC Berkeley</h3>
+      <h3>Computational Mechanics Research</h3>
 
       <div class="project-images">
-        <img src="images/woo_1.jpg" alt="Research Image 1">
-        <img src="images/woo_2.jpg" alt="Research Image 2">
+        <img src="images/ye_1.jpg">
+        <img src="images/ye_2.jpg">
       </div>
 
       <p>
-        This research focuses on Computed Axial Lithography (CAL), a volumetric additive manufacturing technique that fabricates three-dimensional objects by tomographically synthesizing light within a rotating volume of photopolymer precursor solution. Unlike conventional layer-by-layer 3D printing methods, CAL generates an entire object simultaneously by projecting dynamically computed light patterns into the rotating resin volume. When the integrated light dose within the resin reaches a polymerization threshold, the desired geometry solidifies throughout the volume at once, enabling extremely rapid fabrication of complex structures.
+        This research focused on accelerating digital image correlation (DIC), enabling fast and accurate displacement field prediction using neural networks.
       </p>
 
-      <p>
-My work in the Design for Emerging and Nanoscale Manufacturing research group focuses on integrating machine learning and data infrastructure into the CAL workflow. I developed an MLOps-based data pipeline to manage and preprocess experimental and simulated datasets produced during volumetric printing experiments. This pipeline standardizes data ingestion, formatting, and preprocessing, allowing machine learning models to be trained and evaluated efficiently on large collections of print and simulation data.
-      </p>
-
-      <p>
-Building on this infrastructure, I designed and trained neural network models to address the inverse problem inherent in CAL printing. Rather than directly projecting a model of the target object, CAL requires computing a set of tomographic light projections whose integrated dose will polymerize the desired geometry within the rotating resin volume. The neural networks I developed learn to map target 3D geometries to optimized light dose distributions that produce accurate volumetric prints.
-      </p>
-    </div>
-
-
-    <!-- Research Project 2 -->
-    <div class="project-block">
-      <h3>Computational Mechanics Research Group, University of Maryland, Baltimore County</h3>
-
-      <div class="project-images">
-        <img src="images/ye_1.jpg" alt="Research Image 3">
-        <img src="images/ye_2.jpg" alt="Research Image 4">
-      </div>
-
-      <p>
-        This research focused on accelerating digital image correlation (DIC), a widely used experimental mechanics technique for measuring full-field displacement and strain in deforming materials. DIC typically works by comparing images of a speckle pattern applied to a specimen before and after deformation and computing the displacement of the speckle features between the two images. While highly accurate, traditional DIC algorithms are computationally intensive and can require several hours to process large datasets.
-      </p>
-
-      <p>
-        To address this limitation, I developed a convolutional neural network (CNN) capable of predicting full-field displacement maps directly from paired speckle images representing the undeformed and deformed states of a material. The model was trained on a large dataset of synthetically generated speckle images with known displacement fields. These datasets were generated and curated in MATLAB, producing more than 10,000 training image pairs with controlled deformation patterns.
-      </p>
-
-      <p>
-        Preliminary testing suggests that the neural network can reproduce displacement fields with high fidelity while reducing computation time by approximately 98 percent, decreasing processing time from roughly six hours to around six minutes for comparable analyses. The model is currently undergoing further validation by researchers in the Computational Mechanics Research Group to evaluate its performance across a broader range of deformation conditions and experimental datasets.
-      </p>
     </div>
 
   </div>
 </section>
-
-<footer>
-  © 2026 Ayush Ghosh · Mechanical Engineering Portfolio
-</footer>
 
 <script>
   function showSection(id) {
