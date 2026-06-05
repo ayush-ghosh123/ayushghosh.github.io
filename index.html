@@ -415,10 +415,16 @@
       <img src="images/sodium_bicarbonate_dispenser_2.jpg" alt="Sodium Bicarbonate Dispenser System">
     </div>
     <p>
-     This project was inspired by my work at the Institute of Marine and Environmental Technology (IMET), where I helped deliver sodium bicarbonate to aquatic tanks to maintain stable pH. It grew into the design and implementation of an automated chemical dosing system intended to regulate and stabilize pH levels in aquatic tank environments. A Raspberry Pi served as the central embedded controller, interfaced via a breadboard with discrete electrical components including a control switch, LED status indicators, and a DC pump powered by a 12 V battery supply.
+     This project was inspired by my work at the Institute of Marine and Environmental Technology (IMET), where I helped deliver sodium bicarbonate to aquatic tanks to maintain stable pH. It grew into the design and implementation of an automated chemical dosing system intended to regulate and stabilize pH levels in aquatic tank environments.
     </p>
     <p>
-     Custom Python scripts were developed to manage system logic and control pump actuation, enabling consistent and repeatable sodium bicarbonate delivery. Visual feedback was provided through LED indicators to communicate real-time system status and improve operational reliability.
+     A Raspberry Pi served as the central embedded controller, interfaced via a breadboard with discrete electrical components including a control switch, LED status indicators, and a DC pump powered by a 12 V battery supply.
+    </p>
+    <p>
+     Custom Python scripts were developed to manage system logic and control pump actuation, enabling consistent and repeatable sodium bicarbonate delivery, while LED indicators provided real-time visual feedback on system status to improve operational reliability. At the core of the software is a dosing calculator I helped develop from first-principles acid–base chemistry, which computes the required sodium bicarbonate dose from critical water parameters—current pH, target pH, tank volume, tank alkalinity, and temperature.
+    </p>
+    <p>
+     The completed system was pitched to IMET as a prototype to automate their pH stabilization process.
     </p>
     <div style="margin-top:1.5rem; max-width:900px;">
       <a href="https://www.youtube.com/watch?v=t889_P_oynA" target="_blank" style="display:inline-block; margin-top:1.2rem; color: var(--accent); font-size: 1.1rem; text-decoration: none; border: 1px solid rgba(56,189,248,0.4); padding: 0.6rem 1.2rem; border-radius: 10px; transition: all 0.3s ease;">▶ Watch System Demonstration on YouTube</a>
