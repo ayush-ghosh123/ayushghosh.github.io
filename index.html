@@ -224,6 +224,20 @@
       margin-bottom: 1.2rem;
     }
 
+    /* WORK EXPERIENCE DATE SUBTITLE */
+    .project-block .work-date {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 400;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-top: -0.4rem;
+      margin-bottom: 1.5rem;
+      padding-left: 0.85rem;
+      border-left: 2px solid rgba(56,189,248,0.6);
+    }
+
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; }
       nav { padding: 1rem; }
@@ -269,9 +283,10 @@
 
   <div class="projects-vertical">
 
-    <!-- ===== Work Experience 1 — replace placeholders below ===== -->
+    <!-- ===== Work Experience 1 ===== -->
     <div class="project-block">
       <h3>Hardware Engineering Intern — KwikKart</h3>
+      <p class="work-date">May 2026 – Present</p>
 
       <div class="project-images">
         <img src="images/kwikkart_1.jpg" alt="Work Experience 1 Image 1">
@@ -279,19 +294,14 @@
       </div>
 
       <p>
-        May 2026 - Present
-      </p>
-      <p>
         At KwikKart, a company building AI-powered smart shopping carts that let shoppers scan, weigh, and check out produce as they go, I work on the hardware design of the device's mechanical and electrical platform. I am helping design the aluminum chassis and figuring out how to integrate and package the electrical components—the Jetson compute, cameras, display, barcode scanner, and power electronics—into a serviceable, cart-mountable enclosure. I am also designing a passive (fanless) cooling system for the NVIDIA Jetson AGX Orin, using SolidWorks to model the heat-sink and thermal-path geometry and validating it through thermal simulations in SolidWorks. In parallel, I am developing a modular produce-weighing scale, applying structural mechanics and load FEA to size the load path and mounting structure for accurate, repeatable readings under everyday shopping use.
-      </p>
-      <p>
-       
       </p>
     </div>
 
-    <!-- ===== Work Experience 2 — replace placeholders below ===== -->
+    <!-- ===== Work Experience 2 ===== -->
     <div class="project-block">
       <h3>Co-Founder — Firefly</h3>
+      <p class="work-date">May 2026 – Present</p>
 
       <div class="project-images">
         <img src="images/firefly_1.jpg" alt="Work Experience 2 Image 1">
@@ -299,19 +309,14 @@
       </div>
 
       <p>
-        May 2026 - Present
-      </p>
-      <p>
         At Firefly, a company developing rovers for consumer fire response, I am redesigning the electrical system of a tracked, computer-vision-guided firefighting robot. I am building the power budget and sizing a custom LiFePO4 battery pack with a BMS for cell monitoring, balancing, fault protection, and state-of-charge/health tracking, chosen for thermal stability near fire. I am also designing the power distribution architecture—master switch, E-stop, fused branches, and DC-DC-regulated 24 V/12 V/5 V rails—plus wire management and the thermal, isolation, and IP-rated sealing design that lets the platform spray water and run in heat without compromising its electronics.
-      </p>
-      <p>
-        
       </p>
     </div>
 
-    <!-- ===== Work Experience 3 — replace placeholders below ===== -->
+    <!-- ===== Work Experience 3 ===== -->
     <div class="project-block">
       <h3>Engineering Intern — Senrab Co.</h3>
+      <p class="work-date">December 2025 – May 2026</p>
 
       <div class="project-images">
         <img src="images/NDA.jpg" alt="Work Experience 3 Image 1">
@@ -319,13 +324,7 @@
       </div>
 
       <p>
-        December 2025 - May 2026
-      </p>
-      <p>
         At Senrab, I work on the vehicle and infrastructure design for a high-speed, low-pressure transit system. I am designing the vehicle geometry and supporting vacuum infrastructure in SolidWorks—including pressure boundaries, isolation gates, and pumping subsystems—while modeling payload dynamics in MATLAB to analyze stability, transient load response, and kinematics, which informs structural sizing and detachable-shell concepts for heat flux absorption during atmospheric transit. I am also running extensive thermal FEA to characterize exoatmospheric heat flux and evaluate payload structural performance under combined aerodynamic and thermal loading. Across this work, I apply factors of safety and material allowables to qualify components for a high-acceleration flight environment.
-      </p>
-      <p>
-       
       </p>
     </div>
 
@@ -342,6 +341,7 @@
     
   <div class="project-block">
   <h3>Formula SAE Accumulator Attic Electrical Architecture</h3>
+  <p class="work-date">[Month Year – Present]</p>
 
   <div class="project-images">
     <img src="images/attic.jpg" alt="Formula SAE Accumulator Attic CAD">
@@ -363,6 +363,7 @@
 
   <div class="project-block">
     <h3>Raspberry Pi Sodium Bicarbonate Dispenser</h3>
+    <p class="work-date">[Month Year – Month Year]</p>
     <div class="project-images">
       <img src="images/sodium_bicarbonate_dispenser_1.jpg" alt="Sodium Bicarbonate Dispenser CAD">
       <img src="images/sodium_bicarbonate_dispenser_2.jpg" alt="Sodium Bicarbonate Dispenser System">
@@ -383,6 +384,7 @@
 
   <div class="project-block">
     <h3>Solar-Powered Portable Phone Charger</h3>
+    <p class="work-date">[Month Year – Month Year]</p>
     <div class="project-images">
       <img src="images/piezoelectric_phone_case_1.png" alt="Solar Phone Charger CAD">
       <img src="images/piezoelectric_phone_case_2.jpg" alt="Solar Phone Charger Prototype">
@@ -407,6 +409,7 @@
 
   <div class="project-block">
     <h3>ACTE Trophy Design</h3>
+    <p class="work-date">[Month Year – Month Year]</p>
     <div class="project-images">
       <img src="images/acte_trophy_1.jpg" alt="ACTE Trophy CAD">
       <img src="images/acte_trophy_2.jpg" alt="ACTE Trophy Render">
@@ -441,6 +444,7 @@
       <h3>Design for Emerging
 and Nanoscale
 Manufacturing, UC Berkeley</h3>
+      <p class="work-date">[Month Year – Present]</p>
 
       <div class="project-images">
         <img src="images/woo_1.jpg" alt="Research Image 1">
@@ -464,6 +468,7 @@ Building on this infrastructure, I designed and trained neural network models to
     <!-- Research Project 2 -->
     <div class="project-block">
       <h3>Computational Mechanics Research Group, University of Maryland, Baltimore County</h3>
+      <p class="work-date">[Month Year – Month Year]</p>
 
       <div class="project-images">
         <img src="images/ye_1.jpg" alt="Research Image 3">
