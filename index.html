@@ -349,15 +349,15 @@
   </div>
 
   <p>
-    In this project, I designed the accumulator attic for a Formula SAE electric race car, which houses the vehicle’s high-voltage (HV) and low-voltage (LV) power distribution components. I developed the enclosure and internal electrical architecture in CAD to integrate safety systems, sensing electronics, and high-current interfaces while accounting for packaging constraints and electrical isolation requirements.
+   In this project, I designed the accumulator attic for a Formula SAE electric race car—the Accumulator Tractive System Container (ATSC), a high-voltage DC battery enclosure that houses the vehicle’s high-voltage (HV) and low-voltage (LV) power distribution components. I developed the enclosure and internal electrical architecture in SolidWorks using GD&T-driven tolerance stack-ups to integrate safety systems, sensing electronics, and high-current interfaces while accounting for packaging constraints and electrical isolation requirements. Using first-principles Joule heating and thermal conduction analysis, I redesigned the attic electrical component layout, cutting assembly mass by 18% while streamlining the high-voltage assembly workflow.
   </p>
 
   <p>
-    I fabricated custom copper busbars and sheet-metal mounting components using FabLight laser cutting and DIWIRE CNC wire bending to achieve precise conductor geometry and reliable electrical connections. While developing the layout, I evaluated current paths, electrical interfaces, and potential regions of increased resistive heating within the busbar network.
+    I fabricated custom copper busbars and sheet-metal mounting components using FabLight laser cutting and DIWIRE CNC wire bending to achieve precise conductor geometry and reliable electrical connections. While developing the layout, I evaluated current paths, electrical interfaces, and potential regions of increased resistive heating within the busbar network, supported by thermal calculations.
   </p>
 
   <p>
-    I am also developing an Arduino-based instrumentation system with thermocouples to measure busbar temperature rise under controlled load conditions. The data from these tests will be used to analyze the thermal behavior of the conductors and iteratively redesign the busbar geometry to mitigate hotspots and improve the reliability of the accumulator power distribution system. Currently, the accumulator attic and its electrical hardware are being assembled.
+   I developed the instrumentation system and test setup used to characterize busbar thermal behavior: an Arduino-based rig with a thermocouple sensor array and four-point probe resistance measurement, with telemetry logged and visualized in Python and matplotlib. By comparing the measured thermocouple and four-point probe results against SolidWorks thermal FEA, I validated the models and used the results to suggest new busbar design geometries, directly driving iterative redesigns that mitigate hotspots and improve the reliability of the accumulator power distribution system. Currently, the accumulator attic and its electrical hardware are being assembled.
   </p>
 </div>
 
@@ -394,13 +394,13 @@
       <img src="images/sodium_bicarbonate_dispenser_2.jpg" alt="Sodium Bicarbonate Dispenser System">
     </div>
     <p>
-      This project focused on the design and implementation of an automated chemical dosing system intended to regulate and stabilize pH levels in aquatic tank environments.
+     This project was inspired by my work at the Institute of Marine and Environmental Technology (IMET), where I helped deliver sodium bicarbonate to aquatic tanks to maintain stable pH. It grew into the design and implementation of an automated chemical dosing system intended to regulate and stabilize pH levels in aquatic tank environments. A Raspberry Pi served as the central embedded controller, interfaced via a breadboard with discrete electrical components including a control switch, LED status indicators, and a DC pump powered by a 12 V battery supply.
     </p>
     <p>
-      A Raspberry Pi served as the central embedded controller, interfaced via a breadboard with discrete electrical components including a control switch, LED status indicators, and a DC pump powered by a 12 V battery supply.
+      A Raspberry Pi 4 served as the central embedded controller, interfaced via a breadboard with discrete electrical components including a control switch, LED status indicators, and a DC pump powered by a 12 V battery supply.
     </p>
     <p>
-      Custom Python scripts were developed to manage system logic and control pump actuation, enabling consistent and repeatable sodium bicarbonate delivery. Visual feedback was provided through LED indicators to communicate real-time system status and improve operational reliability.
+     Custom Python scripts were developed to manage system logic and control pump actuation, enabling consistent and repeatable sodium bicarbonate delivery. Visual feedback was provided through LED indicators to communicate real-time system status and improve operational reliability.
     </p>
     <div style="margin-top:1.5rem; max-width:900px;">
       <a href="https://www.youtube.com/watch?v=t889_P_oynA" target="_blank" style="display:inline-block; margin-top:1.2rem; color: var(--accent); font-size: 1.1rem; text-decoration: none; border: 1px solid rgba(56,189,248,0.4); padding: 0.6rem 1.2rem; border-radius: 10px; transition: all 0.3s ease;">▶ Watch System Demonstration on YouTube</a>
