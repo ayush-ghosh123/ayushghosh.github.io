@@ -16,26 +16,19 @@
       --panel-2:   rgba(255,255,255,0.04);
       --line:      rgba(214,228,246,0.10);
       --line-2:    rgba(214,228,246,0.18);
-
       --accent:    #3fa9ff;   /* electric azure  */
       --accent-dim:#1d6fc4;
       --accent2:   #5b6ef5;   /* deep indigo     */
       --accent3:   #5eead4;   /* instrument teal */
-
       --text:      #e6ebf2;
       --muted:     #8592a6;
-
       --mono: 'JetBrains Mono', ui-monospace, monospace;
       --display: 'Chakra Petch', sans-serif;
       --body: 'Inter', sans-serif;
-
       --glow: 0 0 0 1px rgba(63,169,255,0.25), 0 0 28px rgba(63,169,255,0.10);
     }
-
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
-
     body {
       margin: 0;
       font-family: var(--body);
@@ -45,7 +38,6 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
-
     /* ===== ANIMATED BACKPLANE ===== */
     .backplane {
       position: fixed;
@@ -74,7 +66,6 @@
       from { transform: translate3d(0,0,0); }
       to   { transform: translate3d(120px,120px,0); }
     }
-
     /* scanline sweep */
     .scanline {
       position: fixed;
@@ -91,9 +82,7 @@
       50%  { transform: translateY(115vh); }
       100% { transform: translateY(-30vh); }
     }
-
     ::selection { background: var(--accent); color: #04060d; }
-
     ::-webkit-scrollbar { width: 10px; }
     ::-webkit-scrollbar-track { background: #04060d; }
     ::-webkit-scrollbar-thumb {
@@ -102,7 +91,6 @@
       border-radius: 20px;
     }
     ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-
     /* ===== NAV ===== */
     nav {
       display: flex;
@@ -125,7 +113,6 @@
       background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
       opacity: 0.55;
     }
-
     nav h1 {
       font-family: var(--display);
       font-weight: 700;
@@ -159,9 +146,7 @@
       vertical-align: -2px;
     }
     @keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
-
     .navlinks { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-
     nav button {
       position: relative;
       background: transparent;
@@ -199,7 +184,6 @@
       box-shadow: 0 0 22px rgba(63,169,255,0.14) inset;
     }
     nav button.active::before { transform: scaleY(1); }
-
     /* ===== STATUS STRIP ===== */
     .statusbar {
       position: sticky;
@@ -233,7 +217,6 @@
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.25} }
     .statusbar .mid { color: rgba(214,228,246,0.35); }
     .statusbar b { color: var(--accent); font-weight: 500; }
-
     /* ===== SECTIONS ===== */
     section {
       max-width: 1200px;
@@ -246,7 +229,6 @@
       from { opacity: 0; transform: translateY(18px); filter: blur(6px); }
       to   { opacity: 1; transform: none; filter: none; }
     }
-
     /* section heading block */
     .projects-header {
       display: flex;
@@ -294,7 +276,6 @@
       text-align: right;
     }
     .section-meta span { color: var(--accent); }
-
     /* ===== ABOUT / HERO ===== */
     .hero {
       display: grid;
@@ -302,7 +283,6 @@
       gap: 3.5rem;
       align-items: center;
     }
-
     .kicker {
       font-family: var(--mono);
       font-size: 0.68rem;
@@ -320,7 +300,6 @@
       height: 1px;
       background: linear-gradient(90deg, rgba(63,169,255,0.5), transparent);
     }
-
     .hero h2 {
       font-family: var(--display);
       font-size: 3.4rem;
@@ -336,7 +315,6 @@
       font-style: normal;
       color: var(--accent);
     }
-
     .hero p {
       color: var(--muted);
       font-size: 1.06rem;
@@ -345,7 +323,6 @@
       border-left: 1px solid var(--line-2);
       padding-left: 1.4rem;
     }
-
     .stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -367,7 +344,6 @@
     }
     .stat h3 { margin: 0; font-size: 1.5rem; font-family: var(--display); color: var(--accent); }
     .stat span { font-size: 0.68rem; font-family: var(--mono); letter-spacing: 1.4px; text-transform: uppercase; color: var(--muted); }
-
     /* ===== ABOUT IMAGE : HUD FRAME ===== */
     .about-image-wrapper {
       position: relative;
@@ -395,7 +371,6 @@
       transition: filter .5s ease;
     }
     .about-image-wrapper:hover img { filter: contrast(1.12) saturate(1.05) brightness(1.02); }
-
     .hud-overlay {
       position: absolute;
       inset: 8px;
@@ -422,7 +397,6 @@
     .about-image-wrapper .corner.tr { top: 14px; right: 14px; border-left: 0; border-bottom: 0; }
     .about-image-wrapper .corner.bl { bottom: 14px; left: 14px; border-right: 0; border-top: 0; }
     .about-image-wrapper .corner.br { bottom: 14px; right: 14px; border-left: 0; border-top: 0; }
-
     .award-badge {
       position: absolute;
       bottom: 18px;
@@ -443,7 +417,6 @@
       content: "◆ ";
       color: var(--accent2);
     }
-
     /* ===== PROJECT / EXPERIENCE BLOCKS ===== */
     .projects-vertical {
       display: flex;
@@ -451,7 +424,6 @@
       gap: 3rem;
       counter-reset: block;
     }
-
     .project-block {
       counter-increment: block;
       position: relative;
@@ -489,7 +461,6 @@
       transform: translateY(-3px);
     }
     .project-block:hover::before { opacity: 1; }
-
     .project-block h3 {
       font-family: var(--display);
       color: var(--text);
@@ -507,7 +478,6 @@
       font-family: var(--mono);
       font-size: 1rem;
     }
-
     /* DATE SUBTITLE */
     .project-block .work-date {
       display: inline-block;
@@ -523,14 +493,12 @@
       padding: 0.32rem 0.7rem;
       margin: 0 0 1.9rem;
     }
-
     .project-images {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 1.5rem;
       margin-bottom: 2rem;
     }
-
     .shot {
       position: relative;
       border-radius: 6px;
@@ -554,7 +522,6 @@
     }
     .shot:hover { border-color: rgba(63,169,255,0.4); box-shadow: 0 0 34px rgba(63,169,255,0.10); transform: translateY(-2px); }
     .shot:hover::after { transform: translateY(100%); }
-
     .shot .tick {
       position: absolute;
       z-index: 3;
@@ -567,7 +534,6 @@
     .shot:hover .tick { opacity: 1; }
     .shot .tick.tl { top: 9px; left: 9px; border-right: 0; border-bottom: 0; }
     .shot .tick.br { bottom: 9px; right: 9px; border-left: 0; border-top: 0; }
-
     .project-images img {
       width: 100%;
       height: 360px;
@@ -578,7 +544,6 @@
       transition: filter .4s ease, transform .5s ease;
     }
     .shot:hover img { filter: saturate(1.08) contrast(1.08); transform: scale(1.015); }
-
     .project-block p {
       color: var(--muted);
       font-size: 1.02rem;
@@ -587,7 +552,12 @@
       margin-bottom: 1.15rem;
     }
     .project-block p:last-of-type { margin-bottom: 0; }
-
+    /* KEY-DETAIL HIGHLIGHTS */
+    .project-block p strong,
+    .hero p strong {
+      color: var(--text);
+      font-weight: 600;
+    }
     /* action links */
     .btn-link {
       display: inline-block;
@@ -620,7 +590,6 @@
       transition: color .3s ease, border-color .3s ease;
     }
     .inline-link:hover { color: var(--accent); border-color: var(--accent); }
-
     /* placeholder image styling */
     .shot.placeholder {
       border-style: dashed;
@@ -649,11 +618,9 @@
       letter-spacing: 1.4px;
       color: rgba(214,228,246,0.28);
     }
-
     /* reveal on scroll */
     .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.3,1); }
     .reveal.in { opacity: 1; transform: none; }
-
     /* ===== FOOTER ===== */
     footer {
       max-width: 1200px;
@@ -671,7 +638,6 @@
       flex-wrap: wrap;
     }
     footer span { color: var(--accent-dim); }
-
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; gap: 2.5rem; }
       .hero h2 { font-size: 2.4rem; }
@@ -687,17 +653,14 @@
       .section-meta { text-align: left; }
       .project-images img, .shot.placeholder .ph { height: 260px; }
     }
-
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
   </style>
 </head>
 <body>
-
 <div class="backplane"></div>
 <div class="scanline"></div>
-
 <nav>
   <h1>
     <span class="tag">AG</span>
@@ -709,13 +672,11 @@
     <button data-target="research" onclick="showSection('research', this)">Research</button>
   </div>
 </nav>
-
 <div class="statusbar">
   <div><span class="dot"></span>SYS <b>ONLINE</b> — SECTION <b id="secLabel">ABOUT</b></div>
   <div class="mid">UC BERKELEY · MECHANICAL ENGINEERING · EECS MINOR</div>
   <div>LOCAL <b id="clock">--:--:--</b></div>
 </div>
-
 <!-- ABOUT PAGE -->
 <section id="about" class="active">
   <div class="hero">
@@ -726,7 +687,6 @@
           I'm a Mechanical Engineering student at UC Berkeley minoring in Electrical Engineering and Computer Science (EECS). I enjoy full-stack engineering — taking a project from hardware design and analysis through the electrical systems and software that bring it to life. My work centers on turning engineering principles into practical, manufacturable solutions through CAD, FEA, prototyping, and system-level thinking, and I'm at my best on open-ended problems that cross mechanical, electrical, and software domains.
       </p>
     </div>
-
     <div class="about-image-wrapper">
       <div class="hud-overlay"></div>
       <span class="corner tl"></span><span class="corner tr"></span>
@@ -734,23 +694,18 @@
       <img src="images/ayush_ghosh_about.jpg" alt="Ayush Ghosh">
       <div class="award-badge">ACTE Trophy Winner</div>
     </div>
-
   </div>
 </section>
-
 <!-- PROJECTS PAGE -->
 <section id="projects">
   <div class="projects-header">
     <h2>Projects</h2>
     <div class="section-meta">Index <span>02</span> / Records <span>06</span></div>
   </div>
-
   <div class="projects-vertical">
-
   <div class="project-block reveal">
   <h3>Formula SAE Accumulator Attic Electrical Architecture</h3>
   <p class="work-date"> January 2026 - Present </p>
-
   <div class="project-images">
     <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
       <img src="images/attic.jpg" alt="Formula SAE Accumulator Attic CAD">
@@ -759,25 +714,20 @@
       <img src="images/ATTIC_jpg.jpg" alt="Formula SAE Accumulator Attic Assembly">
     </div>
   </div>
-
   <p>
-   In this project, I designed the accumulator attic for a Formula SAE electric race car—the Accumulator Tractive System Container (ATSC), a high-voltage DC battery enclosure that houses the vehicle's high-voltage (HV) and low-voltage (LV) power distribution components. I developed the enclosure and internal electrical architecture in SolidWorks using GD&T-driven tolerance stack-ups to integrate safety systems, sensing electronics, and high-current interfaces while accounting for packaging constraints and electrical isolation requirements. Using first-principles Joule heating and thermal conduction analysis, I redesigned the attic electrical component layout, cutting assembly mass by 18% while streamlining the high-voltage assembly workflow.
+   In this project, I designed the accumulator attic for a Formula SAE electric race car—the <strong>Accumulator Tractive System Container (ATSC)</strong>, a high-voltage DC battery enclosure that houses the vehicle's high-voltage (HV) and low-voltage (LV) power distribution components. I developed the enclosure and internal electrical architecture in <strong>SolidWorks</strong> using <strong>GD&amp;T-driven tolerance stack-ups</strong> to integrate safety systems, sensing electronics, and high-current interfaces while accounting for packaging constraints and electrical isolation requirements. Using first-principles <strong>Joule heating and thermal conduction analysis</strong>, I redesigned the attic electrical component layout, <strong>cutting assembly mass by 18%</strong> while streamlining the high-voltage assembly workflow.
   </p>
-
   <p>
-    I fabricated custom copper busbars and sheet-metal mounting components using FabLight laser cutting and DIWIRE CNC wire bending to achieve precise conductor geometry and reliable electrical connections. While developing the layout, I evaluated current paths, electrical interfaces, and potential regions of increased resistive heating within the busbar network, supported by thermal calculations.
+    I fabricated custom copper busbars and sheet-metal mounting components using <strong>FabLight laser cutting</strong> and <strong>DIWIRE CNC wire bending</strong> to achieve precise conductor geometry and reliable electrical connections. While developing the layout, I evaluated current paths, electrical interfaces, and potential regions of increased resistive heating within the busbar network, supported by thermal calculations.
   </p>
-
   <p>
-   I developed the instrumentation system and test setup used to characterize busbar thermal behavior: an Arduino-based rig with a thermocouple sensor array and four-point probe resistance measurement, with telemetry logged and visualized in Python and matplotlib. By comparing the measured thermocouple and four-point probe results against SolidWorks thermal FEA, I validated the models and used the results to suggest new busbar design geometries, directly driving iterative redesigns that mitigate hotspots and improve the reliability of the accumulator power distribution system. Currently, the accumulator attic and its electrical hardware are being assembled.
+   I developed the instrumentation system and test setup used to characterize busbar thermal behavior: an <strong>Arduino-based rig</strong> with a <strong>thermocouple sensor array</strong> and <strong>four-point probe resistance measurement</strong>, with telemetry logged and visualized in <strong>Python and matplotlib</strong>. By comparing the measured thermocouple and four-point probe results against <strong>SolidWorks thermal FEA</strong>, I validated the models and used the results to suggest new busbar design geometries, directly driving iterative redesigns that mitigate hotspots and improve the reliability of the accumulator power distribution system. Currently, the accumulator attic and its electrical hardware are being assembled.
   </p>
 </div>
-
-  <!-- ===== CUSTOM QUADCOPTER (placeholder images + description) ===== -->
+  <!-- ===== CUSTOM QUADCOPTER ===== -->
   <div class="project-block reveal">
     <h3>Custom Quadcopter</h3>
     <p class="work-date"> Placeholder Date — Update Me </p>
-
     <div class="project-images">
       <div class="shot placeholder">
         <span class="tick tl"></span><span class="tick br"></span>
@@ -798,20 +748,16 @@
         </div>
       </div>
     </div>
-
     <p>
-      <em>Placeholder description — replace with your own write-up.</em> This project covers the design and build of a custom quadcopter from the frame up, spanning the mechanical airframe, the propulsion and power electronics, and the flight control software that ties the system together. The frame and arm geometry were modeled in CAD and iterated around motor placement, propeller clearance, and battery packaging, with attention to stiffness and vibration isolation at the flight controller mount.
+      For this project, I designed, built, and tested a fully custom quadcopter drone from the airframe up through the firmware. I began by selecting a frame geometry and validating it in <strong>SolidWorks</strong> using <strong>finite element analysis (FEA)</strong>, applying representative thrust and landing loads to confirm the structure could handle flight and impact stresses with an acceptable factor of safety before committing to a build. In parallel, I sized the propulsion system with <strong>hand calculations</strong>, using aerodynamic and electrical analysis to match <strong>propeller diameter and pitch</strong> to <strong>motor Kv</strong>, thrust-to-weight target, and current draw, ensuring the motor and propeller pairing could produce enough thrust to hover and maneuver while staying within the power budget of the battery and ESCs.
     </p>
-
     <p>
-      <em>Placeholder description — replace with your own write-up.</em> The propulsion system was sized from a thrust-to-weight target, pairing brushless motors, ESCs, and propellers against the all-up weight of the airframe to set hover throttle margin and estimate flight endurance. Power distribution, wiring routing, and connector selection were laid out to keep current paths short and serviceable.
+      Rather than rely on an off-the-shelf autopilot, I designed and built my own <strong>flight controller in KiCad</strong>. The custom <strong>PCB</strong> integrates an <strong>IMU</strong> for attitude sensing, a <strong>barometer</strong> for altitude estimation, and an <strong>RC receiver</strong> interface for pilot input, laid out as a single board tailored to the frame. I then wrote the <strong>flight firmware from scratch</strong>, implementing the sensor fusion and control loops needed to stabilize the aircraft and translate stick commands into motor outputs through the ESCs.
     </p>
-
     <p>
-      <em>Placeholder description — replace with your own write-up.</em> On the controls and software side, the flight controller was configured and tuned through bench and flight testing, with logged telemetry used to evaluate attitude response and refine control gains. Test flights informed successive revisions to the frame, mounting hardware, and tuning.
+      To validate the control system safely, I built a <strong>tethered test jig</strong> that tied the drone down while still allowing it to react to control inputs, letting me tune the <strong>PID gains</strong> without risking an uncontrolled flight. Working axis by axis, I adjusted the proportional, integral, and derivative terms until the drone held a stable, responsive attitude and rejected disturbances cleanly. The result was a complete, self-contained platform: a validated structure, hand-verified propulsion, a custom flight controller, and hand-tuned firmware, demonstrating the full design cycle from mechanical analysis through embedded control.
     </p>
   </div>
-
   <div class="project-block reveal">
     <h3>Wind Turbine Design &amp; Testing</h3>
     <p class="work-date"> March 2026 - May 2026 </p>
@@ -824,19 +770,18 @@
       </div>
     </div>
     <p>
-      For this ENGIN 26 design project at UC Berkeley, my team designed, built, and tested a small-scale horizontal-axis wind turbine to generate electricity under laboratory conditions at a 25 mph wind speed. The rotor uses a three-blade design with a NACA 4412 airfoil profile—chosen for its high lift-to-drag ratio at low wind speeds—set to a 6° angle of attack with a blade twist from 20° at the root to 0° at the tip to keep the angle of attack favorable along the span.
+      For this ENGIN 26 design project at UC Berkeley, my team designed, built, and tested a small-scale horizontal-axis wind turbine to generate electricity under laboratory conditions at a <strong>25 mph wind speed</strong>. The rotor uses a <strong>three-blade design</strong> with a <strong>NACA 4412 airfoil profile</strong>—chosen for its high lift-to-drag ratio at low wind speeds—set to a <strong>6° angle of attack</strong> with a blade twist from 20° at the root to 0° at the tip to keep the angle of attack favorable along the span.
     </p>
     <p>
-      The supporting tower was modeled in SolidWorks as a tapered square-truss lattice with diagonal cross-bracing to maximize stiffness-to-weight while lowering the center of gravity. I validated the structure with finite element analysis: under a 1.5 N horizontal wind load, the tower showed a maximum von Mises stress of 2.56 MPa, a minimum factor of safety of 4.6, and a peak tip displacement of just 0.19 mm. Sweeping the applied load from 0.5 N to 6 N produced a near-perfectly linear load–deflection response, and the final 3D-printed turbine came in at 215.5 g, well under the 300 g limit.
+      The supporting tower was modeled in <strong>SolidWorks</strong> as a tapered square-truss lattice with diagonal cross-bracing to maximize stiffness-to-weight while lowering the center of gravity. I validated the structure with <strong>finite element analysis</strong>: under a 1.5 N horizontal wind load, the tower showed a <strong>maximum von Mises stress of 2.56 MPa</strong>, a <strong>minimum factor of safety of 4.6</strong>, and a <strong>peak tip displacement of just 0.19 mm</strong>. Sweeping the applied load from 0.5 N to 6 N produced a near-perfectly linear load–deflection response, and the final 3D-printed turbine came in at <strong>215.5 g</strong>, well under the 300 g limit.
     </p>
     <p>
-      We tested the prototype two ways: a stiffness test using a pulley and incremental weights to measure tower deflection, and a power-generation test in front of a 25 mph wind source with the output wired to a DC electronic load and digital power meter. Sweeping the electrical load, we recorded voltage, current, power, and rotor speed across the operating range to locate the maximum power point. The turbine produced a peak of approximately 1.395 W at 595 mA and 1.93 V (~3684 rpm), corresponding to an aerodynamic efficiency of about 58.9%—close to the theoretical Betz limit of 59%.
+      We tested the prototype two ways: a stiffness test using a pulley and incremental weights to measure tower deflection, and a power-generation test in front of a 25 mph wind source with the output wired to a <strong>DC electronic load and digital power meter</strong>. Sweeping the electrical load, we recorded voltage, current, power, and rotor speed across the operating range to locate the maximum power point. The turbine produced a <strong>peak of approximately 1.395 W at 595 mA and 1.93 V (~3684 rpm)</strong>, corresponding to an <strong>aerodynamic efficiency of about 58.9%</strong>—close to the theoretical Betz limit of 59%.
     </p>
     <p style="margin-top:1.6rem;">
       <a href="pdfs/report1_pdf.pdf" target="_blank" class="btn-link">View Full Project Report (PDF)</a>
     </p>
   </div>
-
   <div class="project-block reveal">
     <h3>Solar-Powered Portable Phone Charger</h3>
     <p class="work-date"> January 2025 - May 2025 </p>
@@ -849,23 +794,21 @@
       </div>
     </div>
    <p>
-  This project involved the mechanical design and prototyping of a foldable, solar-powered portable phone charging system intended to maximize charging efficiency while maintaining portability.
+  This project involved the mechanical design and prototyping of a <strong>foldable, solar-powered portable phone charging system</strong> intended to maximize charging efficiency while maintaining portability.
 </p>
 <p>
-  The enclosure was fully modeled in CAD and fabricated using additive manufacturing, with a five-fold mechanical layout designed to optimize solar exposure while securely housing a mobile device. Finite element analysis (FEA) was conducted on the hinge mechanisms to evaluate stress distribution and ensure structural integrity under repeated folding cycles.
+  The enclosure was fully modeled in <strong>CAD</strong> and fabricated using <strong>additive manufacturing</strong>, with a <strong>five-fold mechanical layout</strong> designed to optimize solar exposure while securely housing a mobile device. <strong>Finite element analysis (FEA)</strong> was conducted on the hinge mechanisms to evaluate stress distribution and ensure structural integrity under repeated folding cycles.
 </p>
 <p>
-  The system integrates ten miniature photovoltaic panels electrically configured in parallel to increase current output while maintaining a stable voltage. Each panel was rated for approximately 0.6 W at 2 V under direct sunlight, yielding a total theoretical output of up to 6 W. A voltage regulation module was incorporated to ensure consistent and safe power delivery despite fluctuations in solar input.
+  The system integrates <strong>ten miniature photovoltaic panels</strong> electrically configured in <strong>parallel</strong> to increase current output while maintaining a stable voltage. Each panel was rated for approximately <strong>0.6 W at 2 V</strong> under direct sunlight, yielding a <strong>total theoretical output of up to 6 W</strong>. A <strong>voltage regulation module</strong> was incorporated to ensure consistent and safe power delivery despite fluctuations in solar input.
 </p>
     <p style="margin-top:1rem;">
   <a href="pdfs/Solar%20Power%20Bank%20Project%20Portfolio.pdf"
      target="_blank"
      class="inline-link">
-
   </a>
 </p>
   </div>
-
   <div class="project-block reveal">
     <h3>Raspberry Pi Sodium Bicarbonate Dispenser</h3>
     <p class="work-date"> February 2024 - April 2024 </p>
@@ -878,13 +821,13 @@
       </div>
     </div>
     <p>
-     This project was inspired by my work at the Institute of Marine and Environmental Technology (IMET), where I helped deliver sodium bicarbonate to aquatic tanks to maintain stable pH. It grew into the design and implementation of an automated chemical dosing system intended to regulate and stabilize pH levels in aquatic tank environments.
+     This project was inspired by my work at the Institute of Marine and Environmental Technology (IMET), where I helped deliver sodium bicarbonate to aquatic tanks to maintain stable pH. It grew into the design and implementation of an <strong>automated chemical dosing system</strong> intended to regulate and stabilize pH levels in aquatic tank environments.
     </p>
     <p>
-     A Raspberry Pi served as the central embedded controller, interfaced via a breadboard with discrete electrical components including a control switch, LED status indicators, and a DC pump powered by a 12 V battery supply.
+     A <strong>Raspberry Pi</strong> served as the central embedded controller, interfaced via a breadboard with discrete electrical components including a control switch, LED status indicators, and a <strong>DC pump powered by a 12 V battery supply</strong>.
     </p>
     <p>
-     Custom Python scripts were developed to manage system logic and control pump actuation, enabling consistent and repeatable sodium bicarbonate delivery, while LED indicators provided real-time visual feedback on system status to improve operational reliability. At the core of the software is a dosing calculator I helped develop from first-principles acid–base chemistry, which computes the required sodium bicarbonate dose from critical water parameters—current pH, target pH, tank volume, tank alkalinity, and temperature.
+     <strong>Custom Python scripts</strong> were developed to manage system logic and control pump actuation, enabling consistent and repeatable sodium bicarbonate delivery, while LED indicators provided real-time visual feedback on system status to improve operational reliability. At the core of the software is a <strong>dosing calculator</strong> I helped develop from <strong>first-principles acid–base chemistry</strong>, which computes the required sodium bicarbonate dose from critical water parameters—current pH, target pH, tank volume, tank alkalinity, and temperature.
     </p>
     <p>
      The completed system was pitched to IMET as a prototype to automate their pH stabilization process.
@@ -893,7 +836,6 @@
       <a href="https://www.youtube.com/watch?v=t889_P_oynA" target="_blank" class="btn-link">▶ Watch System Demonstration on YouTube</a>
     </div>
   </div>
-
   <div class="project-block reveal">
     <h3>ACTE Trophy Design</h3>
     <p class="work-date"> November 2025 - December 2025 </p>
@@ -906,38 +848,33 @@
       </div>
     </div>
     <p>
-      This award-winning project involved the end-to-end design of a national-level trophy using CAD and digital modeling workflows.
+      This award-winning project involved the <strong>end-to-end design of a national-level trophy</strong> using CAD and digital modeling workflows.
     </p>
     <p>
-      Onshape was utilized for parametric and structural modeling of the primary geometry, while Blender was employed to generate complex surface features, organic curves, and refined aesthetic elements.
+      <strong>Onshape</strong> was utilized for parametric and structural modeling of the primary geometry, while <strong>Blender</strong> was employed to generate complex surface features, organic curves, and refined aesthetic elements.
     </p>
     <p>
-      The final design received the National ACTE Student Trophy Design Award, resulting in a $1,000 scholarship, the donation of a professional-grade 3D printer to the school, and an invitation to present the project at a national conference in Texas.
+      The final design received the <strong>National ACTE Student Trophy Design Award</strong>, resulting in a <strong>$1,000 scholarship</strong>, the donation of a professional-grade 3D printer to the school, and an invitation to present the project at a national conference in Texas.
     </p>
     <p style="margin-top:1.2rem;">
       <a href="https://www.acteonline.org/blog/press/maryland-students-win-acte-national-student-trophy-design-contest-3/" target="_blank" class="inline-link">Read Official ACTE Article →</a>
     </p>
   </div>
-
 </div>
 </section>
-
   <!-- RESEARCH PAGE -->
 <section id="research">
   <div class="projects-header">
     <h2>Research</h2>
     <div class="section-meta">Index <span>03</span> / Records <span>02</span></div>
   </div>
-
   <div class="projects-vertical">
-
     <!-- Research Project 1 -->
     <div class="project-block reveal">
       <h3>Design for Emerging
 and Nanoscale
 Manufacturing, UC Berkeley</h3>
       <p class="work-date"> February 2026 - Present </p>
-
       <div class="project-images">
         <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
           <img src="images/woo_1.jpg" alt="Research Image 1">
@@ -946,26 +883,20 @@ Manufacturing, UC Berkeley</h3>
           <img src="images/woo_2.jpg" alt="Research Image 2">
         </div>
       </div>
-
       <p>
-        This research focuses on Computed Axial Lithography (CAL), a volumetric additive manufacturing technique that fabricates three-dimensional objects by tomographically synthesizing light within a rotating volume of photopolymer precursor solution. Unlike conventional layer-by-layer 3D printing methods, CAL generates an entire object simultaneously by projecting dynamically computed light patterns into the rotating resin volume. When the integrated light dose within the resin reaches a polymerization threshold, the desired geometry solidifies throughout the volume at once, enabling extremely rapid fabrication of complex structures.
+        This research focuses on <strong>Computed Axial Lithography (CAL)</strong>, a volumetric additive manufacturing technique that fabricates three-dimensional objects by tomographically synthesizing light within a rotating volume of photopolymer precursor solution. Unlike conventional layer-by-layer 3D printing methods, CAL generates an entire object simultaneously by projecting dynamically computed light patterns into the rotating resin volume. When the integrated light dose within the resin reaches a polymerization threshold, the desired geometry solidifies throughout the volume at once, enabling extremely rapid fabrication of complex structures.
       </p>
-
       <p>
-My work in the Design for Emerging and Nanoscale Manufacturing research group focuses on integrating machine learning and data infrastructure into the CAL workflow. I developed an MLOps-based data pipeline to manage and preprocess experimental and simulated datasets produced during volumetric printing experiments. This pipeline standardizes data ingestion, formatting, and preprocessing, allowing machine learning models to be trained and evaluated efficiently on large collections of print and simulation data.
+My work in the Design for Emerging and Nanoscale Manufacturing research group focuses on integrating machine learning and data infrastructure into the CAL workflow. I developed an <strong>MLOps-based data pipeline</strong> to manage and preprocess experimental and simulated datasets produced during volumetric printing experiments. This pipeline standardizes data ingestion, formatting, and preprocessing, allowing machine learning models to be trained and evaluated efficiently on large collections of print and simulation data.
       </p>
-
       <p>
-Building on this infrastructure, I designed and trained neural network models to address the inverse problem inherent in CAL printing. Rather than directly projecting a model of the target object, CAL requires computing a set of tomographic light projections whose integrated dose will polymerize the desired geometry within the rotating resin volume. The neural networks I developed learn to map target 3D geometries to optimized light dose distributions that produce accurate volumetric prints.
+Building on this infrastructure, I designed and trained <strong>neural network models</strong> to address the <strong>inverse problem</strong> inherent in CAL printing. Rather than directly projecting a model of the target object, CAL requires computing a set of tomographic light projections whose integrated dose will polymerize the desired geometry within the rotating resin volume. The neural networks I developed learn to map target 3D geometries to optimized light dose distributions that produce accurate volumetric prints.
       </p>
     </div>
-
-
     <!-- Research Project 2 -->
     <div class="project-block reveal">
       <h3>Computational Mechanics Research Group, University of Maryland, Baltimore County</h3>
       <p class="work-date"> June 2024 - August 2025 </p>
-
       <div class="project-images">
         <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
           <img src="images/dic4.png" alt="Research Image 3">
@@ -974,33 +905,26 @@ Building on this infrastructure, I designed and trained neural network models to
           <img src="images/ye_2.jpg" alt="Research Image 4">
         </div>
       </div>
-
       <p>
-        This research focused on accelerating digital image correlation (DIC), a widely used experimental mechanics technique for measuring full-field displacement and strain in deforming materials. DIC typically works by comparing images of a speckle pattern applied to a specimen before and after deformation and computing the displacement of the speckle features between the two images. While highly accurate, traditional DIC algorithms are computationally intensive and can require several hours to process large datasets.
+        This research focused on accelerating <strong>digital image correlation (DIC)</strong>, a widely used experimental mechanics technique for measuring full-field displacement and strain in deforming materials. DIC typically works by comparing images of a speckle pattern applied to a specimen before and after deformation and computing the displacement of the speckle features between the two images. While highly accurate, traditional DIC algorithms are computationally intensive and can require several hours to process large datasets.
       </p>
-
       <p>
-        To address this limitation, I developed a convolutional neural network (CNN) capable of predicting full-field displacement maps directly from paired speckle images representing the undeformed and deformed states of a material. The model was trained on a large dataset of synthetically generated speckle images with known displacement fields. These datasets were generated and curated in MATLAB, producing more than 10,000 training image pairs with controlled deformation patterns.
+        To address this limitation, I developed a <strong>convolutional neural network (CNN)</strong> capable of predicting full-field displacement maps directly from paired speckle images representing the undeformed and deformed states of a material. The model was trained on a large dataset of synthetically generated speckle images with known displacement fields. These datasets were generated and curated in <strong>MATLAB</strong>, producing <strong>more than 10,000 training image pairs</strong> with controlled deformation patterns.
       </p>
-
       <p>
-        Preliminary testing suggests that the neural network can reproduce displacement fields with high fidelity while reducing computation time by approximately 98 percent, decreasing processing time from roughly six hours to around six minutes for comparable analyses. The model is currently undergoing further validation by researchers in the Computational Mechanics Research Group to evaluate its performance across a broader range of deformation conditions and experimental datasets.
+        Preliminary testing suggests that the neural network can reproduce displacement fields with high fidelity while <strong>reducing computation time by approximately 98 percent</strong>, decreasing processing time from roughly <strong>six hours to around six minutes</strong> for comparable analyses. The model is currently undergoing further validation by researchers in the Computational Mechanics Research Group to evaluate its performance across a broader range of deformation conditions and experimental datasets.
       </p>
     </div>
-
   </div>
 </section>
-
 <footer>
   <div>© 2026 Ayush Ghosh · Mechanical Engineering Portfolio</div>
   <div><span>■</span> BUILT WITH CAD · FEA · CODE</div>
 </footer>
-
 <script>
   function showSection(id, btn) {
     document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
     document.getElementById(id).classList.add('active');
-
     document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
     if (btn) {
       btn.classList.add('active');
@@ -1008,14 +932,11 @@ Building on this infrastructure, I designed and trained neural network models to
       const match = document.querySelector('nav button[data-target="' + id + '"]');
       if (match) match.classList.add('active');
     }
-
     const label = document.getElementById('secLabel');
     if (label) label.textContent = id.toUpperCase();
-
     window.scrollTo({ top: 0, behavior: 'smooth' });
     revealPass();
   }
-
   /* live clock in the status strip */
   function tick() {
     const el = document.getElementById('clock');
@@ -1026,17 +947,14 @@ Building on this infrastructure, I designed and trained neural network models to
   }
   tick();
   setInterval(tick, 1000);
-
   /* scroll reveal */
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
   function revealPass() {
     document.querySelectorAll('section.active .reveal').forEach(el => io.observe(el));
   }
   revealPass();
 </script>
-
 </body>
 </html>
