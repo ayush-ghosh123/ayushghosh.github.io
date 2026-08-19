@@ -417,13 +417,168 @@
       content: "◆ ";
       color: var(--accent2);
     }
-    /* ===== PROJECT / EXPERIENCE BLOCKS ===== */
-    .projects-vertical {
+    /* ===== PROJECT CARD GRID (THUMBNAILS) ===== */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.6rem;
+    }
+    .project-card {
+      position: relative;
       display: flex;
       flex-direction: column;
-      gap: 3rem;
-      counter-reset: block;
+      text-align: left;
+      background: linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.008));
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color .4s ease, transform .4s ease, box-shadow .4s ease;
     }
+    .project-card::before {
+      content: "";
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 1px;
+      z-index: 4;
+      background: linear-gradient(90deg, var(--accent), rgba(91,110,245,0.6), transparent 65%);
+      opacity: 0.7;
+      transition: opacity .4s ease;
+    }
+    .project-card:hover {
+      border-color: rgba(63,169,255,0.35);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(63,169,255,0.06);
+      transform: translateY(-4px);
+    }
+    .project-card:hover::before { opacity: 1; }
+    .project-card:focus-visible {
+      outline: none;
+      border-color: rgba(63,169,255,0.6);
+      box-shadow: 0 0 0 2px rgba(63,169,255,0.5), 0 24px 60px rgba(0,0,0,0.5);
+    }
+    .card-thumb {
+      position: relative;
+      height: 210px;
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(rgba(214,228,246,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(214,228,246,0.03) 1px, transparent 1px),
+        #060a12;
+      background-size: 26px 26px, 26px 26px, auto;
+      overflow: hidden;
+    }
+    .card-thumb img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      padding: 1.1rem;
+      filter: saturate(0.9) contrast(1.04);
+      transition: transform .5s ease, filter .4s ease;
+    }
+    .project-card:hover .card-thumb img { transform: scale(1.045); filter: saturate(1.08) contrast(1.08); }
+    .card-thumb .tick {
+      position: absolute;
+      z-index: 3;
+      width: 14px; height: 14px;
+      border: 1px solid rgba(63,169,255,0.7);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .35s ease;
+    }
+    .project-card:hover .card-thumb .tick { opacity: 1; }
+    .card-thumb .tick.tl { top: 9px; left: 9px; border-right: 0; border-bottom: 0; }
+    .card-thumb .tick.br { bottom: 9px; right: 9px; border-left: 0; border-top: 0; }
+    .thumb-badge {
+      position: absolute;
+      top: 10px; right: 10px;
+      z-index: 4;
+      font-family: var(--mono);
+      font-size: 0.56rem;
+      letter-spacing: 1.4px;
+      color: var(--accent);
+      background: rgba(4,6,13,0.82);
+      border: 1px solid rgba(63,169,255,0.4);
+      padding: 0.28rem 0.5rem;
+      border-radius: 3px;
+      backdrop-filter: blur(4px);
+    }
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      padding: 1.35rem 1.4rem 1.5rem;
+      flex: 1;
+    }
+    .card-date {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .card-body h3 {
+      font-family: var(--display);
+      font-size: 1.14rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      line-height: 1.3;
+      color: var(--text);
+      margin: 0;
+    }
+    .card-body h3::before {
+      content: "//";
+      color: var(--accent);
+      margin-right: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+    }
+    .card-brief {
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.65;
+      flex: 1;
+      margin: 0;
+    }
+    .card-cta {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.2rem;
+    }
+    .card-cta .arw { transition: transform .3s ease; }
+    .project-card:hover .card-cta .arw { transform: translateX(5px); }
+    /* ===== DETAIL VIEW ===== */
+    .detail-view { display: none; counter-reset: block; }
+    .detail-view.open { display: block; animation: sectionIn .5s cubic-bezier(.2,.7,.3,1) both; }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 0.62rem 1.05rem;
+      cursor: pointer;
+      margin-bottom: 2.2rem;
+      transition: color .3s ease, border-color .3s ease, background .3s ease, transform .3s ease;
+    }
+    .back-btn:hover {
+      color: var(--accent);
+      border-color: rgba(63,169,255,0.45);
+      background: rgba(63,169,255,0.06);
+      transform: translateX(-3px);
+    }
+    .back-btn .arw { transition: transform .3s ease; }
+    .back-btn:hover .arw { transform: translateX(-3px); }
+    /* ===== PROJECT / EXPERIENCE BLOCKS (DETAIL) ===== */
     .project-block {
       counter-increment: block;
       position: relative;
@@ -455,12 +610,6 @@
       pointer-events: none;
       letter-spacing: 2px;
     }
-    .project-block:hover {
-      border-color: rgba(63,169,255,0.35);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(63,169,255,0.06);
-      transform: translateY(-3px);
-    }
-    .project-block:hover::before { opacity: 1; }
     .project-block h3 {
       font-family: var(--display);
       color: var(--text);
@@ -590,37 +739,190 @@
       transition: color .3s ease, border-color .3s ease;
     }
     .inline-link:hover { color: var(--accent); border-color: var(--accent); }
-    /* placeholder image styling */
-    .shot.placeholder {
-      border-style: dashed;
-      border-color: rgba(63,169,255,0.28);
-    }
-    .shot.placeholder .ph {
-      height: 360px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.55rem;
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .shot.placeholder .ph .glyph {
-      font-size: 1.6rem;
-      color: var(--accent);
-      opacity: 0.7;
-    }
-    .shot.placeholder .ph small {
-      font-size: 0.62rem;
-      letter-spacing: 1.4px;
-      color: rgba(214,228,246,0.28);
-    }
     /* reveal on scroll */
     .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.3,1); }
     .reveal.in { opacity: 1; transform: none; }
+    /* ===== MULTI-STAGE DOSSIER (rich detail pages) ===== */
+    .detail-lead {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.008));
+      padding: 2.4rem;
+      margin-bottom: 2.6rem;
+      overflow: hidden;
+    }
+    .detail-lead::before {
+      content: "";
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 1px;
+      background: linear-gradient(90deg, var(--accent), rgba(91,110,245,0.6), transparent 65%);
+    }
+    .lead-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: flex; align-items: center; gap: 0.7rem;
+      margin-bottom: 1rem;
+    }
+    .lead-eyebrow::after {
+      content: ""; flex: 1; height: 1px;
+      background: linear-gradient(90deg, rgba(63,169,255,0.4), transparent);
+    }
+    .lead-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 0.9fr;
+      gap: 2.2rem;
+      align-items: center;
+    }
+    .lead-title {
+      font-family: var(--display);
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      line-height: 1.1;
+      color: var(--text);
+      margin: 0 0 1rem;
+    }
+    .lead-sub {
+      color: var(--muted);
+      font-size: 1.04rem;
+      line-height: 1.8;
+      margin: 0;
+    }
+    .lead-media .shot img { height: 460px; }
+    /* spec readout strip */
+    .spec-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: 1.8rem;
+    }
+    .spec {
+      background: #070b13;
+      padding: 0.85rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .spec span {
+      font-family: var(--mono);
+      font-size: 0.56rem;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .spec b {
+      font-family: var(--display);
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.4px;
+    }
+    /* numbered process stages */
+    .stage { position: relative; padding-top: 2.4rem; }
+    .stage + .stage {
+      margin-top: 2.6rem;
+      border-top: 1px solid var(--line);
+    }
+    .stage-head {
+      display: flex;
+      align-items: baseline;
+      gap: 1.1rem;
+      margin-bottom: 1.2rem;
+    }
+    .stage-no {
+      font-family: var(--display);
+      font-size: 1.9rem;
+      font-weight: 700;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(63,169,255,0.55);
+      letter-spacing: 1px;
+      flex-shrink: 0;
+    }
+    .stage-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+    .stage-title {
+      font-family: var(--display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      line-height: 1.2;
+      color: var(--text);
+      margin: 0;
+    }
+    .stage p {
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.85;
+      max-width: 94ch;
+      margin: 0 0 1.4rem;
+    }
+    .stage p strong { color: var(--text); font-weight: 600; }
+    .stage p:last-child { margin-bottom: 0; }
+    /* per-figure caption inside a shot frame */
+    .shot .label {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      z-index: 3;
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: linear-gradient(180deg, transparent, rgba(4,6,13,0.92) 70%);
+      padding: 1.5rem 0.75rem 0.55rem;
+      pointer-events: none;
+    }
+    /* large stacked gallery (e.g. PCB schematic / layout / 3D render) */
+    .project-images.stack { grid-template-columns: 1fr; gap: 1.6rem; }
+    .project-images.stack img { height: 540px; }
+    /* two-up gallery for tall handwritten calc sheets */
+    .project-images.calcs { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .project-images.calcs img { height: 620px; }
+    /* full-width, extra-tall gallery for detailed PCB artwork */
+    .project-images.pcb { grid-template-columns: 1fr; gap: 1.8rem; }
+    .project-images.pcb img { height: 700px; background: #0a0e17; }
+    /* image-slot placeholder — shown until a real file is dropped in */
+    .shot .ph {
+      position: absolute; inset: 0; z-index: 1;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 0.55rem; text-align: center; padding: 1rem;
+      font-family: var(--mono);
+      font-size: 0.66rem; letter-spacing: 1.6px; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .shot .ph .glyph { font-size: 1.7rem; color: var(--accent); opacity: 0.75; }
+    .shot .ph small {
+      font-size: 0.55rem; letter-spacing: 0.8px; text-transform: none;
+      color: rgba(214,228,246,0.4);
+    }
+    .shot img { position: relative; z-index: 2; }
+    @media (max-width: 900px) {
+      .lead-grid { grid-template-columns: 1fr; gap: 1.6rem; }
+      .lead-title { font-size: 1.8rem; }
+      .lead-media .shot img { height: 320px; }
+      .detail-lead { padding: 1.5rem 1.3rem; }
+      .stage-head { gap: 0.8rem; }
+      .stage-title { font-size: 1.2rem; }
+      .project-images.stack img { height: 300px; }
+      .project-images.calcs { grid-template-columns: 1fr; }
+      .project-images.calcs img { height: 420px; }
+      .project-images.pcb img { height: 340px; }
+    }
     /* ===== FOOTER ===== */
     footer {
       max-width: 1200px;
@@ -646,12 +948,14 @@
       .statusbar { top: 0; position: static; padding: 0.4rem 1rem; font-size: 0.55rem; }
       .statusbar .mid { display: none; }
       section { padding: 3rem 1.1rem 4rem; }
+      .card-grid { grid-template-columns: 1fr; gap: 1.3rem; }
+      .card-thumb { height: 190px; }
       .project-block { padding: 1.6rem 1.3rem 1.9rem; }
       .project-block::after { font-size: 2.2rem; top: 1rem; right: 1.1rem; }
       .projects-header { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
       .projects-header h2 { font-size: 1.9rem; }
       .section-meta { text-align: left; }
-      .project-images img, .shot.placeholder .ph { height: 260px; }
+      .project-images img { height: 260px; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -677,7 +981,10 @@
   <div class="mid">UC BERKELEY · MECHANICAL ENGINEERING · EECS MINOR</div>
   <div>LOCAL <b id="clock">--:--:--</b></div>
 </div>
+
+<!-- ============================================================= -->
 <!-- ABOUT PAGE -->
+<!-- ============================================================= -->
 <section id="about" class="active">
   <div class="hero">
     <div>
@@ -696,169 +1003,777 @@
     </div>
   </div>
 </section>
+
+<!-- ============================================================= -->
 <!-- PROJECTS PAGE -->
+<!-- ============================================================= -->
 <section id="projects">
-  <div class="projects-header">
-    <h2>Projects</h2>
-    <div class="section-meta">Index <span>02</span> / Records <span>06</span></div>
-  </div>
-  <div class="projects-vertical">
-  <div class="project-block reveal">
-  <h3>Formula SAE Accumulator Attic Electrical Architecture</h3>
-  <p class="work-date"> January 2026 - Present </p>
-  <div class="project-images">
-    <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
-      <img src="images/attic.jpg" alt="Formula SAE Accumulator Attic CAD">
+
+  <!-- ---- GRID (THUMBNAILS) ---- -->
+  <div class="grid-mode" id="grid-projects">
+    <div class="projects-header">
+      <h2>Projects</h2>
+      <div class="section-meta">Index <span>02</span> / Records <span>06</span></div>
     </div>
-    <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
-      <img src="images/ATTIC_jpg.jpg" alt="Formula SAE Accumulator Attic Assembly">
+    <div class="card-grid">
+
+      <article class="project-card reveal" data-project="fsae" tabindex="0"
+               onclick="openProject('fsae')" onkeydown="cardKey(event,'fsae')">
+        <div class="card-thumb">
+          <span class="tick tl"></span><span class="tick br"></span>
+          <span class="thumb-badge">—</span>
+          <img src="images/attic.jpg" alt="Formula SAE Accumulator Attic thumbnail">
+        </div>
+        <div class="card-body">
+          <div class="card-date">January 2026 - Present</div>
+          <h3>Formula SAE Accumulator Attic Electrical Architecture</h3>
+          <p class="card-brief">High-voltage battery enclosure and custom busbar power distribution for a Formula SAE electric race car — designed, thermally validated, and instrumented for testing.</p>
+          <span class="card-cta">View Project <span class="arw">→</span></span>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-project="quad" tabindex="0"
+               onclick="openProject('quad')" onkeydown="cardKey(event,'quad')">
+        <div class="card-thumb">
+          <span class="tick tl"></span><span class="tick br"></span>
+          <span class="thumb-badge">—</span>
+          <img src="images/quad_final.jpg" alt="Custom Quadcopter thumbnail">
+        </div>
+        <div class="card-body">
+          <div class="card-date">May 2026 — August 2026</div>
+          <h3>Custom Quadcopter</h3>
+          <p class="card-brief">A fully custom quadcopter built from the airframe up — FEA-validated frame, a KiCad flight-controller PCB, and flight firmware written from scratch.</p>
+          <span class="card-cta">View Project <span class="arw">→</span></span>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-project="wind" tabindex="0"
+               onclick="openProject('wind')" onkeydown="cardKey(event,'wind')">
+        <div class="card-thumb">
+          <span class="tick tl"></span><span class="tick br"></span>
+          <span class="thumb-badge">—</span>
+          <img src="images/wind_hero.jpg" alt="Wind Turbine thumbnail">
+        </div>
+        <div class="card-body">
+          <div class="card-date">March 2026 - May 2026</div>
+          <h3>Wind Turbine Design &amp; Testing</h3>
+          <p class="card-brief">Design, FEA, and lab testing of a small-scale horizontal-axis wind turbine reaching about 58.9% aerodynamic efficiency — near the Betz limit.</p>
+          <span class="card-cta">View Project <span class="arw">→</span></span>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-project="solar" tabindex="0"
+               onclick="openProject('solar')" onkeydown="cardKey(event,'solar')">
+        <div class="card-thumb">
+          <span class="tick tl"></span><span class="tick br"></span>
+          <span class="thumb-badge">—</span>
+          <img src="images/piezoelectric_phone_case_1.png" alt="Solar Phone Charger thumbnail">
+        </div>
+        <div class="card-body">
+          <div class="card-date">January 2025 - May 2025</div>
+          <h3>Solar-Powered Portable Phone Charger</h3>
+          <p class="card-brief">A foldable, 3D-printed solar power bank integrating ten photovoltaic panels for efficient charging without sacrificing portability.</p>
+          <span class="card-cta">View Project <span class="arw">→</span></span>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-project="dispenser" tabindex="0"
+               onclick="openProject('dispenser')" onkeydown="cardKey(event,'dispenser')">
+        <div class="card-thumb">
+          <span class="tick tl"></span><span class="tick br"></span>
+          <span class="thumb-badge">—</span>
+          <img src="images/sodium_bicarbonate_dispenser_1.jpg" alt="Sodium Bicarbonate Dispenser thumbnail">
+        </div>
+        <div class="card-body">
+          <div class="card-date">February 2024 - April 2024</div>
+          <h3>Raspberry Pi Sodium Bicarbonate Dispenser</h3>
+          <p class="card-brief">A Raspberry Pi–controlled automated dosing system that stabilizes pH in aquatic tanks, driven by a first-principles chemistry dosing calculator.</p>
+          <span class="card-cta">View Project <span class="arw">→</span></span>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-project="acte" tabindex="0"
+               onclick="openProject('acte')" onkeydown="cardKey(event,'acte')">
+        <div class="card-thumb">
+          <span class="tick tl"></span><span class="tick br"></span>
+          <span class="thumb-badge">—</span>
+          <img src="images/acte_trophy_1.jpg" alt="ACTE Trophy Design thumbnail">
+        </div>
+        <div class="card-body">
+          <div class="card-date">November 2025 - December 2025</div>
+          <h3>ACTE Trophy Design</h3>
+          <p class="card-brief">Award-winning national trophy designed in Onshape and Blender — winner of the ACTE National Student Trophy Design contest.</p>
+          <span class="card-cta">View Project <span class="arw">→</span></span>
+        </div>
+      </article>
+
     </div>
   </div>
-  <p>
-   In this project, I designed the accumulator attic for a Formula SAE electric race car—the <strong>Accumulator Tractive System Container (ATSC)</strong>, a high-voltage DC battery enclosure that houses the vehicle's high-voltage (HV) and low-voltage (LV) power distribution components. I developed the enclosure and internal electrical architecture in <strong>SolidWorks</strong> using <strong>GD&amp;T-driven tolerance stack-ups</strong> to integrate safety systems, sensing electronics, and high-current interfaces while accounting for packaging constraints and electrical isolation requirements. Using first-principles <strong>Joule heating and thermal conduction analysis</strong>, I redesigned the attic electrical component layout, <strong>cutting assembly mass by 18%</strong> while streamlining the high-voltage assembly workflow.
+
+  <!-- ---- DETAIL VIEWS ---- -->
+
+  <!-- DETAIL: Formula SAE -->
+  <div class="detail-view" id="detail-fsae">
+    <button class="back-btn" onclick="closeProject()"><span class="arw">←</span> Back to Projects</button>
+    <div class="project-block">
+      <h3>Formula SAE Accumulator Attic Electrical Architecture</h3>
+      <p class="work-date"> January 2026 - Present </p>
+      <div class="project-images">
+        <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+          <img src="images/attic.jpg" alt="Formula SAE Accumulator Attic CAD">
+        </div>
+        <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+          <img src="images/ATTIC_jpg.jpg" alt="Formula SAE Accumulator Attic Assembly">
+        </div>
+      </div>
+      <p>
+       In this project, I designed the accumulator attic for a Formula SAE electric race car—the <strong>Accumulator Tractive System Container (ATSC)</strong>, a high-voltage DC battery enclosure that houses the vehicle's high-voltage (HV) and low-voltage (LV) power distribution components. I developed the enclosure and internal electrical architecture in <strong>SolidWorks</strong> using <strong>GD&amp;T-driven tolerance stack-ups</strong> to integrate safety systems, sensing electronics, and high-current interfaces while accounting for packaging constraints and electrical isolation requirements. Using first-principles <strong>Joule heating and thermal conduction analysis</strong>, I redesigned the attic electrical component layout, <strong>cutting assembly mass by 18%</strong> while streamlining the high-voltage assembly workflow.
+      </p>
+      <p>
+        I fabricated custom copper busbars and sheet-metal mounting components using <strong>FabLight laser cutting</strong> and <strong>DIWIRE CNC wire bending</strong> to achieve precise conductor geometry and reliable electrical connections. While developing the layout, I evaluated current paths, electrical interfaces, and potential regions of increased resistive heating within the busbar network, supported by thermal calculations.
+      </p>
+      <p>
+       I developed the instrumentation system and test setup used to characterize busbar thermal behavior: an <strong>Arduino-based rig</strong> with a <strong>thermocouple sensor array</strong> and <strong>four-point probe resistance measurement</strong>, with telemetry logged and visualized in <strong>Python and matplotlib</strong>. By comparing the measured thermocouple and four-point probe results against <strong>SolidWorks thermal FEA</strong>, I validated the models and used the results to suggest new busbar design geometries, directly driving iterative redesigns that mitigate hotspots and improve the reliability of the accumulator power distribution system. Currently, the accumulator attic and its electrical hardware are being assembled.
+      </p>
+    </div>
+  </div>
+
+  <!-- DETAIL: Custom Quadcopter -->
+  <div class="detail-view" id="detail-quad">
+    <button class="back-btn" onclick="closeProject()"><span class="arw">←</span> Back to Projects</button>
+    <div class="dossier">
+
+      <!-- LEAD / OVERVIEW -->
+      <div class="detail-lead">
+        <div class="lead-eyebrow">Project File // QUAD-01 · Personal Build</div>
+        <div class="lead-grid">
+          <div>
+            <h2 class="lead-title">Custom Quadcopter</h2>
+            <p class="lead-sub">
+              A fully custom quadcopter engineered from first principles — sizing the propulsion system by hand, validating the frame with FEA, designing a bespoke <strong>STM32 flight-controller PCB in KiCad</strong>, writing the flight firmware and a <strong>Kalman-filter state estimator</strong> from scratch, and tuning the PID loops on a tethered rig until it flew. Every layer, from the airframe to the control loops, was designed rather than bought off the shelf.
+            </p>
+            <div class="spec-strip">
+              <div class="spec"><span>All-Up Mass</span><b>0.894 kg</b></div>
+              <div class="spec"><span>Thrust-to-Weight</span><b>3.58 : 1</b></div>
+              <div class="spec"><span>Hover Thrust / Motor</span><b>2.19 N</b></div>
+              <div class="spec"><span>MCU</span><b>STM32F405</b></div>
+              <div class="spec"><span>Est. Endurance</span><b>~12 min</b></div>
+              <div class="spec"><span>Tip Mach</span><b>0.31</b></div>
+            </div>
+          </div>
+          <div class="lead-media">
+            <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+              <img src="images/quad_final.jpg" alt="Finished custom quadcopter">
+              <span class="label">Finished build</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 01 — HAND CALCULATIONS -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">01</span>
+          <div>
+            <div class="stage-eyebrow">First Principles</div>
+            <h3 class="stage-title">Propulsion &amp; Power Hand Calculations</h3>
+          </div>
+        </div>
+        <p>
+          The whole design started on paper. I worked from the vehicle weight outward to prove — before buying a single part — that the motors, props, and battery could actually lift and sustain the aircraft.
+        </p>
+        <p>
+          <strong>Weight, disk area &amp; thrust budget.</strong> Starting from an all-up mass of <strong>0.894 kg</strong>, the weight is W = mg = <strong>8.77 N</strong>, which the four props must support. Each 10-inch prop sweeps a disk of A = πD²/4 = <strong>0.0507 m²</strong>. With each motor producing up to ~7.85 N, total thrust is 31.4 N, giving a <strong>thrust-to-weight ratio of 3.58</strong> — comfortably above the ~2:1 minimum for controllable flight. Splitting weight across four motors, each only needs <strong>2.19 N (~224 gf)</strong> to hover, out of ~800 gf available — so hover sits near 28% throttle, leaving plenty of headroom.
+        </p>
+        <p>
+          <strong>Momentum (actuator-disk) theory.</strong> Modeling each rotor as an actuator disk, I solved for the induced velocity vᵢ = √(T / 2ρA) = <strong>4.20 m/s</strong>, then the ideal induced power Pᵢdₑₐₗ = T·vᵢ. Dividing by a figure of merit (~0.65) converts that to real shaft power: about <strong>14.2 W per motor at hover</strong>, rising to <strong>~96 W per motor at full throttle</strong>.
+        </p>
+        <p>
+          <strong>Empirical thrust model &amp; RPM cross-check.</strong> To sanity-check the propulsion pairing, I used an empirical static-thrust model to back out the required <strong>~7930 RPM</strong> for the target thrust, then confirmed the motor's Kv·V no-load speed (12,600 RPM) put that at a healthy <strong>63% of no-load</strong>. A tip-speed and Mach check gave a tip velocity of 105 m/s, or <strong>Mach 0.31</strong> — safely subsonic, so no compressibility losses at the blade tips.
+        </p>
+        <p>
+          <strong>Power, current &amp; endurance.</strong> Converting shaft power through the motor efficiency gives ~120 W electrical per motor, or <strong>10.8 A</strong> each and <strong>~43 A total</strong> at full throttle. The 3S 2200 mAh pack's discharge rating clears that draw, and using 80% usable capacity against the hover current yields an estimated endurance of about <strong>12 minutes</strong>.
+        </p>
+        <div class="project-images calcs">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/quad_calc_weight.jpg" alt="Weight, disk area, and thrust budget calculations" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Weight · disk area · thrust budget</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/quad_calc_momentum.jpg" alt="Momentum actuator-disk theory calculations" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Momentum theory · induced power</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/quad_calc_thrust.jpg" alt="Empirical static thrust and RPM cross-check" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Static thrust · RPM · tip Mach</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/quad_calc_power.jpg" alt="Power, current draw, and endurance calculations" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Power · current · endurance</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 02 — FEA -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">02</span>
+          <div>
+            <div class="stage-eyebrow">Structural</div>
+            <h3 class="stage-title">FEA Frame Validation</h3>
+          </div>
+        </div>
+        <p>
+          With the loads known, I validated the frame geometry in <strong>SolidWorks FEA</strong>, fixing the center plate and applying the motor thrust and landing loads out at the arm tips. The <strong>static stress plot</strong> showed a peak von Mises stress of about <strong>4.31 MPa</strong> against a material yield of <strong>~60 MPa</strong> — a factor of safety near <strong>14×</strong>, so the frame is nowhere close to yielding. The <strong>displacement plot</strong> showed the expected behavior: the arms deflect most at their tips (peak ~10.6 mm at the exaggerated load case) while the central hub stays rigid, confirming stiffness is concentrated where the electronics and battery sit.
+        </p>
+        <div class="project-images">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/quad_fea_stress.jpg" alt="Von Mises stress FEA of the drone frame" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Von Mises · peak 4.31 MPa</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/quad_fea_displacement.jpg" alt="Displacement FEA of the drone frame" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Displacement · arm-tip deflection</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 03 — PCB DESIGN -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">03</span>
+          <div>
+            <div class="stage-eyebrow">Electronics</div>
+            <h3 class="stage-title">Flight-Controller PCB in KiCad</h3>
+          </div>
+        </div>
+        <p>
+          Rather than run an off-the-shelf autopilot, I designed my own flight controller in <strong>KiCad</strong> — a single board carrying every subsystem the aircraft needs. The <strong>schematic</strong> is organized into functional blocks:
+        </p>
+        <p>
+          At the center is an <strong>STM32F405 (Cortex-M4F) MCU</strong> — the brain — with a 16 MHz crystal, decoupling and VCAP capacitors, an SWD programming header, and BOOT0/reset circuitry. A <strong>buck-converter block</strong> steps the 3S LiPo (~11.1–12.6 V) down to regulated <strong>5 V and 3.3 V rails</strong> and drives a power LED. A <strong>battery screw terminal</strong> feeds the pack in, and a <strong>33k/10k voltage divider</strong> taps it into an ADC pin so the firmware can monitor pack voltage. Four <strong>ESC signal outputs</strong> (Motor 0–3) run on 3-pin headers with 33 Ω series resistors, wired so only a single ESC's BEC feeds the 5 V rail. An <strong>ELRS RC-receiver</strong> connects over UART (with TX/RX crossed). For sensing, an <strong>MPU-6050 IMU</strong> (3-axis gyro + accelerometer, with interrupt) and a <strong>BMP280 barometer</strong> sit on the I²C buses — the IMU for attitude, the barometer for altitude. A <strong>USB-micro port</strong> with a <strong>USBLC6 ESD-protection</strong> device handles programming and telemetry, and four mounting holes tie it to the frame.
+        </p>
+        <p>
+          The <strong>board layout</strong> places the STM32 and crystal centrally with tight decoupling, groups the ESC headers along one edge and the sensor headers on the I²C side, isolates the buck converter and its inductor in a corner, and keeps the mounting holes on the vehicle's bolt pattern. The <strong>populated board</strong> shows the final result: the STM32 reflowed in the center, the purple BMP280 barometer and blue MPU-6050 IMU on their headers, the screw terminal for battery power, and the pin headers broken out for the four ESCs and the receiver.
+        </p>
+        <div class="project-images pcb">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/quad_pcb_schematic.png" alt="KiCad flight controller schematic" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Schematic — functional blocks</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/quad_pcb_layout.png" alt="KiCad PCB board layout" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Board layout</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/quad_pcb_board.jpg" alt="Populated flight controller board" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Populated board — STM32, IMU, barometer</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 04 — FIRMWARE -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">04</span>
+          <div>
+            <div class="stage-eyebrow">Software</div>
+            <h3 class="stage-title">Flight Firmware From Scratch</h3>
+          </div>
+        </div>
+        <p>
+          With the board in hand, I wrote the flight firmware from the ground up on the STM32 — no autopilot stack underneath it. At boot the firmware brings up the clocks, I²C, UART, timers, and ADC, then initializes and calibrates the <strong>IMU</strong> and <strong>barometer</strong>. The core is a <strong>fixed-rate control loop</strong> that runs every cycle: read the gyro/accelerometer and barometer, fuse them into an attitude and altitude estimate, read the pilot's stick commands from the ELRS receiver over UART, run the control laws, and write motor commands out to the four ESCs via timer-generated PWM. The same loop watches pack voltage through the divider and enforces failsafes — for example, cutting motors if the receiver link drops — so the aircraft fails safe rather than flying away.
+        </p>
+      </div>
+
+      <!-- STAGE 05 — KALMAN FILTER -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">05</span>
+          <div>
+            <div class="stage-eyebrow">State Estimation</div>
+            <h3 class="stage-title">Kalman-Filter Sensor Fusion</h3>
+          </div>
+        </div>
+        <p>
+          A quadcopter can't be stabilized from raw sensors: the <strong>gyroscope</strong> is fast and smooth but drifts as its bias integrates over time, while the <strong>accelerometer</strong> gives an absolute gravity reference but is noisy and corrupted by the vehicle's own vibration and motion. I implemented a <strong>Kalman filter</strong> to fuse them into one clean attitude estimate — trusting the gyro for short-term rate integration while continuously correcting its drift against the accelerometer's long-term gravity vector, with the filter's gain balancing how much to believe each source based on their modeled noise. The result is a stable, low-latency estimate of pitch and roll (with the barometer folded in for altitude) that holds steady even under motor vibration — the foundation the control loops depend on.
+        </p>
+      </div>
+
+      <!-- STAGE 06 — PID TUNING / TEST RIG -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">06</span>
+          <div>
+            <div class="stage-eyebrow">Controls · Bring-Up</div>
+            <h3 class="stage-title">PID Tuning on a Tethered Rig</h3>
+          </div>
+        </div>
+        <p>
+          With a trustworthy attitude estimate, the last step was closing the loop. The firmware runs <strong>PID controllers</strong> that turn the error between commanded and estimated attitude into per-motor corrections — the proportional term reacting to current error, the derivative term damping the rate of change, and the integral term trimming out steady-state offset. To tune the gains safely I built a <strong>tethered test rig</strong>, anchoring the drone to heavy dumbbells so it could spool up and react to inputs without flying away. Working <strong>axis by axis</strong>, I raised each proportional gain until the response was crisp but not oscillating, added derivative to damp overshoot, and trimmed integral to hold attitude — until the aircraft settled quickly and rejected disturbances cleanly.
+        </p>
+        <div class="project-images">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/quad_testrig.jpg" alt="Quadcopter tethered to dumbbells for tuning" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Tethered tuning rig</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 07 — FINALIZED DRONE -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">07</span>
+          <div>
+            <div class="stage-eyebrow">Flight Ready</div>
+            <h3 class="stage-title">Finalized Drone</h3>
+          </div>
+        </div>
+        <p>
+          The finished quadcopter brings every layer together — an FEA-validated frame, a custom STM32 flight-controller PCB, firmware and a Kalman-filter estimator written from scratch, and hand-tuned PID loops — into a vehicle that hovers and maneuvers under its own control.
+        </p>
+        <div class="project-images stack">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/quad_final.jpg" alt="Finalized custom quadcopter" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Completed quadcopter</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DETAIL: Wind Turbine -->
+  <div class="detail-view" id="detail-wind">
+    <button class="back-btn" onclick="closeProject()"><span class="arw">←</span> Back to Projects</button>
+    <div class="dossier">
+
+      <!-- LEAD / OVERVIEW -->
+      <div class="detail-lead">
+        <div class="lead-eyebrow">Project File // WIND-01 · ENGIN 26 · UC Berkeley</div>
+        <div class="lead-grid">
+          <div>
+            <h2 class="lead-title">Wind Turbine Design &amp; Testing</h2>
+            <p class="lead-sub">
+              A full-cycle mechanical engineering project — research, CAD, FEA, 3D printing, and physical testing — to design a small-scale horizontal-axis wind turbine that generates power in a <strong>25 mph</strong> laboratory wind. The final build pairs a three-blade <strong>NACA 4412</strong> rotor with a tapered lattice tower, and reached roughly <strong>58.9% aerodynamic efficiency</strong> — essentially at the theoretical Betz limit of 59%.
+            </p>
+            <div class="spec-strip">
+              <div class="spec"><span>Wind Speed</span><b>25 mph</b></div>
+              <div class="spec"><span>Peak Power</span><b>1.395 W</b></div>
+              <div class="spec"><span>Efficiency</span><b>58.9%</b></div>
+              <div class="spec"><span>Min Factor of Safety</span><b>4.613</b></div>
+              <div class="spec"><span>Tower Mass</span><b>215.5 g</b></div>
+              <div class="spec"><span>Rotor</span><b>3 × NACA 4412</b></div>
+            </div>
+          </div>
+          <div class="lead-media">
+            <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+              <img src="images/wind_hero.jpg" alt="Final wind turbine with motor and blades mounted">
+              <span class="label">Final build — motor &amp; rotor mounted</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 01 — BLADE / AERODYNAMICS -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">01</span>
+          <div>
+            <div class="stage-eyebrow">Aerodynamics</div>
+            <h3 class="stage-title">Blade &amp; Airfoil Design</h3>
+          </div>
+        </div>
+        <p>
+          The rotor was designed around four key parameters. The blade uses a <strong>NACA 4412 airfoil</strong>, chosen for its high lift-to-drag ratio at low wind speeds and a 12% thickness-to-chord ratio that also eases 3D printing. A <strong>three-blade</strong> layout balances smooth, low-vibration rotation against the added drag of more blades. Each blade runs a <strong>6° angle of attack</strong> and twists from <strong>20° at the root to 0° at the tip</strong>, holding the local angle of attack favorable along the span. Final blade length was 2.75 in from a 0.25 in hub offset.
+        </p>
+        <div class="project-images">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/wind_airfoil.png" alt="NACA 4412 airfoil profile sketch">
+            <span class="label">NACA 4412 profile</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/wind_blade_cad.png" alt="Three-blade rotor modeled in SolidWorks">
+            <span class="label">SolidWorks rotor model</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 02 — TOWER / STRUCTURES -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">02</span>
+          <div>
+            <div class="stage-eyebrow">Structures</div>
+            <h3 class="stage-title">Tower Concept &amp; Selection</h3>
+          </div>
+        </div>
+        <p>
+          The tower carries the motor and rotor while staying light and stiff. After sketching several concepts, the team chose a <strong>tapered square-truss lattice</strong> with diagonal cross-bracing: triangulated members resist deformation far better than open rectangular frames, and the wide base lowers the center of gravity and resists overturning. Research comparing lattice and tubular towers drove the decision to use an <strong>open truss rather than a solid column</strong>.
+        </p>
+        <div class="project-images">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/wind_tower_sketch_1.jpg" alt="Preliminary tower concept sketch">
+            <span class="label">Concept sketch</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/wind_tower_sketch_2.jpg" alt="Tower section-view study sketch">
+            <span class="label">Section study</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/wind_tower_cad.png" alt="Final selected tower design in SolidWorks">
+            <span class="label">Final tower CAD</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 03 — CAD & ASSEMBLY -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">03</span>
+          <div>
+            <div class="stage-eyebrow">CAD Modeling</div>
+            <h3 class="stage-title">Assembly &amp; Mass Budget</h3>
+          </div>
+        </div>
+        <p>
+          The full turbine — tower, motor mount, and blades — was modeled and assembled in <strong>SolidWorks</strong>. The Mass Properties tool put the printed tower at <strong>14.12 in³</strong> of material and <strong>215.5 g</strong>, well under the 300 g limit, confirming the lattice was material-efficient before anything reached the printer.
+        </p>
+        <div class="project-images">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/wind_assembly.png" alt="3D assembly drawing of the wind turbine">
+            <span class="label">3D assembly</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/wind_exploded.png" alt="Exploded view of the tower">
+            <span class="label">Exploded view</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/wind_mass_properties.png" alt="SolidWorks mass properties readout">
+            <span class="label">Mass properties · 14.12 in³</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 04 — STATIC FEA -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">04</span>
+          <div>
+            <div class="stage-eyebrow">Simulation</div>
+            <h3 class="stage-title">Static FEA Validation</h3>
+          </div>
+        </div>
+        <p>
+          To validate stiffness, the tower base was fixed and a <strong>1.5 N horizontal load</strong> — the estimated 25 mph fan load — was applied at the motor mount using ABS material properties. The results: a maximum <strong>von Mises stress of 2.555 MPa</strong>, a <strong>minimum factor of safety of 4.613</strong>, and a peak <strong>displacement of just 0.190 mm</strong>, all concentrated near the top mount where the load enters the frame.
+        </p>
+        <div class="project-images">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/wind_fea_von_mises.png" alt="Von Mises stress plot under 1.5 N load">
+            <span class="label">Von Mises · 2.555 MPa</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/wind_fea_fos.png" alt="Factor of safety plot">
+            <span class="label">Factor of safety · 4.613</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/wind_fea_displacement.png" alt="Total displacement plot">
+            <span class="label">Displacement · 0.190 mm</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 05 — STIFFNESS SWEEP -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">05</span>
+          <div>
+            <div class="stage-eyebrow">Simulation</div>
+            <h3 class="stage-title">Load–Deflection Sweep</h3>
+          </div>
+        </div>
+        <p>
+          Sweeping the applied load from <strong>0.5 N to 6 N</strong> produced a near-perfectly linear load–deflection response (<strong>R² ≈ 0.99999998</strong>), confirming the tower stays elastic across the range. The slope gives a simulated tower stiffness of about <strong>7.91 N/mm</strong>.
+        </p>
+        <div class="project-images">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/wind_fea_load_deflection.png" alt="FEA load versus deflection plot">
+            <span class="label">FEA load vs deflection</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 06 — FABRICATION -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">06</span>
+          <div>
+            <div class="stage-eyebrow">Manufacturing</div>
+            <h3 class="stage-title">3D Printing &amp; Build</h3>
+          </div>
+        </div>
+        <p>
+          The turbine was <strong>3D printed and assembled</strong>, with the motor mounted at the top of the tower holding the three-blade rotor. Final printed mass came in at <strong>215.5 g</strong> — leaving nearly 85 g of unused margin under the 300 g cap.
+        </p>
+        <div class="project-images">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/wind_final_build.jpg" alt="Printed and assembled turbine on the test stand">
+            <span class="label">Printed build on test stand</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 07 — TEST SETUP -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">07</span>
+          <div>
+            <div class="stage-eyebrow">Testing</div>
+            <h3 class="stage-title">Experimental Setup</h3>
+          </div>
+        </div>
+        <p>
+          Two tests were run. For <strong>power generation</strong>, the turbine faced a 25 mph wind source with its output wired to a <strong>DC electronic load and digital power meter</strong>; the electrical load was stepped while voltage, current, power, and rotor speed were logged. For <strong>stiffness</strong>, weights were hung from a pulley to pull the tower laterally, measuring deflection against load.
+        </p>
+        <div class="project-images">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/wind_test_setup.jpg" alt="Wind turbine power-generation test setup">
+            <span class="label">Power-generation test rig</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 08 — POWER RESULTS -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">08</span>
+          <div>
+            <div class="stage-eyebrow">Results</div>
+            <h3 class="stage-title">Power Generation</h3>
+          </div>
+        </div>
+        <p>
+          Across the load sweep, voltage fell as current rose — expected as heavier electrical load draws down a small generator. Power climbed to a peak of <strong>1.395 W at 595 mA, 1.93 V, and ~3684 rpm</strong>, then dropped off as the rotor was pulled past its maximum-power point.
+        </p>
+        <div class="project-images">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/wind_power_vs_current.png" alt="Power versus current plot">
+            <span class="label">Power vs current</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/wind_voltage_vs_current.png" alt="Voltage versus current plot">
+            <span class="label">Voltage vs current</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 09 — STIFFNESS RESULTS -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">09</span>
+          <div>
+            <div class="stage-eyebrow">Results</div>
+            <h3 class="stage-title">Measured Tower Stiffness</h3>
+          </div>
+        </div>
+        <p>
+          The physical pull test was linear over the tested range, giving a <strong>measured tower stiffness of 579.1 N/mm</strong> — stiff enough to keep the rotor aligned under wind load and minimize deflection during operation.
+        </p>
+        <div class="project-images">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/wind_stiffness_curve.png" alt="Measured tower load versus displacement">
+            <span class="label">Measured load vs displacement</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 10 — EFFICIENCY -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">10</span>
+          <div>
+            <div class="stage-eyebrow">Analysis</div>
+            <h3 class="stage-title">Efficiency vs the Betz Limit</h3>
+          </div>
+        </div>
+        <p>
+          Efficiency compares experimental output to the theoretical wind power through the swept area. With <strong>P<sub>exp</sub> = 1.395 W</strong> against <strong>P<sub>theo</sub> ≈ 2.368 W</strong>, the turbine reached <strong>≈ 58.9%</strong> — essentially at the <strong>Betz limit of 59%</strong>, the theoretical ceiling for any wind turbine.
+        </p>
+        <div class="project-images">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/wind_efficiency_calc.png" alt="Efficiency calculation">
+            <span class="label">Efficiency calculation</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 11 — CONCLUSIONS -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">11</span>
+          <div>
+            <div class="stage-eyebrow">Reflection</div>
+            <h3 class="stage-title">Conclusions &amp; Next Steps</h3>
+          </div>
+        </div>
+        <p>
+          The turbine met every goal — research-driven design, CAD, FEA, printing, and testing in one working prototype. Clear next steps stand out: grow the blade radius (power scales with <strong>r²</strong>), match a fixed load resistor to the generator so it <strong>holds its peak</strong> instead of passing through it, thicken the lower bracing to use the remaining mass budget, and calibrate the FEA — the gap between the simulated <strong>7.91 N/mm</strong> and measured <strong>579.1 N/mm</strong> points to resin material properties and boundary conditions that need tuning.
+        </p>
+        <p style="margin-top:1.6rem;">
+          <a href="pdfs/report1_pdf.pdf" target="_blank" class="btn-link">View Full Project Report (PDF)</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DETAIL: Solar Charger -->
+  <div class="detail-view" id="detail-solar">
+    <button class="back-btn" onclick="closeProject()"><span class="arw">←</span> Back to Projects</button>
+    <div class="project-block">
+      <h3>Solar-Powered Portable Phone Charger</h3>
+      <p class="work-date"> January 2025 - May 2025 </p>
+      <div class="project-images">
+        <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+          <img src="images/piezoelectric_phone_case_1.png" alt="Solar Phone Charger CAD">
+        </div>
+        <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+          <img src="images/piezoelectric_phone_case_2.jpg" alt="Solar Phone Charger Prototype">
+        </div>
+      </div>
+     <p>
+    This project involved the mechanical design and prototyping of a <strong>foldable, solar-powered portable phone charging system</strong> intended to maximize charging efficiency while maintaining portability.
   </p>
   <p>
-    I fabricated custom copper busbars and sheet-metal mounting components using <strong>FabLight laser cutting</strong> and <strong>DIWIRE CNC wire bending</strong> to achieve precise conductor geometry and reliable electrical connections. While developing the layout, I evaluated current paths, electrical interfaces, and potential regions of increased resistive heating within the busbar network, supported by thermal calculations.
+    The enclosure was fully modeled in <strong>CAD</strong> and fabricated using <strong>additive manufacturing</strong>, with a <strong>five-fold mechanical layout</strong> designed to optimize solar exposure while securely housing a mobile device. <strong>Finite element analysis (FEA)</strong> was conducted on the hinge mechanisms to evaluate stress distribution and ensure structural integrity under repeated folding cycles.
   </p>
   <p>
-   I developed the instrumentation system and test setup used to characterize busbar thermal behavior: an <strong>Arduino-based rig</strong> with a <strong>thermocouple sensor array</strong> and <strong>four-point probe resistance measurement</strong>, with telemetry logged and visualized in <strong>Python and matplotlib</strong>. By comparing the measured thermocouple and four-point probe results against <strong>SolidWorks thermal FEA</strong>, I validated the models and used the results to suggest new busbar design geometries, directly driving iterative redesigns that mitigate hotspots and improve the reliability of the accumulator power distribution system. Currently, the accumulator attic and its electrical hardware are being assembled.
+    The system integrates <strong>ten miniature photovoltaic panels</strong> electrically configured in <strong>parallel</strong> to increase current output while maintaining a stable voltage. Each panel was rated for approximately <strong>0.6 W at 2 V</strong> under direct sunlight, yielding a <strong>total theoretical output of up to 6 W</strong>. A <strong>voltage regulation module</strong> was incorporated to ensure consistent and safe power delivery despite fluctuations in solar input.
   </p>
-</div>
-  <!-- ===== CUSTOM QUADCOPTER ===== -->
-  <div class="project-block reveal">
-    <h3>Custom Quadcopter</h3>
-    <p class="work-date"> May 2026 — August 2026 </p>
-    <div class="project-images">
-      <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
-        <img src="images/quad_1.jpeg" alt="Custom Quadcopter Frame CAD">
-      </div>
-      <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
-        <img src="images/quad_2.jpeg" alt="Custom Quadcopter Build">
-      </div>
-    </div>
-    <p>
-      For this project, I designed, built, and tested a fully custom quadcopter drone from the airframe up through the firmware. I began by selecting a frame geometry and validating it in <strong>SolidWorks</strong> using <strong>finite element analysis (FEA)</strong>, applying representative thrust and landing loads to confirm the structure could handle flight and impact stresses with an acceptable factor of safety before committing to a build. In parallel, I sized the propulsion system with <strong>hand calculations</strong>, using aerodynamic and electrical analysis to match <strong>propeller diameter and pitch</strong> to <strong>motor Kv</strong>, thrust-to-weight target, and current draw, ensuring the motor and propeller pairing could produce enough thrust to hover and maneuver while staying within the power budget of the battery and ESCs.
-    </p>
-    <p>
-      Rather than rely on an off-the-shelf autopilot, I designed and built my own <strong>flight controller in KiCad</strong>. The custom <strong>PCB</strong> integrates an <strong>IMU</strong> for attitude sensing, a <strong>barometer</strong> for altitude estimation, and an <strong>RC receiver</strong> interface for pilot input, laid out as a single board tailored to the frame. I then wrote the <strong>flight firmware from scratch</strong>, implementing the sensor fusion and control loops needed to stabilize the aircraft and translate stick commands into motor outputs through the ESCs.
-    </p>
-    <p>
-      To validate the control system safely, I built a <strong>tethered test jig</strong> that tied the drone down while still allowing it to react to control inputs, letting me tune the <strong>PID gains</strong> without risking an uncontrolled flight. Working axis by axis, I adjusted the proportional, integral, and derivative terms until the drone held a stable, responsive attitude and rejected disturbances cleanly.
-    </p>
-  </div>
-  <div class="project-block reveal">
-    <h3>Wind Turbine Design &amp; Testing</h3>
-    <p class="work-date"> March 2026 - May 2026 </p>
-    <div class="project-images">
-      <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
-        <img src="images/wind_1.jpg" alt="Wind Turbine CAD Model">
-      </div>
-      <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
-        <img src="images/wind_2.jpg" alt="Wind Turbine 3D-Printed Prototype">
-      </div>
-    </div>
-    <p>
-      For this ENGIN 26 design project at UC Berkeley, my team designed, built, and tested a small-scale horizontal-axis wind turbine to generate electricity under laboratory conditions at a <strong>25 mph wind speed</strong>. The rotor uses a <strong>three-blade design</strong> with a <strong>NACA 4412 airfoil profile</strong>—chosen for its high lift-to-drag ratio at low wind speeds—set to a <strong>6° angle of attack</strong> with a blade twist from 20° at the root to 0° at the tip to keep the angle of attack favorable along the span.
-    </p>
-    <p>
-      The supporting tower was modeled in <strong>SolidWorks</strong> as a tapered square-truss lattice with diagonal cross-bracing to maximize stiffness-to-weight while lowering the center of gravity. I validated the structure with <strong>finite element analysis</strong>: under a 1.5 N horizontal wind load, the tower showed a <strong>maximum von Mises stress of 2.56 MPa</strong>, a <strong>minimum factor of safety of 4.6</strong>, and a <strong>peak tip displacement of just 0.19 mm</strong>. Sweeping the applied load from 0.5 N to 6 N produced a near-perfectly linear load–deflection response, and the final 3D-printed turbine came in at <strong>215.5 g</strong>, well under the 300 g limit.
-    </p>
-    <p>
-      We tested the prototype two ways: a stiffness test using a pulley and incremental weights to measure tower deflection, and a power-generation test in front of a 25 mph wind source with the output wired to a <strong>DC electronic load and digital power meter</strong>. Sweeping the electrical load, we recorded voltage, current, power, and rotor speed across the operating range to locate the maximum power point. The turbine produced a <strong>peak of approximately 1.395 W at 595 mA and 1.93 V (~3684 rpm)</strong>, corresponding to an <strong>aerodynamic efficiency of about 58.9%</strong>—close to the theoretical Betz limit of 59%.
-    </p>
-    <p style="margin-top:1.6rem;">
-      <a href="pdfs/report1_pdf.pdf" target="_blank" class="btn-link">View Full Project Report (PDF)</a>
-    </p>
-  </div>
-  <div class="project-block reveal">
-    <h3>Solar-Powered Portable Phone Charger</h3>
-    <p class="work-date"> January 2025 - May 2025 </p>
-    <div class="project-images">
-      <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
-        <img src="images/piezoelectric_phone_case_1.png" alt="Solar Phone Charger CAD">
-      </div>
-      <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
-        <img src="images/piezoelectric_phone_case_2.jpg" alt="Solar Phone Charger Prototype">
-      </div>
-    </div>
-   <p>
-  This project involved the mechanical design and prototyping of a <strong>foldable, solar-powered portable phone charging system</strong> intended to maximize charging efficiency while maintaining portability.
-</p>
-<p>
-  The enclosure was fully modeled in <strong>CAD</strong> and fabricated using <strong>additive manufacturing</strong>, with a <strong>five-fold mechanical layout</strong> designed to optimize solar exposure while securely housing a mobile device. <strong>Finite element analysis (FEA)</strong> was conducted on the hinge mechanisms to evaluate stress distribution and ensure structural integrity under repeated folding cycles.
-</p>
-<p>
-  The system integrates <strong>ten miniature photovoltaic panels</strong> electrically configured in <strong>parallel</strong> to increase current output while maintaining a stable voltage. Each panel was rated for approximately <strong>0.6 W at 2 V</strong> under direct sunlight, yielding a <strong>total theoretical output of up to 6 W</strong>. A <strong>voltage regulation module</strong> was incorporated to ensure consistent and safe power delivery despite fluctuations in solar input.
-</p>
-    <p style="margin-top:1rem;">
-  <a href="pdfs/Solar%20Power%20Bank%20Project%20Portfolio.pdf"
-     target="_blank"
-     class="inline-link">
-  </a>
-</p>
-  </div>
-  <div class="project-block reveal">
-    <h3>Raspberry Pi Sodium Bicarbonate Dispenser</h3>
-    <p class="work-date"> February 2024 - April 2024 </p>
-    <div class="project-images">
-      <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
-        <img src="images/sodium_bicarbonate_dispenser_1.jpg" alt="Sodium Bicarbonate Dispenser CAD">
-      </div>
-      <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
-        <img src="images/sodium_bicarbonate_dispenser_2.jpg" alt="Sodium Bicarbonate Dispenser System">
-      </div>
-    </div>
-    <p>
-     This project was inspired by my work at the Institute of Marine and Environmental Technology (IMET), where I helped deliver sodium bicarbonate to aquatic tanks to maintain stable pH. It grew into the design and implementation of an <strong>automated chemical dosing system</strong> intended to regulate and stabilize pH levels in aquatic tank environments.
-    </p>
-    <p>
-     A <strong>Raspberry Pi</strong> served as the central embedded controller, interfaced via a breadboard with discrete electrical components including a control switch, LED status indicators, and a <strong>DC pump powered by a 12 V battery supply</strong>.
-    </p>
-    <p>
-     <strong>Custom Python scripts</strong> were developed to manage system logic and control pump actuation, enabling consistent and repeatable sodium bicarbonate delivery, while LED indicators provided real-time visual feedback on system status to improve operational reliability. At the core of the software is a <strong>dosing calculator</strong> I helped develop from <strong>first-principles acid–base chemistry</strong>, which computes the required sodium bicarbonate dose from critical water parameters—current pH, target pH, tank volume, tank alkalinity, and temperature.
-    </p>
-    <p>
-     The completed system was pitched to IMET as a prototype to automate their pH stabilization process.
-    </p>
-    <div style="margin-top:1.6rem; max-width:900px;">
-      <a href="https://www.youtube.com/watch?v=t889_P_oynA" target="_blank" class="btn-link">▶ Watch System Demonstration on YouTube</a>
+      <p style="margin-top:1rem;">
+    <a href="pdfs/Solar%20Power%20Bank%20Project%20Portfolio.pdf"
+       target="_blank"
+       class="inline-link">
+    </a>
+  </p>
     </div>
   </div>
-  <div class="project-block reveal">
-    <h3>ACTE Trophy Design</h3>
-    <p class="work-date"> November 2025 - December 2025 </p>
-    <div class="project-images">
-      <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
-        <img src="images/acte_trophy_1.jpg" alt="ACTE Trophy CAD">
+
+  <!-- DETAIL: Sodium Bicarbonate Dispenser -->
+  <div class="detail-view" id="detail-dispenser">
+    <button class="back-btn" onclick="closeProject()"><span class="arw">←</span> Back to Projects</button>
+    <div class="project-block">
+      <h3>Raspberry Pi Sodium Bicarbonate Dispenser</h3>
+      <p class="work-date"> February 2024 - April 2024 </p>
+      <div class="project-images">
+        <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+          <img src="images/sodium_bicarbonate_dispenser_1.jpg" alt="Sodium Bicarbonate Dispenser CAD">
+        </div>
+        <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+          <img src="images/sodium_bicarbonate_dispenser_2.jpg" alt="Sodium Bicarbonate Dispenser System">
+        </div>
       </div>
-      <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
-        <img src="images/acte_trophy_2.jpg" alt="ACTE Trophy Render">
+      <p>
+       This project was inspired by my work at the Institute of Marine and Environmental Technology (IMET), where I helped deliver sodium bicarbonate to aquatic tanks to maintain stable pH. It grew into the design and implementation of an <strong>automated chemical dosing system</strong> intended to regulate and stabilize pH levels in aquatic tank environments.
+      </p>
+      <p>
+       A <strong>Raspberry Pi</strong> served as the central embedded controller, interfaced via a breadboard with discrete electrical components including a control switch, LED status indicators, and a <strong>DC pump powered by a 12 V battery supply</strong>.
+      </p>
+      <p>
+       <strong>Custom Python scripts</strong> were developed to manage system logic and control pump actuation, enabling consistent and repeatable sodium bicarbonate delivery, while LED indicators provided real-time visual feedback on system status to improve operational reliability. At the core of the software is a <strong>dosing calculator</strong> I helped develop from <strong>first-principles acid–base chemistry</strong>, which computes the required sodium bicarbonate dose from critical water parameters—current pH, target pH, tank volume, tank alkalinity, and temperature.
+      </p>
+      <p>
+       The completed system was pitched to IMET as a prototype to automate their pH stabilization process.
+      </p>
+      <div style="margin-top:1.6rem; max-width:900px;">
+        <a href="https://www.youtube.com/watch?v=t889_P_oynA" target="_blank" class="btn-link">▶ Watch System Demonstration on YouTube</a>
       </div>
     </div>
-    <p>
-      This award-winning project involved the <strong>end-to-end design of a national-level trophy</strong> using CAD and digital modeling workflows.
-    </p>
-    <p>
-      <strong>Onshape</strong> was utilized for parametric and structural modeling of the primary geometry, while <strong>Blender</strong> was employed to generate complex surface features, organic curves, and refined aesthetic elements.
-    </p>
-    <p>
-      The final design received the <strong>National ACTE Student Trophy Design Award</strong>, resulting in a <strong>$1,000 scholarship</strong>, the donation of a professional-grade 3D printer to the school, and an invitation to present the project at a national conference in Texas.
-    </p>
-    <p style="margin-top:1.2rem;">
-      <a href="https://www.acteonline.org/blog/press/maryland-students-win-acte-national-student-trophy-design-contest-3/" target="_blank" class="inline-link">Read Official ACTE Article →</a>
-    </p>
   </div>
-</div>
+
+  <!-- DETAIL: ACTE Trophy -->
+  <div class="detail-view" id="detail-acte">
+    <button class="back-btn" onclick="closeProject()"><span class="arw">←</span> Back to Projects</button>
+    <div class="project-block">
+      <h3>ACTE Trophy Design</h3>
+      <p class="work-date"> November 2025 - December 2025 </p>
+      <div class="project-images">
+        <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+          <img src="images/acte_trophy_1.jpg" alt="ACTE Trophy CAD">
+        </div>
+        <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+          <img src="images/acte_trophy_2.jpg" alt="ACTE Trophy Render">
+        </div>
+      </div>
+      <p>
+        This award-winning project involved the <strong>end-to-end design of a national-level trophy</strong> using CAD and digital modeling workflows.
+      </p>
+      <p>
+        <strong>Onshape</strong> was utilized for parametric and structural modeling of the primary geometry, while <strong>Blender</strong> was employed to generate complex surface features, organic curves, and refined aesthetic elements.
+      </p>
+      <p>
+        The final design received the <strong>National ACTE Student Trophy Design Award</strong>, resulting in a <strong>$1,000 scholarship</strong>, the donation of a professional-grade 3D printer to the school, and an invitation to present the project at a national conference in Texas.
+      </p>
+      <p style="margin-top:1.2rem;">
+        <a href="https://www.acteonline.org/blog/press/maryland-students-win-acte-national-student-trophy-design-contest-3/" target="_blank" class="inline-link">Read Official ACTE Article →</a>
+      </p>
+    </div>
+  </div>
+
 </section>
-  <!-- RESEARCH PAGE -->
+
+<!-- ============================================================= -->
+<!-- RESEARCH PAGE -->
+<!-- ============================================================= -->
 <section id="research">
-  <div class="projects-header">
-    <h2>Research</h2>
-    <div class="section-meta">Index <span>03</span> / Records <span>02</span></div>
+
+  <!-- ---- GRID (THUMBNAILS) ---- -->
+  <div class="grid-mode" id="grid-research">
+    <div class="projects-header">
+      <h2>Research</h2>
+      <div class="section-meta">Index <span>03</span> / Records <span>02</span></div>
+    </div>
+    <div class="card-grid">
+
+      <article class="project-card reveal" data-project="cal" tabindex="0"
+               onclick="openProject('cal')" onkeydown="cardKey(event,'cal')">
+        <div class="card-thumb">
+          <span class="tick tl"></span><span class="tick br"></span>
+          <span class="thumb-badge">—</span>
+          <img src="images/woo_1.jpg" alt="CAL research thumbnail">
+        </div>
+        <div class="card-body">
+          <div class="card-date">February 2026 - Present</div>
+          <h3>Design for Emerging and Nanoscale Manufacturing, UC Berkeley</h3>
+          <p class="card-brief">Machine learning and MLOps pipelines for Computed Axial Lithography (CAL) volumetric 3D printing — solving the inverse projection problem with neural networks.</p>
+          <span class="card-cta">View Project <span class="arw">→</span></span>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-project="dic" tabindex="0"
+               onclick="openProject('dic')" onkeydown="cardKey(event,'dic')">
+        <div class="card-thumb">
+          <span class="tick tl"></span><span class="tick br"></span>
+          <span class="thumb-badge">—</span>
+          <img src="images/dic4.png" alt="DIC research thumbnail">
+        </div>
+        <div class="card-body">
+          <div class="card-date">June 2024 - August 2025</div>
+          <h3>Computational Mechanics Research Group, UMBC</h3>
+          <p class="card-brief">A convolutional neural network that accelerates digital image correlation (DIC), cutting full-field displacement analysis time by roughly 98%.</p>
+          <span class="card-cta">View Project <span class="arw">→</span></span>
+        </div>
+      </article>
+
+    </div>
   </div>
-  <div class="projects-vertical">
-    <!-- Research Project 1 -->
-    <div class="project-block reveal">
+
+  <!-- ---- DETAIL VIEWS ---- -->
+
+  <!-- DETAIL: CAL -->
+  <div class="detail-view" id="detail-cal">
+    <button class="back-btn" onclick="closeProject()"><span class="arw">←</span> Back to Research</button>
+    <div class="project-block">
       <h3>Design for Emerging
 and Nanoscale
 Manufacturing, UC Berkeley</h3>
@@ -875,14 +1790,18 @@ Manufacturing, UC Berkeley</h3>
         This research focuses on <strong>Computed Axial Lithography (CAL)</strong>, a volumetric additive manufacturing technique that fabricates three-dimensional objects by tomographically synthesizing light within a rotating volume of photopolymer precursor solution. Unlike conventional layer-by-layer 3D printing methods, CAL generates an entire object simultaneously by projecting dynamically computed light patterns into the rotating resin volume. When the integrated light dose within the resin reaches a polymerization threshold, the desired geometry solidifies throughout the volume at once, enabling extremely rapid fabrication of complex structures.
       </p>
       <p>
-My work in the Design for Emerging and Nanoscale Manufacturing research group focuses on integrating machine learning and data infrastructure into the CAL workflow. I developed an <strong>MLOps-based data pipeline</strong> to manage and preprocess experimental and simulated datasets produced during volumetric printing experiments. This pipeline standardizes data ingestion, formatting, and preprocessing, allowing machine learning models to be trained and evaluated efficiently on large collections of print and simulation data.
+  My work in the Design for Emerging and Nanoscale Manufacturing research group focuses on integrating machine learning and data infrastructure into the CAL workflow. I developed an <strong>MLOps-based data pipeline</strong> to manage and preprocess experimental and simulated datasets produced during volumetric printing experiments. This pipeline standardizes data ingestion, formatting, and preprocessing, allowing machine learning models to be trained and evaluated efficiently on large collections of print and simulation data.
       </p>
       <p>
-Building on this infrastructure, I designed and trained <strong>neural network models</strong> to address the <strong>inverse problem</strong> inherent in CAL printing. Rather than directly projecting a model of the target object, CAL requires computing a set of tomographic light projections whose integrated dose will polymerize the desired geometry within the rotating resin volume. The neural networks I developed learn to map target 3D geometries to optimized light dose distributions that produce accurate volumetric prints.
+  Building on this infrastructure, I designed and trained <strong>neural network models</strong> to address the <strong>inverse problem</strong> inherent in CAL printing. Rather than directly projecting a model of the target object, CAL requires computing a set of tomographic light projections whose integrated dose will polymerize the desired geometry within the rotating resin volume. The neural networks I developed learn to map target 3D geometries to optimized light dose distributions that produce accurate volumetric prints.
       </p>
     </div>
-    <!-- Research Project 2 -->
-    <div class="project-block reveal">
+  </div>
+
+  <!-- DETAIL: DIC -->
+  <div class="detail-view" id="detail-dic">
+    <button class="back-btn" onclick="closeProject()"><span class="arw">←</span> Back to Research</button>
+    <div class="project-block">
       <h3>Computational Mechanics Research Group, University of Maryland, Baltimore County</h3>
       <p class="work-date"> June 2024 - August 2025 </p>
       <div class="project-images">
@@ -904,15 +1823,23 @@ Building on this infrastructure, I designed and trained <strong>neural network m
       </p>
     </div>
   </div>
+
 </section>
+
 <footer>
   <div>© 2026 Ayush Ghosh · Mechanical Engineering Portfolio</div>
   <div><span>■</span> BUILT WITH CAD · FEA · CODE</div>
 </footer>
+
 <script>
   function showSection(id, btn) {
+    /* reset any open detail views so sections always land on their grid */
+    document.querySelectorAll('.detail-view').forEach(d => d.classList.remove('open'));
+    document.querySelectorAll('.grid-mode').forEach(g => g.style.display = '');
+
     document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
     document.getElementById(id).classList.add('active');
+
     document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
     if (btn) {
       btn.classList.add('active');
@@ -920,11 +1847,71 @@ Building on this infrastructure, I designed and trained <strong>neural network m
       const match = document.querySelector('nav button[data-target="' + id + '"]');
       if (match) match.classList.add('active');
     }
+
     const label = document.getElementById('secLabel');
     if (label) label.textContent = id.toUpperCase();
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
     revealPass();
   }
+
+  /* open a single project's detail view */
+  function openProject(id) {
+    const detail = document.getElementById('detail-' + id);
+    if (!detail) return;
+    const section = detail.closest('section');
+    const grid = section.querySelector('.grid-mode');
+    if (grid) grid.style.display = 'none';
+    detail.classList.add('open');
+
+    const label = document.getElementById('secLabel');
+    if (label) label.textContent = section.id.toUpperCase() + ' / DETAIL';
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    revealPass();
+  }
+
+  /* return from a detail view to the active section's grid */
+  function closeProject() {
+    const active = document.querySelector('section.active');
+    if (!active) return;
+    active.querySelectorAll('.detail-view').forEach(d => d.classList.remove('open'));
+    const grid = active.querySelector('.grid-mode');
+    if (grid) grid.style.display = '';
+
+    const label = document.getElementById('secLabel');
+    if (label) label.textContent = active.id.toUpperCase();
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    revealPass();
+  }
+
+  /* keyboard access for cards (Enter / Space) */
+  function cardKey(e, id) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openProject(id);
+    }
+  }
+
+  /* placeholder image slots: hide the note when a real file loads, hide broken img if it doesn't */
+  function phHide(img){ var ph = img.parentElement.querySelector('.ph'); if(ph) ph.style.display='none'; }
+  function imgHide(img){ img.style.display='none'; }
+
+  /* auto-fill each card's image-count badge from its detail view */
+  function initBadges() {
+    document.querySelectorAll('.project-card').forEach(card => {
+      const id = card.dataset.project;
+      const detail = document.getElementById('detail-' + id);
+      const badge = card.querySelector('.thumb-badge');
+      if (detail && badge) {
+        const n = detail.querySelectorAll('.project-images img').length;
+        badge.textContent = n + (n === 1 ? ' IMAGE' : ' IMAGES');
+      }
+    });
+  }
+  initBadges();
+
   /* live clock in the status strip */
   function tick() {
     const el = document.getElementById('clock');
@@ -935,6 +1922,7 @@ Building on this infrastructure, I designed and trained <strong>neural network m
   }
   tick();
   setInterval(tick, 1000);
+
   /* scroll reveal */
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
