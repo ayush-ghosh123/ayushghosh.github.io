@@ -1025,7 +1025,7 @@
         <div class="card-thumb">
           <span class="tick tl"></span><span class="tick br"></span>
           <span class="thumb-badge"></span>
-          <img src="images/attic.jpg" alt="Formula SAE Accumulator Attic thumbnail">
+          <img src="images/Attic.png" alt="Formula SAE Accumulator Attic thumbnail">
         </div>
         <div class="card-body">
           <div class="card-date">January 2026 - Present</div>
@@ -1118,26 +1118,173 @@
   <!-- DETAIL: Formula SAE -->
   <div class="detail-view" id="detail-fsae">
     <button class="back-btn" onclick="closeProject()"><span class="arw">←</span> Back to Projects</button>
-    <div class="project-block">
-      <h3>Formula SAE Accumulator Attic Electrical Architecture</h3>
-      <p class="work-date"> January 2026 - Present </p>
-      <div class="project-images">
-        <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
-          <img src="images/attic.jpg" alt="Formula SAE Accumulator Attic CAD">
-        </div>
-        <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
-          <img src="images/ATTIC_jpg.jpg" alt="Formula SAE Accumulator Attic Assembly">
+    <div class="dossier">
+
+      <!-- LEAD / OVERVIEW -->
+      <div class="detail-lead">
+        <div class="lead-eyebrow">Project File // ATTIC-01 · Formula SAE · UC Berkeley</div>
+        <div class="lead-grid">
+          <div>
+            <h2 class="lead-title">Accumulator Attic Electrical Architecture</h2>
+            <p class="lead-sub">
+              The <strong>Accumulator Tractive System Container (ATSC)</strong>, the accumulator attic, is the high-voltage DC battery enclosure and power-distribution deck for a Formula SAE electric race car. It houses the vehicle's high-voltage (HV) and low-voltage (LV) distribution, safety systems, sensing electronics, and high-current interfaces. I designed the enclosure and internal electrical architecture, fabricated the custom copper busbars, and built an instrumentation program that cross-checks four-point probe and thermocouple measurements against <strong>ANSYS thermal simulation</strong> to drive the busbar design.
+            </p>
+            <div class="spec-strip">
+              <div class="spec"><span>Role</span><b>HV/LV Distribution</b></div>
+              <div class="spec"><span>Assembly Mass</span><b>Cut 18%</b></div>
+              <div class="spec"><span>Busbars</span><b>Custom Copper</b></div>
+              <div class="spec"><span>Tolerancing</span><b>GD&amp;T Stack-ups</b></div>
+              <div class="spec"><span>Instrumentation</span><b>4-Point + Thermocouple</b></div>
+              <div class="spec"><span>Sim Cross-check</span><b>ANSYS Coupled-Field</b></div>
+            </div>
+          </div>
+          <div class="lead-media">
+            <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+              <img src="images/Attic.png" alt="SolidWorks render of the accumulator attic enclosure">
+              <span class="label">SolidWorks enclosure architecture</span>
+            </div>
+          </div>
         </div>
       </div>
-      <p>
-       In this project, I designed the accumulator attic for a Formula SAE electric race car, the <strong>Accumulator Tractive System Container (ATSC)</strong>, a high-voltage DC battery enclosure that houses the vehicle's high-voltage (HV) and low-voltage (LV) power distribution components. I developed the enclosure and internal electrical architecture in <strong>SolidWorks</strong> using <strong>GD&amp;T-driven tolerance stack-ups</strong> to integrate safety systems, sensing electronics, and high-current interfaces while accounting for packaging constraints and electrical isolation requirements. Using first-principles <strong>Joule heating and thermal conduction analysis</strong>, I redesigned the attic electrical component layout, <strong>cutting assembly mass by 18%</strong> while streamlining the high-voltage assembly workflow.
-      </p>
-      <p>
-        I fabricated custom copper busbars and sheet-metal mounting components using <strong>FabLight laser cutting</strong> and <strong>DIWIRE CNC wire bending</strong> to achieve precise conductor geometry and reliable electrical connections. While developing the layout, I evaluated current paths, electrical interfaces, and potential regions of increased resistive heating within the busbar network, supported by thermal calculations.
-      </p>
-      <p>
-       I developed the instrumentation system and test setup used to characterize busbar thermal behavior: an <strong>Arduino-based rig</strong> with a <strong>thermocouple sensor array</strong> and <strong>four-point probe resistance measurement</strong>, with telemetry logged and visualized in <strong>Python and matplotlib</strong>. By comparing the measured thermocouple and four-point probe results against <strong>SolidWorks thermal FEA</strong>, I validated the models and used the results to suggest new busbar design geometries, directly driving iterative redesigns that mitigate hotspots and improve the reliability of the accumulator power distribution system. Currently, the accumulator attic and its electrical hardware are being assembled.
-      </p>
+
+      <!-- STAGE 01 - ARCHITECTURE / CAD -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">01</span>
+          <div>
+            <div class="stage-eyebrow">CAD · GD&amp;T</div>
+            <h3 class="stage-title">Enclosure Architecture &amp; Tolerancing</h3>
+          </div>
+        </div>
+        <p>
+          I developed the enclosure and internal electrical architecture in <strong>SolidWorks</strong>, using <strong>GD&amp;T-driven tolerance stack-ups</strong> to integrate the safety systems, sensing electronics, and high-current interfaces while respecting tight packaging constraints and electrical isolation requirements. Working from first-principles <strong>Joule heating and thermal conduction analysis</strong>, I re-laid the internal component layout to shorten and simplify the high-current paths, <strong>cutting assembly mass by 18%</strong> and streamlining the high-voltage assembly workflow.
+        </p>
+        <div class="project-images stack">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/attic.jpg" alt="CAD component layout of the accumulator attic" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Component layout (CAD)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 02 - BUSBAR FABRICATION -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">02</span>
+          <div>
+            <div class="stage-eyebrow">Manufacturing</div>
+            <h3 class="stage-title">Custom Busbar Fabrication</h3>
+          </div>
+        </div>
+        <p>
+          The high-current connections run on <strong>custom copper busbars</strong>. I fabricated the busbars and sheet-metal mounting components using <strong>FabLight laser cutting</strong> and <strong>DIWIRE CNC wire bending</strong> to hit precise conductor geometry and reliable, low-resistance joints. As I developed the layout, I traced the current paths and electrical interfaces and flagged the regions most likely to see elevated resistive (I²R) heating, backed by hand thermal calculations.
+        </p>
+        <div class="project-images stack">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/IMG_8273.jpg" alt="Copper busbar and high-voltage assembly with contactors, fuse, and current sensor" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Busbar &amp; HV assembly</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 03 - ASSEMBLY & INTEGRATION -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">03</span>
+          <div>
+            <div class="stage-eyebrow">Build</div>
+            <h3 class="stage-title">Assembly &amp; Integration</h3>
+          </div>
+        </div>
+        <p>
+          With the geometry finalized, the HV and LV hardware, contactors, fusing, current sensing, and the wiring harness were integrated into the aluminum enclosure. This is the stage where the packaging and isolation decisions made in CAD get verified against real hardware, connectors, and cable routing.
+        </p>
+        <div class="project-images stack">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/ATTIC_jpg.jpg" alt="Assembled accumulator attic with wiring harness" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Assembled attic (build)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 04 - FOUR-POINT PROBE -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">04</span>
+          <div>
+            <div class="stage-eyebrow">Instrumentation</div>
+            <h3 class="stage-title">Four-Point Probe Resistance</h3>
+          </div>
+        </div>
+        <p>
+          To ground the thermal work in real numbers, I measured the busbar and joint resistances directly with a <strong>four-point (Kelvin) milliohm meter</strong>. The four-point method drives a known current through one pair of leads and senses voltage across a separate pair, so it cancels out the lead and contact resistance and resolves the true milliohm-level resistance of the conductor and its joints. These measurements pinpoint where the resistive heating is actually generated and set the electrical baseline for the thermal predictions.
+        </p>
+        <div class="project-images feature">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/IMG_8823.jpeg" alt="Four-point probe milliohm measurement on a busbar" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Four-point probe resistance test</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 05 - THERMOCOUPLE RIG -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">05</span>
+          <div>
+            <div class="stage-eyebrow">Instrumentation</div>
+            <h3 class="stage-title">Arduino Thermocouple Thermal Rig</h3>
+          </div>
+        </div>
+        <p>
+          I built an <strong>Arduino-based measurement rig</strong> with a <strong>thermocouple sensor array</strong> to capture the busbars' real thermal behavior. A bench power supply drives representative current through the busbar network while the thermocouples log the temperature rise, and the telemetry is streamed out and visualized in <strong>Python and matplotlib</strong>. This produces a time-resolved temperature map of the conductors under load.
+        </p>
+        <div class="project-images feature">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/IMG_8762.jpeg" alt="Arduino thermocouple rig with bench power supply heating the busbars" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Arduino thermocouple heating rig</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 06 - ANSYS CFD CROSS-CHECK -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">06</span>
+          <div>
+            <div class="stage-eyebrow">Simulation · CFD</div>
+            <h3 class="stage-title">ANSYS Coupled-Field Thermal Cross-Check</h3>
+          </div>
+        </div>
+        <p>
+          In parallel with the physical testing, I ran <strong>ANSYS coupled-field thermal simulations</strong> on the busbars to cross-check the experimental results. The model couples the electrical and thermal fields: I apply the measured current and copper's resistivity so ANSYS computes the <strong>Joule (I²R) heat</strong> generated inside the conductor, then define <strong>convective and radiative boundary conditions</strong> to the surrounding enclosure air so the solver captures how that heat is carried away. After meshing the busbar and solving for the <strong>steady-state temperature field</strong>, the simulation predicts the peak conductor temperature and shows exactly where the hotspots land along the geometry.
+        </p>
+        <p>
+          Because the current load and resistivity come straight from the four-point probe data, the simulated temperatures can be compared directly against the thermocouple readings, so the ANSYS model and the physical rig validate each other rather than each standing on its own. That agreement is what lets me trust the simulation when exploring geometry changes that would be slow or expensive to test physically.
+        </p>
+        <div class="project-images stack">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <div class="ph"><span class="glyph">◈</span>ANSYS CFD Result<small>images/busbarAnsys.png</small></div>
+            <img src="images/busbarAnsys.png" alt="ANSYS coupled-field thermal result for a busbar" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">ANSYS coupled-field thermal · busbar</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 07 - VALIDATION & STATUS -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">07</span>
+          <div>
+            <div class="stage-eyebrow">Results</div>
+            <h3 class="stage-title">Validation, Redesign &amp; Status</h3>
+          </div>
+        </div>
+        <p>
+          Comparing the measured thermocouple and four-point probe results against the ANSYS thermal simulation and the first-principles calculations, I validated the models and used them to propose new busbar geometries that redistribute current and mitigate the predicted hotspots. That closed loop of measure, simulate, cross-check, and redesign directly improves the reliability of the accumulator power distribution system. The attic and its electrical hardware are currently being assembled.
+        </p>
+      </div>
+
     </div>
   </div>
 
