@@ -1300,7 +1300,7 @@
           <div>
             <h2 class="lead-title">Custom Quadcopter</h2>
             <p class="lead-sub">
-              A fully custom quadcopter engineered from first principles, sizing the propulsion system by hand, validating the frame with FEA, designing a bespoke <strong>STM32 flight-controller PCB in KiCad</strong>, writing the flight firmware and a <strong>Kalman-filter state estimator</strong> from scratch, and tuning the PID loops on a tethered rig until it flew. Every layer, from the airframe to the control loops, was designed rather than bought off the shelf.
+              A fully custom quadcopter engineered from first principles, sizing the propulsion system by hand, validating the frame with FEA, designing a bespoke <strong>STM32 flight-controller PCB in KiCad</strong>, writing the flight firmware and a <strong>complementary-filter state estimator</strong> from scratch, and tuning the PID loops on a tethered rig until it flew. Every layer, from the airframe to the control loops, was designed rather than bought off the shelf.
             </p>
             <div class="spec-strip">
               <div class="spec"><span>All-Up Mass</span><b>0.894 kg</b></div>
@@ -1432,21 +1432,21 @@
           </div>
         </div>
         <p>
-          With the board in hand, I wrote the flight firmware from the ground up on the STM32, no autopilot stack underneath it. At boot the firmware brings up the clocks, I²C, UART, timers, and ADC, then initializes and calibrates the <strong>IMU</strong> and <strong>barometer</strong>. The core is a <strong>fixed-rate control loop</strong> that runs every cycle: read the gyro/accelerometer and barometer, fuse them into an attitude and altitude estimate, read the pilot's stick commands from the ELRS receiver over UART, run the control laws, and write motor commands out to the four ESCs via timer-generated PWM. The same loop watches pack voltage through the divider and enforces failsafes, for example, cutting motors if the receiver link drops, so the aircraft fails safe rather than flying away.
+          With the board in hand, I wrote the flight firmware from the ground up on the <strong>STM32F405</strong>, using <strong>bare-metal C with no HAL or autopilot stack</strong>. At boot the firmware brings up the clocks, I²C, UART, timers, and ADC, then initializes and calibrates the <strong>MPU-6050 IMU</strong>, <strong>BMP280 barometer</strong>, and ELRS receiver. The firmware runs a <strong>100 Hz fixed-rate control loop</strong> that reads the IMU and barometer, receives pilot commands over UART, estimates vehicle attitude and altitude, computes control corrections, and drives the four ESCs through timer-generated PWM. Battery voltage is simultaneously monitored through the PCB's ADC voltage-divider circuit, with receiver-loss and other failsafe conditions handled directly in firmware.
         </p>
       </div>
 
-      <!-- STAGE 05, KALMAN FILTER -->
+      <!-- STAGE 05, COMPLEMENTARY FILTER -->
       <div class="stage">
         <div class="stage-head">
           <span class="stage-no">05</span>
           <div>
             <div class="stage-eyebrow">State Estimation</div>
-            <h3 class="stage-title">Kalman-Filter Sensor Fusion</h3>
+            <h3 class="stage-title">Complementary-Filter Sensor Fusion</h3>
           </div>
         </div>
         <p>
-          A quadcopter can't be stabilized from raw sensors: the <strong>gyroscope</strong> is fast and smooth but drifts as its bias integrates over time, while the <strong>accelerometer</strong> gives an absolute gravity reference but is noisy and corrupted by the vehicle's own vibration and motion. I implemented a <strong>Kalman filter</strong> to fuse them into one clean attitude estimate, trusting the gyro for short-term rate integration while continuously correcting its drift against the accelerometer's long-term gravity vector, with the filter's gain balancing how much to believe each source based on their modeled noise. The result is a stable, low-latency estimate of pitch and roll (with the barometer folded in for altitude) that holds steady even under motor vibration, the foundation the control loops depend on.
+          A quadcopter can't be stabilized from raw sensors: the <strong>gyroscope</strong> is fast and smooth but drifts as its bias integrates over time, while the <strong>accelerometer</strong> provides an absolute gravity reference but is noisy and affected by vibration and vehicle acceleration. I implemented a <strong>complementary filter (α = 0.98)</strong> to combine these measurements, using the gyro for responsive short-term attitude tracking while continuously correcting long-term drift with the accelerometer's gravity reference. Barometer measurements provide the altitude signal used by the vertical control loop. The result is a stable, low-latency estimate of pitch and roll that gives the control system a reliable state estimate under motor vibration and disturbances.
         </p>
       </div>
 
@@ -1456,11 +1456,14 @@
           <span class="stage-no">06</span>
           <div>
             <div class="stage-eyebrow">Controls · Bring-Up</div>
-            <h3 class="stage-title">PID Tuning on a Tethered Rig</h3>
+            <h3 class="stage-title">Cascaded PID Control &amp; Tuning</h3>
           </div>
         </div>
         <p>
-          With a trustworthy attitude estimate, the last step was closing the loop. The firmware runs <strong>PID controllers</strong> that turn the error between commanded and estimated attitude into per-motor corrections, the proportional term reacting to current error, the derivative term damping the rate of change, and the integral term trimming out steady-state offset. To tune the gains safely I built a <strong>tethered test rig</strong>, anchoring the drone to heavy dumbbells so it could spool up and react to inputs without flying away. Working <strong>axis by axis</strong>, I raised each proportional gain until the response was crisp but not oscillating, added derivative to damp overshoot, and trimmed integral to hold attitude, until the aircraft settled quickly and rejected disturbances cleanly.
+          With the state estimator providing attitude and altitude feedback, I implemented a <strong>cascaded angle/rate/altitude PID control architecture</strong> running at <strong>100 Hz</strong>. The outer angle loop converts commanded roll and pitch angles into desired angular rates, while the inner rate loop converts rate error into motor corrections. A dedicated altitude loop regulates vertical position using barometer feedback. The resulting control outputs are mixed across the four motors and converted into <strong>1 µs-resolution PWM commands</strong> for the ESCs.
+        </p>
+        <p>
+          To tune the gains safely I built a <strong>tethered flight-test rig</strong>, anchoring the drone so it could spool up and respond to inputs without flying away. Working <strong>axis by axis</strong>, I iterated through approximately <strong>6–8 tuning cycles</strong> to reduce transient error, suppress oscillations, and achieve stable hover within approximately <strong>±2° roll/pitch under disturbances</strong>.
         </p>
         <div class="project-images feature">
           <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
@@ -1480,7 +1483,7 @@
           </div>
         </div>
         <p>
-          The finished quadcopter brings every layer together, an FEA-validated frame, a custom STM32 flight-controller PCB, firmware and a Kalman-filter estimator written from scratch, and hand-tuned PID loops, into a vehicle that hovers and maneuvers under its own control.
+          The finished quadcopter brings every layer together, an FEA-validated frame, a custom STM32 flight-controller PCB, firmware and a complementary-filter estimator written from scratch, and hand-tuned PID loops, into a vehicle that hovers and maneuvers under its own control.
         </p>
         <div class="project-images stack">
           <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
