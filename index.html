@@ -1043,7 +1043,7 @@
           <img src="images/quad_final.jpeg" alt="Custom Quadcopter thumbnail">
         </div>
         <div class="card-body">
-          <div class="card-date">May 2026 - August 2026</div>
+          <div class="card-date">June 2026 - Present</div>
           <h3>Custom Quadcopter</h3>
           <p class="card-brief">A fully custom quadcopter built from the airframe up, FEA-validated frame, a KiCad flight-controller PCB, and flight firmware written from scratch.</p>
           <span class="card-cta">View Project <span class="arw">→</span></span>
@@ -1073,7 +1073,7 @@
           <img src="images/piezoelectric_phone_case_2.jpg" alt="Solar Phone Charger thumbnail">
         </div>
         <div class="card-body">
-          <div class="card-date">January 2025 - May 2025</div>
+          <div class="card-date">September 2024 - May 2025</div>
           <h3>Solar-Powered Portable Phone Charger</h3>
           <p class="card-brief">A foldable, 3D-printed solar power bank integrating ten photovoltaic panels for efficient charging without sacrificing portability.</p>
           <span class="card-cta">View Project <span class="arw">→</span></span>
@@ -1127,7 +1127,7 @@
           <div>
             <h2 class="lead-title">Accumulator Attic Electrical Architecture</h2>
             <p class="lead-sub">
-              The <strong>Accumulator Tractive System Container (ATSC)</strong>, the accumulator attic, is the high-voltage DC battery enclosure and power-distribution deck for a Formula SAE electric race car. It houses the vehicle's high-voltage (HV) and low-voltage (LV) distribution, safety systems, sensing electronics, and high-current interfaces. I designed the enclosure and internal electrical architecture, fabricated the custom copper busbars, and built an instrumentation program that cross-checks four-point probe and thermocouple measurements against <strong>ANSYS thermal simulation</strong> to drive the busbar design.
+              The <strong>Accumulator Tractive System Container (ATSC)</strong>, the accumulator attic, is the high-voltage DC battery enclosure and power-distribution deck for a Formula SAE electric race car. It houses the vehicle's high-voltage (HV) and low-voltage (LV) distribution, safety systems, sensing electronics, and high-current interfaces. I helped design the enclosure and internal electrical architecture, fabricated the custom copper busbars, and built an instrumentation program that cross-checks four-point probe and thermocouple measurements against <strong>ANSYS thermal simulation</strong> to drive the busbar design.
             </p>
             <div class="spec-strip">
               <div class="spec"><span>Role</span><b>HV/LV Distribution</b></div>
@@ -1157,7 +1157,7 @@
           </div>
         </div>
         <p>
-          I developed the enclosure and internal electrical architecture in <strong>SolidWorks</strong>, using <strong>GD&amp;T-driven tolerance stack-ups</strong> to integrate the safety systems, sensing electronics, and high-current interfaces while respecting tight packaging constraints and electrical isolation requirements. Working from first-principles <strong>Joule heating and thermal conduction analysis</strong>, I re-laid the internal component layout to shorten and simplify the high-current paths, <strong>cutting assembly mass by 18%</strong> and streamlining the high-voltage assembly workflow.
+          I helped develop the enclosure and internal electrical architecture in <strong>SolidWorks</strong>, using <strong>GD&amp;T-driven tolerance stack-ups</strong> to integrate the safety systems, sensing electronics, and high-current interfaces while respecting tight packaging constraints and electrical isolation requirements. Working from first-principles <strong>Joule heating and thermal conduction analysis</strong>, I re-laid the internal component layout to shorten and simplify the high-current paths, <strong>cutting assembly mass by 18%</strong> and streamlining the high-voltage assembly workflow.
         </p>
         <div class="project-images stack">
           <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
@@ -1307,7 +1307,7 @@
               <div class="spec"><span>Thrust-to-Weight</span><b>3.58 : 1</b></div>
               <div class="spec"><span>Hover Thrust / Motor</span><b>2.19 N</b></div>
               <div class="spec"><span>MCU</span><b>STM32F405</b></div>
-              <div class="spec"><span>Est. Endurance</span><b>~12 min</b></div>
+              <div class="spec"><span>Flight Time</span><b>~12 min</b></div>
               <div class="spec"><span>Tip Mach</span><b>0.31</b></div>
             </div>
           </div>
@@ -1432,11 +1432,11 @@
           </div>
         </div>
         <p>
-          With the board in hand, I wrote the flight firmware from the ground up on the <strong>STM32F405</strong>, using <strong>bare-metal C with no HAL or autopilot stack</strong>. At boot the firmware brings up the clocks, I²C, UART, timers, and ADC, then initializes and calibrates the <strong>MPU-6050 IMU</strong>, <strong>BMP280 barometer</strong>, and ELRS receiver. The firmware runs a <strong>100 Hz fixed-rate control loop</strong> that reads the IMU and barometer, receives pilot commands over UART, estimates vehicle attitude and altitude, computes control corrections, and drives the four ESCs through timer-generated PWM. Battery voltage is simultaneously monitored through the PCB's ADC voltage-divider circuit, with receiver-loss and other failsafe conditions handled directly in firmware.
+          With the board in hand, I wrote the flight firmware from the ground up on the STM32, no autopilot stack underneath it. At boot the firmware brings up the clocks, I²C, UART, timers, and ADC, then initializes and calibrates the <strong>IMU</strong> and <strong>barometer</strong>. The core is a <strong>fixed-rate control loop</strong> that runs every cycle: read the gyro/accelerometer and barometer, fuse them into an attitude and altitude estimate, read the pilot's stick commands from the ELRS receiver over UART, run the control laws, and write motor commands out to the four ESCs via timer-generated PWM. The same loop watches pack voltage through the divider and enforces failsafes, for example, cutting motors if the receiver link drops, so the aircraft fails safe rather than flying away.
         </p>
       </div>
 
-      <!-- STAGE 05, COMPLEMENTARY FILTER -->
+      <!-- STAGE 05, KALMAN FILTER -->
       <div class="stage">
         <div class="stage-head">
           <span class="stage-no">05</span>
@@ -1446,7 +1446,7 @@
           </div>
         </div>
         <p>
-          A quadcopter can't be stabilized from raw sensors: the <strong>gyroscope</strong> is fast and smooth but drifts as its bias integrates over time, while the <strong>accelerometer</strong> provides an absolute gravity reference but is noisy and affected by vibration and vehicle acceleration. I implemented a <strong>complementary filter (α = 0.98)</strong> to combine these measurements, using the gyro for responsive short-term attitude tracking while continuously correcting long-term drift with the accelerometer's gravity reference. Barometer measurements provide the altitude signal used by the vertical control loop. The result is a stable, low-latency estimate of pitch and roll that gives the control system a reliable state estimate under motor vibration and disturbances.
+          A quadcopter can't be stabilized from raw sensors: the <strong>gyroscope</strong> is fast and smooth but drifts as its bias integrates over time, while the <strong>accelerometer</strong> gives an absolute gravity reference but is noisy and corrupted by the vehicle's own vibration and motion. I implemented a <strong>complementary filter</strong> (&alpha; = 0.98) to fuse them into one clean attitude estimate: it high-pass-filters the integrated gyro rates for the fast, short-term response and low-pass-filters the accelerometer's gravity vector to correct long-term drift, with the &alpha; weighting setting how much to trust each source. The result is a stable, low-latency estimate of pitch and roll (with the barometer folded in for altitude) that holds steady even under motor vibration, the foundation the control loops depend on.
         </p>
       </div>
 
@@ -1456,14 +1456,11 @@
           <span class="stage-no">06</span>
           <div>
             <div class="stage-eyebrow">Controls · Bring-Up</div>
-            <h3 class="stage-title">Cascaded PID Control &amp; Tuning</h3>
+            <h3 class="stage-title">PID Tuning on a Tethered Rig</h3>
           </div>
         </div>
         <p>
-          With the state estimator providing attitude and altitude feedback, I implemented a <strong>cascaded angle/rate/altitude PID control architecture</strong> running at <strong>100 Hz</strong>. The outer angle loop converts commanded roll and pitch angles into desired angular rates, while the inner rate loop converts rate error into motor corrections. A dedicated altitude loop regulates vertical position using barometer feedback. The resulting control outputs are mixed across the four motors and converted into <strong>1 µs-resolution PWM commands</strong> for the ESCs.
-        </p>
-        <p>
-          To tune the gains safely I built a <strong>tethered flight-test rig</strong>, anchoring the drone so it could spool up and respond to inputs without flying away. Working <strong>axis by axis</strong>, I iterated through approximately <strong>6–8 tuning cycles</strong> to reduce transient error, suppress oscillations, and achieve stable hover within approximately <strong>±2° roll/pitch under disturbances</strong>.
+          With a trustworthy attitude estimate, the last step was closing the loop. The firmware runs <strong>PID controllers</strong> that turn the error between commanded and estimated attitude into per-motor corrections, the proportional term reacting to current error, the derivative term damping the rate of change, and the integral term trimming out steady-state offset. To tune the gains safely I built a <strong>tethered test rig</strong>, anchoring the drone to heavy dumbbells so it could spool up and react to inputs without flying away. Working <strong>axis by axis</strong>, I raised each proportional gain until the response was crisp but not oscillating, added derivative to damp overshoot, and trimmed integral to hold attitude, until the aircraft settled quickly and rejected disturbances cleanly.
         </p>
         <div class="project-images feature">
           <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
@@ -1785,7 +1782,7 @@
     <button class="back-btn" onclick="closeProject()"><span class="arw">←</span> Back to Projects</button>
     <div class="project-block">
       <h3>Solar-Powered Portable Phone Charger</h3>
-      <p class="work-date"> January 2025 - May 2025 </p>
+      <p class="work-date"> September 2024 - May 2025 </p>
       <div class="project-images">
         <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
           <img src="images/piezoelectric_phone_case_1.png" alt="Solar Phone Charger CAD">
@@ -1798,7 +1795,7 @@
     This project involved the mechanical design and prototyping of a <strong>foldable, solar-powered portable phone charging system</strong> intended to maximize charging efficiency while maintaining portability.
   </p>
   <p>
-    The enclosure was fully modeled in <strong>CAD</strong> and fabricated using <strong>additive manufacturing</strong>, with a <strong>five-fold mechanical layout</strong> designed to optimize solar exposure while securely housing a mobile device. <strong>Finite element analysis (FEA)</strong> was conducted on the hinge mechanisms to evaluate stress distribution and ensure structural integrity under repeated folding cycles.
+    The enclosure was fully modeled in <strong>CAD</strong> and fabricated using <strong>additive manufacturing</strong>, with a <strong>five-fold mechanical layout</strong> designed to optimize solar exposure while securely housing a mobile device. <strong>Static finite element analysis (FEA)</strong> was conducted on the hinge mechanisms to evaluate stress distribution and confirm the hinges stay within material stress limits under deployment loads.
   </p>
   <p>
     The system integrates <strong>ten miniature photovoltaic panels</strong> electrically configured in <strong>parallel</strong> to increase current output while maintaining a stable voltage. Each panel was rated for approximately <strong>0.6 W at 2 V</strong> under direct sunlight, yielding a <strong>total theoretical output of up to 6 W</strong>. A <strong>voltage regulation module</strong> was incorporated to ensure consistent and safe power delivery despite fluctuations in solar input.
@@ -1927,9 +1924,7 @@
   <div class="detail-view" id="detail-cal">
     <button class="back-btn" onclick="closeProject()"><span class="arw">←</span> Back to Research</button>
     <div class="project-block">
-      <h3>Design for Emerging
-and Nanoscale
-Manufacturing, UC Berkeley</h3>
+      <h3>Design for Emerging and Nanoscale Manufacturing, UC Berkeley</h3>
       <p class="work-date"> February 2026 - Present </p>
       <div class="project-images">
         <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
