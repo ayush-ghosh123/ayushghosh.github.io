@@ -147,7 +147,7 @@
     }
     @keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
     .navlinks { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-    nav button {
+    nav button, nav .nav-resume {
       position: relative;
       background: transparent;
       border: 1px solid var(--line);
@@ -162,7 +162,8 @@
       transition: color .25s ease, border-color .25s ease, background .25s ease, box-shadow .25s ease;
       overflow: hidden;
     }
-    nav button::before {
+    nav .nav-resume { text-decoration: none; display: inline-block; line-height: normal; }
+    nav button::before, nav .nav-resume::before {
       content: "";
       position: absolute;
       left: 0; top: 0; bottom: 0;
@@ -171,12 +172,16 @@
       transform: scaleY(0);
       transition: transform .25s ease;
     }
-    nav button:hover {
+    nav button:hover, nav .nav-resume:hover {
       color: var(--text);
       border-color: var(--line-2);
       background: var(--panel);
     }
-    nav button:hover::before { transform: scaleY(1); }
+    nav button:hover::before, nav .nav-resume:hover::before { transform: scaleY(1); }
+    nav button:focus-visible, nav .nav-resume:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
     nav button.active {
       color: var(--accent);
       border-color: rgba(63,169,255,0.45);
@@ -977,6 +982,7 @@
     <button class="active" data-target="about" onclick="showSection('about', this)">About</button>
     <button data-target="projects" onclick="showSection('projects', this)">Projects</button>
     <button data-target="research" onclick="showSection('research', this)">Research</button>
+    <a class="nav-resume" href="pdfs/Ayush_Ghosh_Resume.pdf" download="Ayush_Ghosh_Resume.pdf">Resume ↓</a>
   </div>
 </nav>
 <div class="statusbar">
