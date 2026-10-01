@@ -903,6 +903,9 @@
     .project-images.pcb img { height: 700px; background: #0a0e17; }
     .project-images.feature { grid-template-columns: 1fr; gap: 1.6rem; }
     .project-images.feature img { height: 680px; }
+    /* equation cards, wide and short */
+    .project-images.eq { grid-template-columns: 1fr; gap: 1.4rem; }
+    .project-images.eq img { height: 300px; }
     /* image-slot placeholder, shown until a real file is dropped in */
     .shot .ph {
       position: absolute; inset: 0; z-index: 1;
@@ -930,6 +933,7 @@
       .project-images.calcs img { height: 420px; }
       .project-images.pcb img { height: 340px; }
       .project-images.feature img { height: 360px; }
+      .project-images.eq img { height: 190px; }
     }
     /* ===== FOOTER ===== */
     footer {
@@ -1022,7 +1026,7 @@
   <div class="grid-mode" id="grid-projects">
     <div class="projects-header">
       <h2>Projects</h2>
-      <div class="section-meta">Index <span>02</span> / Records <span>06</span></div>
+      <div class="section-meta">Index <span>02</span> / Records <span>07</span></div>
     </div>
     <div class="card-grid">
 
@@ -1052,6 +1056,21 @@
           <div class="card-date">June 2026 - Present</div>
           <h3>Custom Quadcopter</h3>
           <p class="card-brief">A fully custom quadcopter built from the airframe up, FEA-validated frame, a KiCad flight-controller PCB, and flight firmware written from scratch.</p>
+          <span class="card-cta">View Project <span class="arw">→</span></span>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-project="filter" tabindex="0"
+               onclick="openProject('filter')" onkeydown="cardKey(event,'filter')">
+        <div class="card-thumb">
+          <span class="tick tl"></span><span class="tick br"></span>
+          <span class="thumb-badge"></span>
+          <img src="images/filter_cad_1.png" alt="Mechanical water filtration system thumbnail">
+        </div>
+        <div class="card-body">
+          <div class="card-date">September 2026</div>
+          <h3>Mechanical Emergency Water Filtration System</h3>
+          <p class="card-brief">A purely mechanical, human-powered 0.2 µm filtration system delivering 10 L/min from ambient water, with accumulator backwash and gravity coast-down, validated with MATLAB, FEA, and CFD.</p>
           <span class="card-cta">View Project <span class="arw">→</span></span>
         </div>
       </article>
@@ -1120,6 +1139,356 @@
   </div>
 
   <!-- ---- DETAIL VIEWS ---- -->
+
+  <!-- DETAIL: Mechanical Water Filtration System -->
+  <div class="detail-view" id="detail-filter">
+    <button class="back-btn" onclick="closeProject()"><span class="arw">←</span> Back to Projects</button>
+    <div class="dossier">
+
+      <!-- LEAD / OVERVIEW -->
+      <div class="detail-lead">
+        <div class="lead-eyebrow">Project File // FILTER-01 · ESB Technical Design · UC Berkeley</div>
+        <div class="lead-grid">
+          <div>
+            <h2 class="lead-title">Mechanical Emergency Water Filtration System</h2>
+            <p class="lead-sub">
+              A <strong>purely mechanical, human-powered water filtration system</strong> for disaster relief, designed to deliver <strong>10 L/min</strong> of clean water through a reusable <strong>0.2 µm ceramic barrier</strong>, drawing from ambient unpressurized water with <strong>no electricity</strong>. A self-priming pump feeds a ceramic bank, a <strong>pneumatic accumulator</strong> fires reverse-flow backwash pulses so the filters are reusable rather than disposable, and an <strong>elevated tank</strong> stores potential energy to keep water flowing after power input stops. I took it end to end: first-principles analysis, five MATLAB models, full CAD, FEA, and CFD.
+            </p>
+            <div class="spec-strip">
+              <div class="spec"><span>Clean Output</span><b>10 L/min</b></div>
+              <div class="spec"><span>Filtration</span><b>0.2 µm</b></div>
+              <div class="spec"><span>Peak Power</span><b>~95 W</b></div>
+              <div class="spec"><span>Membrane Area</span><b>~3 m²</b></div>
+              <div class="spec"><span>Coast-Down</span><b>~3 min</b></div>
+              <div class="spec"><span>Vessel FoS</span><b>~32×</b></div>
+            </div>
+          </div>
+          <div class="lead-media">
+            <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+              <img src="images/filter_cad_1.png" alt="Full CAD assembly of the mechanical water filtration system" onload="phHide(this)" onerror="imgHide(this)">
+              <span class="label">Full system CAD assembly</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 01 - PROBLEM -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">01</span>
+          <div>
+            <div class="stage-eyebrow">Requirements</div>
+            <h3 class="stage-title">Problem &amp; Constraints</h3>
+          </div>
+        </div>
+        <p>
+          The brief was a mechanical water filter for disaster zones, bound by six hard constraints: a <strong>reusable 0.2 µm filter</strong> with no disposable cartridges, <strong>at least 10 L/min</strong> of throughput, operation on <strong>ambient unpressurized water</strong>, <strong>purely mechanical</strong> operation with no electricity, <strong>semi-automatic</strong> behavior that keeps dispensing for 3–5 minutes after human power stops, and a <strong>power-input-agnostic drive shaft</strong> with one-way transmission so it couples to any rotating source.
+        </p>
+        <p>
+          On top of those I imposed my own criteria, portability, low maintenance, low cost, and ease of manufacture, and framed the design around two stated assumptions: trained relief operators are present and supervising, and chemical post-treatment follows storage. Those assumptions matter because they bound what the mechanical system has to do on its own.
+        </p>
+      </div>
+
+      <!-- STAGE 02 - CONCEPT & SCHEMATIC -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">02</span>
+          <div>
+            <div class="stage-eyebrow">Ideation · Architecture</div>
+            <h3 class="stage-title">Concept Development &amp; Final Schematic</h3>
+          </div>
+        </div>
+        <p>
+          I iterated through three architectures. The first concept ran a <strong>double-acting piston pump</strong> through a pre-filter and primary filter into a pneumatic accumulator, but the piston pump needed a linkage to convert rotary input into reciprocating motion. The second explored a <strong>rotary ceramic crossflow</strong> arrangement with an elevated tank, which is elegantly self-cleaning but demands motor-level rpm that blows the human-power budget.
+        </p>
+        <p>
+          The final architecture is <strong>dead-end filtration with accumulator backwash</strong>: a mesh strainer and pre-filter protect a five-element ceramic bank, a <strong>self-priming flexible-impeller pump</strong> drives the flow, a <strong>nitrogen-charged accumulator</strong> fires reverse pulses to lift the cake off the membrane, and an <strong>elevated tank</strong> provides gravity-fed coast-down. The schematic captures the valve logic, a main valve, a dirty-line drain, and an isolation valve, that switches the system between filtration and backwash modes.
+        </p>
+        <div class="project-images">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/filter_concept1.png" alt="Concept 1, double-acting piston pump architecture" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Concept 1 · piston pump architecture</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/filter_concept2.png" alt="Concept 2, rotary ceramic crossflow architecture" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Concept 2 · rotary crossflow</span>
+          </div>
+        </div>
+        <div class="project-images stack">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/filter_schematic.png" alt="Final fluid schematic of the filtration system" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Final schematic · valve logic &amp; flow path</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 03 - POWER -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">03</span>
+          <div>
+            <div class="stage-eyebrow">Analysis · MATLAB</div>
+            <h3 class="stage-title">Power Delivery</h3>
+          </div>
+        </div>
+        <p>
+          I modeled the full pressure budget in MATLAB, summing the membrane Darcy resistance, the fouling cake, the pre-filter, pipe friction via <strong>Haaland and Darcy–Weisbach</strong>, and static lift, then divided hydraulic power by pump and drivetrain efficiencies to size the required human input. The worst case is the <strong>fill-and-dispense phase on fouled filters</strong>, where the pump must feed the 10 L/min output <em>and</em> top up the elevated tank at the same time.
+        </p>
+        <p>
+          Peak input lands at <strong>~95 W against a 200 W human budget</strong>, with steady dispensing near <strong>50 W</strong>, comfortably feasible for a person on a crank or bicycle drive. A sensitivity sweep identified the <strong>output flow regulator</strong> as the single biggest lever on required power, and the flexible-impeller pump's ~50% efficiency as the dominant loss in the chain.
+        </p>
+        <div class="project-images eq">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/filter_eq_power.png" alt="Power delivery governing equations" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Input power &amp; pressure budget</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 04 - FILTER SIZING -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">04</span>
+          <div>
+            <div class="stage-eyebrow">Analysis · MATLAB</div>
+            <h3 class="stage-title">Filter Sizing &amp; Backwash Interval</h3>
+          </div>
+        </div>
+        <p>
+          Membrane area follows directly from flow divided by flux. Holding the design flux at <strong>200 LMH</strong>, safely below the critical-flux fouling knee, gives roughly <strong>3 m²</strong> of 0.2 µm ceramic, about <strong>six Atech elements</strong>. Modeling cake growth through Darcy's law, where resistance accumulates as the product of specific cake resistance, feed solids, flux, and time, yields the backwash trigger.
+        </p>
+        <p>
+          The key result is that the interval scales as <strong>1/J²</strong>: halving the flux quadruples the run time between cleanings, so a slightly larger, gentler filter pays off far more than linearly. At the design point the system backwashes about every <strong>11 minutes</strong>, with the pre-filter's solids load as the dominant lever on run time. The cake parameters are literature-calibrated, so this interval is an estimate I would pin down with a bench test on real source water.
+        </p>
+        <div class="project-images eq">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/filter_eq_filter.png" alt="Filter sizing and backwash interval equations" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Area, Darcy ΔP &amp; backwash interval</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 05 - ACCUMULATOR -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">05</span>
+          <div>
+            <div class="stage-eyebrow">Analysis · MATLAB</div>
+            <h3 class="stage-title">Accumulator Backwash</h3>
+          </div>
+        </div>
+        <p>
+          The backwash pulse is driven by nitrogen compressed behind a bladder, modeled with <strong>Boyle's law</strong>. Applying a never-empty rule so the bladder never fully collapses, a 12 L accumulator delivers about <strong>3.5 L usable, roughly 30% of the shell</strong>, in a sharp <strong>~11 second pulse</strong>.
+        </p>
+        <p>
+          Because instantaneous flow is proportional to the available pressure, and that pressure decays as the gas expands, the pulse is not constant, it starts strong and tapers. Solving the coupled differential equation shows the discharge volume grows as <strong>√t</strong>, confirming the decaying shape. Pressure is never the limiting factor (~0.2 bar needed to reverse-flow and lift the cake versus 1.5–3 bar available), so usable volume and duration govern, and the strong initial burst is exactly what cracks the cake loose.
+        </p>
+        <div class="project-images eq">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/filter_eq_accumulator.png" alt="Accumulator backwash equations" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Boyle's-law discharge &amp; reverse ΔP</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 06 - COAST-DOWN -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">06</span>
+          <div>
+            <div class="stage-eyebrow">Analysis · MATLAB</div>
+            <h3 class="stage-title">Gravity Coast-Down</h3>
+          </div>
+        </div>
+        <p>
+          To satisfy the semi-automatic requirement, the elevated tank dispenses by gravity once human power stops. I solved the <strong>draining-tank ODE</strong>, Torricelli outflow coupled to a mass balance, both numerically with <strong>RK4</strong> and in closed form, using the agreement between the two as a validation cross-check.
+        </p>
+        <p>
+          A <strong>3.6 mm orifice</strong> sustains about <strong>2 L/min for roughly 3 minutes</strong> from the 6 L tank, and flow drifts only <strong>~5%</strong> across the whole drain because the fixed 1.5 m static head dominates the changing water depth inside the tank. The result is a steady finishing trickle with zero moving parts and no control system, the requirement met by geometry alone.
+        </p>
+        <div class="project-images eq">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/filter_eq_tank.png" alt="Tank drainage ODE" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Torricelli drainage ODE</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 07 - DRIVE / COUPLER -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">07</span>
+          <div>
+            <div class="stage-eyebrow">Drivetrain</div>
+            <h3 class="stage-title">Power-Agnostic Drive &amp; Coupler</h3>
+          </div>
+        </div>
+        <p>
+          The input interface is a <strong>clamp coupler paired with a one-way sprag clutch</strong>, so the device accepts any rotating power source and will not back-drive under idle input. A <strong>keyless chuck</strong> on the input stub lets a drill, crank, or bicycle drive clamp straight on, which is what makes the system genuinely power-input-agnostic.
+        </p>
+        <p>
+          From <strong>T = P/ω</strong>, the worst-case design torque is about <strong>9 N·m</strong> including a 3× service factor at the lowest input speed. Checking friction-grip capacity, a single standard <strong>M4 class-12.9 clamp screw</strong> holds with roughly <strong>4× margin</strong>, so torque capacity is never the binding constraint. The real design concerns are the friction coefficient dropping on a wet shaft and keeping water and grit out of the sprag clutch, which is why a keyed positive drive is the production refinement.
+        </p>
+        <div class="project-images stack">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/filter_coupler_cad.png" alt="Sprag clutch coupler and keyless chuck input in CAD" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Sprag clutch coupler &amp; keyless chuck input</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 08 - CAD -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">08</span>
+          <div>
+            <div class="stage-eyebrow">CAD</div>
+            <h3 class="stage-title">Full System Assembly</h3>
+          </div>
+        </div>
+        <p>
+          The complete system was modeled in <strong>SolidWorks</strong> on a portable, caster-mounted frame. The assembly integrates the mesh strainer, self-priming pump on its saddle mount, inline pre-filter, the horizontal ceramic housing on cradle supports, the pneumatic accumulator, the elevated tank with its float valve, inline pressure gauge, flow regulators, and the full valve network that switches between filtration and backwash.
+        </p>
+        <p>
+          Packaging drove real decisions: the housing runs horizontally to keep the center of gravity low, the accumulator and tank sit high so gravity does the coast-down work for free, and the drive interface is placed at the frame edge so an external power source can couple to it without reaching into the machine.
+        </p>
+        <div class="project-images stack">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/filter_cad_1.png" alt="System CAD assembly, isometric view" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Assembly · isometric</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/filter_cad_2.png" alt="System CAD assembly, side elevation" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Assembly · side elevation</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 09 - PRESSURE VESSEL -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">09</span>
+          <div>
+            <div class="stage-eyebrow">Component Design</div>
+            <h3 class="stage-title">Ceramic Housing Pressure Vessel</h3>
+          </div>
+        </div>
+        <p>
+          The ceramic bank lives inside a custom <strong>6061-T6 aluminum pressure vessel</strong>, a 130 mm bore, 1.7 m long tube with bolted end caps, rated to the 3 bar relief set-point. Aluminum was chosen for the best strength-to-weight, roughly 7.7 kg versus about 20 kg for the same geometry in stainless, with hard anodizing for freshwater corrosion resistance. For saltwater deployment I would switch to 316 stainless and accept the weight penalty.
+        </p>
+        <p>
+          The five ceramic monoliths seat into bored pockets and seal with <strong>radial O-rings</strong>. That choice is deliberate: ceramic is brittle and cannot take a clamping load, so a radial seal is squeezed sideways by interference and energized further by system pressure, sealing with no axial force on the element. The elements are <strong>captured between two tube sheets</strong> rather than clamped, and the whole bundle lifts out as a serviceable cartridge, which is what makes the filter genuinely reusable.
+        </p>
+        <div class="project-images">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <div class="ph"><span class="glyph">◈</span>Pressure Vessel<small>images/filter_vessel1.png</small></div>
+            <img src="images/filter_vessel1.png" alt="Pressure vessel housing CAD" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Housing · external geometry</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <div class="ph"><span class="glyph">◈</span>Pressure Vessel<small>images/filter_vessel2.png</small></div>
+            <img src="images/filter_vessel2.png" alt="Pressure vessel housing with five ceramic element bores" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Housing · five-element bore pattern</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 10 - FEA -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">10</span>
+          <div>
+            <div class="stage-eyebrow">Simulation · FEA</div>
+            <h3 class="stage-title">Pressure Vessel FEA</h3>
+          </div>
+        </div>
+        <p>
+          I validated the housing in <strong>SolidWorks Simulation</strong> against a hand-calculated hoop-stress check, fixing the saddle supports and applying 3 bar internal pressure to the wetted surfaces. The uniform mid-body stress field matches thin-wall theory, which is the cross-check that confirms the model is set up correctly.
+        </p>
+        <p>
+          Peak <strong>von Mises stress is 8.49 MPa against a 275 MPa yield, a factor of safety near 32</strong>, so the vessel is loaded to roughly 3% of yield. As expected, the peak sits at a <strong>port stress concentration</strong> where material is removed for the penetration, with a milder discontinuity stress where the flat end cap restrains the cylinder. Maximum displacement is just <strong>0.014 mm</strong>. The honest caveat is that stress concentrations are mesh-sensitive, so a production design would get a mesh-refinement study and a port fillet, though with this much margin the conclusion holds either way.
+        </p>
+        <div class="project-images">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/filter_fea_vonmises.png" alt="Von Mises stress FEA of the pressure vessel" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Von Mises · peak 8.49 MPa · FoS ~32</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/filter_fea_displacement.png" alt="Displacement FEA of the pressure vessel" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Displacement · max 0.014 mm</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 11 - CFD -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">11</span>
+          <div>
+            <div class="stage-eyebrow">Simulation · CFD</div>
+            <h3 class="stage-title">Backwash Flow Distribution in ANSYS Fluent</h3>
+          </div>
+        </div>
+        <p>
+          A backwash pulse is only useful if it cleans <em>all five</em> elements, so I ran a steady, single-phase <strong>ANSYS Fluent</strong> study of the reverse flow through the inlet diffuser cone and the five channels. The fluid volume was extracted in SpaceClaim, meshed, and solved with a velocity inlet and pressure outlet, converged to tight residuals with the inlet velocity verified by surface integral.
+        </p>
+        <p>
+          The cross-sectional velocity contour revealed a <strong>flow maldistribution</strong>: the top channel carries roughly <strong>5× the velocity</strong> of the outer four, meaning the diffuser cone does not split the pulse evenly and some elements would be under-cleaned. That is a real flaw the analysis caught rather than a result that confirmed what I wanted. The near-term mitigation is firing <strong>2–3 pulses per backwash</strong>; the proper fix is a <strong>flow-distributor plate</strong> or a longer diffuser cone, which I would re-run in CFD to verify an even split.
+        </p>
+        <div class="project-images">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/filter_cfd_1.png" alt="CFD velocity contour showing channel flow maldistribution" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Velocity contour · maldistribution</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/filter_cfd_2.png" alt="CFD velocity contour, rescaled legend" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Channel velocity · rescaled legend</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 12 - BOM / MANUFACTURING -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">12</span>
+          <div>
+            <div class="stage-eyebrow">BOM · Manufacturing</div>
+            <h3 class="stage-title">Bill of Materials, Manufacturing &amp; Mass</h3>
+          </div>
+        </div>
+        <p>
+          The full system comes in at roughly <strong>62 kg</strong> and <strong>~$2,900</strong> in parts, built mostly from off-the-shelf components around three custom pieces: the ceramic housing, the cart frame, and the mounting brackets.
+        </p>
+        <p>
+          The housing is machined from <strong>6061-T6</strong> with bolted or tie-rod-clamped end caps, deliberately avoiding welds, since welding 6061 anneals the T6 temper and roughly halves yield strength in the heat-affected zone. The cart is <strong>bolt-together T-slot extrusion</strong>, requiring no welding or fabrication skill and staying reconfigurable through design iteration. Wetted lines are potable-rated plastic rather than metal, reinforced PVC on the suction side to resist collapse under vacuum and PEX on the pressure side, matched to the 3 bar ambient-temperature duty. The manufacturing strategy is quantity-driven: subtractive machining for a one-off, shifting to extrusion, casting, and stamping at production volume.
+        </p>
+        <div class="project-images stack">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/filter_bom.png" alt="Bill of materials table with mass and cost" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Bill of materials · mass &amp; cost rollup</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 13 - FAILURE MODES / NEXT STEPS -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">13</span>
+          <div>
+            <div class="stage-eyebrow">Reflection</div>
+            <h3 class="stage-title">Failure Modes &amp; Next Steps</h3>
+          </div>
+        </div>
+        <p>
+          I built an FMEA around the highest-severity risks and paired each with a concrete validation test: <strong>bladder or pump-seal leakage</strong> causing cross-contamination, checked by a 24-hour pressure-decay hold and a dye trace; <strong>impeller wear</strong> dropping output below spec, checked by a 100-hour run on turbid water; <strong>fouling runaway</strong> that backwash cannot recover, checked by tracking peak ΔP across repeated cycles; and <strong>coupler slip on a wet shaft</strong>, checked by measuring slip torque wet versus dry.
+        </p>
+        <p>
+          With more time the priorities are clear. First, a <strong>bench test on real source water</strong> to replace the literature-estimated cake parameters with measured data, which is what turns the backwash interval from an estimate into a number. Second, a <strong>flow-distributor plate</strong> to resolve the CFD maldistribution so a single pulse cleans every element. Third, a <strong>differential-pressure gauge</strong> across the bank as a live clogging indicator, with the backwash trigger marked in red on the dial so a non-expert operator knows exactly when to act. Those three moves take a design that is sound on paper and make it proven in the field.
+        </p>
+      </div>
+
+    </div>
+  </div>
 
   <!-- DETAIL: Formula SAE -->
   <div class="detail-view" id="detail-fsae">
