@@ -1026,9 +1026,24 @@
   <div class="grid-mode" id="grid-projects">
     <div class="projects-header">
       <h2>Projects</h2>
-      <div class="section-meta">Index <span>02</span> / Records <span>07</span></div>
+      <div class="section-meta">Index <span>02</span> / Records <span>08</span></div>
     </div>
     <div class="card-grid">
+
+      <article class="project-card reveal" data-project="module" tabindex="0"
+               onclick="openProject('module')" onkeydown="cardKey(event,'module')">
+        <div class="card-thumb">
+          <span class="tick tl"></span><span class="tick br"></span>
+          <span class="thumb-badge"></span>
+          <img src="images/module_exploded.png" alt="Formula SAE battery module exploded view thumbnail">
+        </div>
+        <div class="card-body">
+          <div class="card-date">January 2026 - Present</div>
+          <h3>Formula SAE Battery Module Design</h3>
+          <p class="card-brief">Design of a 42-cell, 14s3p accumulator module, from the full stack-up and sensing integration to a polycarbonate cell plate sized by electrical and crash-load hand calcs and validated with FEA.</p>
+          <span class="card-cta">View Project <span class="arw">→</span></span>
+        </div>
+      </article>
 
       <article class="project-card reveal" data-project="fsae" tabindex="0"
                onclick="openProject('fsae')" onkeydown="cardKey(event,'fsae')">
@@ -1660,24 +1675,185 @@
         </p>
       </div>
 
-      <!-- STAGE 08 - BATTERY MODULE -->
+    </div>
+  </div>
+
+  <!-- DETAIL: Battery Module & Polycarbonate Cell Plate -->
+  <div class="detail-view" id="detail-module">
+    <button class="back-btn" onclick="closeProject()"><span class="arw">←</span> Back to Projects</button>
+    <div class="dossier">
+
+      <!-- LEAD / OVERVIEW -->
+      <div class="detail-lead">
+        <div class="lead-eyebrow">Project File // MODULE-01 · Formula SAE · UC Berkeley</div>
+        <div class="lead-grid">
+          <div>
+            <h2 class="lead-title">Battery Module Design</h2>
+            <p class="lead-sub">
+              The accumulator that feeds the attic is built from <strong>ten identical battery modules</strong>, each a <strong>14s3p group of 42 Reliance RS50 21700 cells</strong>. I helped design the <strong>entire module</strong>: the clamshell structure, the copper current collectors, the cell holder and 3D-printed standoffs, the compression and isolation hardware, and the packaging that folds the voltage-sensing PCB, temperature-sensing board, and BMS into one serviceable brick. Along the way I selected the material for the <strong>polycarbonate insulating plate</strong>, sized its thickness from both electrical and mechanical first principles, and validated it with FEA.
+            </p>
+            <div class="spec-strip">
+              <div class="spec"><span>Module</span><b>14s3p · 42 cells</b></div>
+              <div class="spec"><span>Pack</span><b>140S3P · 420 cells</b></div>
+              <div class="spec"><span>Pack Voltage</span><b>~504 V nom.</b></div>
+              <div class="spec"><span>Plate</span><b>Polycarbonate</b></div>
+              <div class="spec"><span>Governing Load</span><b>20g vertical</b></div>
+              <div class="spec"><span>FEA Peak</span><b>20.1 MPa</b></div>
+            </div>
+          </div>
+          <div class="lead-media">
+            <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+              <img src="images/module_exploded.png" alt="Exploded view of the battery module" onload="phHide(this)" onerror="imgHide(this)">
+              <span class="label">Module stack-up</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 01 - ARCHITECTURE -->
       <div class="stage">
         <div class="stage-head">
-          <span class="stage-no">08</span>
+          <span class="stage-no">01</span>
           <div>
-            <div class="stage-eyebrow">Module Design</div>
-            <h3 class="stage-title">Battery Module &amp; Cell-Monitoring Integration</h3>
+            <div class="stage-eyebrow">CAD · Architecture</div>
+            <h3 class="stage-title">Module Stack-Up</h3>
           </div>
         </div>
         <p>
-          Feeding the attic is the pack itself, built up from repeating modules. I co-designed the module, the <strong>3P parallel cell group</strong>, its interconnect busbars, compression and isolation hardware, and a dedicated <strong>cell-monitoring PCB</strong>, packaged into one serviceable brick. I drove the <strong>GD&amp;T tolerance stack-ups</strong>, <strong>dielectric insulation</strong>, and <strong>thermal management</strong>, and engineered the <strong>custom PCB packaging</strong> that folds the cell-monitoring board into the module housing.
+          I designed the module as a layered sandwich built around the cells. Two <strong>module clamshells</strong> form the outer structure and carry the copper <strong>current collectors</strong> that tie the 3P groups together and route current to the next module. Inside, the cells sit in a <strong>cell holder plate</strong> backed by the <strong>polycarbonate plate</strong>, with <strong>3D-printed standoffs</strong> setting the spacing. A <strong>temperature sensing board</strong> rides on one face and a <strong>voltage sensing PCB</strong> on the other, then an <strong>insulation cover</strong> closes the high-voltage side before the <strong>BMS</strong> board mounts on the outside.
+        </p>
+        <p>
+          Ten modules wire in series to form a <strong>140S3P pack of 420 cells</strong>, about <strong>504 V nominal (588 V at full charge)</strong> and roughly <strong>7.6 kWh</strong>. Because every module is identical, each design decision on the plate is multiplied by ten, which is why the plate's thickness, mass, and machinability got so much attention.
         </p>
         <div class="project-images feature">
           <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
-            <img src="images/module_exploded.png" alt="Exploded view of the Formula SAE battery module" onload="phHide(this)" onerror="imgHide(this)">
+            <img src="images/module_exploded.png" alt="Exploded view of the battery module with labeled components" onload="phHide(this)" onerror="imgHide(this)">
             <span class="label">Exploded module stack-up</span>
           </div>
         </div>
+        <div class="project-images">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/module_iso.png" alt="Assembled module with sensing board visible" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Assembled module · sensing side</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/module_side.png" alt="Side view of the module showing the current collector tabs" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Side view · current collector tabs</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 02 - MATERIAL SELECTION -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">02</span>
+          <div>
+            <div class="stage-eyebrow">Material Selection</div>
+            <h3 class="stage-title">Choosing the Insulating Plate Material</h3>
+          </div>
+        </div>
+        <p>
+          The plate has to do three jobs at once: insulate a ~504 V stack, hold 42 cells through crash loads, and pass the rulebook's flammability requirement. I compared four candidates, <strong>polycarbonate, Garolite FR-4, PEI, and Garolite G-10</strong>, across dielectric strength, yield strength, cost, hardness, flammability rating, stiffness, glass transition temperature, and density.
+        </p>
+        <p>
+          Polycarbonate won on the criteria that mattered most here. It has the <strong>highest dielectric strength of the group (16 kV/mm)</strong>, the <strong>lowest density (1.20 g/cm³)</strong>, which compounds across ten modules, and it meets the <strong>UL94-V0 requirement of rule F.1.18</strong>, which G-10 (UL94-HB) does not. Its lower hardness also makes the cell counterbores far easier to machine cleanly. PEI was stronger and more heat-resistant but cost two to four times as much, and the fiberglass laminates were heavier and harder on tooling. Polycarbonate's lower yield strength (62 MPa) was the trade-off, so the mechanical sizing that follows had to prove it was enough.
+        </p>
+        <div class="project-images stack">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/polycarb_material_table.png" alt="Material comparison table for polycarbonate, FR-4, PEI, and G-10" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Material trade study</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 03 - ELECTRICAL SIZING -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">03</span>
+          <div>
+            <div class="stage-eyebrow">Hand Calcs · Electrical</div>
+            <h3 class="stage-title">Thickness Check: Breakdown &amp; Insulation Resistance</h3>
+          </div>
+        </div>
+        <p>
+          First I checked whether electrical requirements set a minimum thickness. For <strong>dielectric breakdown</strong>, the required thickness is t = FoS · V / E. Using a factor of safety of 2, the full 504 V pack voltage, and a conservative 15 kV/mm, that comes out to just <strong>0.08 mm</strong>.
+        </p>
+        <p>
+          Next was <strong>insulation resistance</strong>. The rulebook (EV.8.6.3 and IN.10.2.2) sets a floor of 500 Ω/V, so the insulation monitoring device trips at <strong>500 Ω/V × 504 V = 252 kΩ</strong>. The plate's resistance through its thickness is R = ρ · t / A; with polycarbonate's volume resistivity of about 10¹⁵ Ω·cm, a 0.64 cm plate, and 411 cm² of area, that is on the order of <strong>10¹² Ω</strong>, millions of times above the trip threshold. Both checks pass with huge margin, so the conclusion was clear: <strong>thickness is not set by the electrical properties</strong>, and the mechanical loads would govern.
+        </p>
+        <div class="project-images calcs">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/polycarb_calc_electrical.png" alt="Hand calculations for dielectric strength and insulation resistance" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Breakdown voltage &amp; insulation resistance</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 04 - MECHANICAL SIZING -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">04</span>
+          <div>
+            <div class="stage-eyebrow">Hand Calcs · Mechanical</div>
+            <h3 class="stage-title">Thickness Check: Crash Loads</h3>
+          </div>
+        </div>
+        <p>
+          The rulebook requires the module structure to protect the cells from <strong>40g longitudinal, 40g lateral, and 20g vertical</strong> accelerations. With 42 cells at about 70 g each, the cell mass is <strong>2.94 kg</strong>. Applying F = m·a and spreading it over the wall area gives <strong>1154 N (28.1 kPa)</strong> in the longitudinal and lateral cases and <strong>577 N (14.0 kPa)</strong> vertically.
+        </p>
+        <p>
+          The two load cases stress the plate differently. The 20g vertical case pushes the cells <strong>out of plane</strong>, so I modeled the plate as a <strong>simply supported plate on four edges</strong> using <strong>Roark's Formulas for Stress and Strain (Table 11.4)</strong>: σ<sub>max</sub> = βqb²/t², rearranged for t<sub>min</sub> against an allowable stress of 62 MPa / 1.5 = 41.3 MPa. The 40g cases load the plate <strong>in plane</strong>, where σ = F / (w·t).
+        </p>
+        <p>
+          The out-of-plane case governs. It needs a minimum of <strong>2.08 mm</strong> and sees about <strong>17.7 MPa</strong> at the design thickness, while the 40g in-plane case needs only <strong>0.15 mm</strong> and sees <strong>1.9 MPa</strong>. That 2.08 mm is actually conservative, since it stacks two safety margins: the rulebook crash accelerations themselves and the 1.5 factor of safety on top. On paper that would allow stepping down to a 1/8-inch plate, but I kept the thicker plate because a thinner one would not leave enough depth for the cells to seat in their <strong>counterbores</strong>. Sometimes the governing constraint is the manufacturing feature, not the stress.
+        </p>
+        <div class="project-images calcs">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/polycarb_calc_mech1.png" alt="Load definition and plate stress formulas" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Load definition · Roark plate formulas</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/polycarb_calc_mech2.png" alt="20g and 40g load case thickness results" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">20g &amp; 40g load cases · t<sub>min</sub> 2.08 mm</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 05 - FEA -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">05</span>
+          <div>
+            <div class="stage-eyebrow">Simulation · FEA</div>
+            <h3 class="stage-title">Plate FEA Validation</h3>
+          </div>
+        </div>
+        <p>
+          To check the hand calcs, I ran a <strong>SolidWorks static study</strong> on the plate with the cell loads applied at every counterbore pocket and the edges restrained. Peak <strong>von Mises stress came out at about 20.1 MPa</strong> against polycarbonate's 62 MPa yield, a <strong>factor of safety of roughly 3</strong>.
+        </p>
+        <p>
+          That lands within about 14% of the <strong>17.7 MPa hand-calc prediction</strong>, and the difference makes sense: Roark's formula treats the plate as a solid sheet, while the FEA captures the <strong>stress concentrations around the counterbores</strong> where material is removed. Getting two independent methods to agree this closely is what gives me confidence the plate is sized correctly.
+        </p>
+        <div class="project-images stack">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/polycarb_fea.png" alt="Von Mises stress FEA of the polycarbonate plate" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Von Mises · peak 20.1 MPa · FoS ~3</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 06 - NEXT STEPS -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">06</span>
+          <div>
+            <div class="stage-eyebrow">Status</div>
+            <h3 class="stage-title">Next Steps</h3>
+          </div>
+        </div>
+        <p>
+          With the architecture and the plate sizing locked in, I am currently working on three things to take the module from analysis to a build-ready design. First, <strong>ANSYS simulation to validate airflow</strong> through the module, checking that the cooling air actually reaches the cells rather than slipping around them. Second, the <strong>tolerance stack-up</strong>, making sure the cell counterbores, standoffs, clamshells, and current collectors line up across manufacturing variation so every cell seats properly and the collectors make reliable contact. Third, the <strong>fastener calculations</strong> for the module, sizing the bolts that hold the clamshells and stack together so the joints keep their clamp load under the same crash accelerations the plate was designed for.
+        </p>
       </div>
 
     </div>
