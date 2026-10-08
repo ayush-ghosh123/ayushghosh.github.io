@@ -293,7 +293,7 @@
         <div class="card-body">
           <div class="card-meta"><span class="card-date">January 2026 - Present</span><span class="card-cat">Hardware</span></div>
           <h3>Formula SAE Battery Module Design</h3>
-          <p class="card-brief">Design of a 42-cell, 14s3p accumulator module, from the full stack-up and sensing integration to a polycarbonate cell plate sized by electrical and crash-load hand calcs and validated with FEA.</p>
+          <p class="card-brief">Design of a 42-cell, 14s3p accumulator module, from the full stack-up and sensing integration to a polycarbonate cell plate sized by electrical and crash-load hand calcs and validated with FEA, plus MATLAB sizing of the nylon module fasteners.</p>
           <span class="card-cta">View Project <span class="arw">→</span></span>
         </div>
       </article>
@@ -1118,17 +1118,58 @@
         </div>
       </div>
 
-      <!-- STAGE 06 - NEXT STEPS -->
+      <!-- STAGE 06 - FASTENER SIZING -->
       <div class="stage">
         <div class="stage-head">
           <span class="stage-no">06</span>
+          <div>
+            <div class="stage-eyebrow">Analysis · MATLAB</div>
+            <h3 class="stage-title">Fastener Sizing for Nylon Screws</h3>
+          </div>
+        </div>
+        <p>
+          We want to hold the module together with <strong>nylon slotted hex screws</strong>, which are non-conductive and light, while using as few fasteners as possible. Nylon is far weaker than steel, though, so I wrote a <strong>MATLAB sizing script</strong> to find how few screws we can get away with. The modules are not bolted to the pack casing; the casing walls hold them in place. That means the screws inside the module only carry load when a part's own inertia pulls it away from what it is attached to. The script focuses on the two groups that carry the most: the <strong>clamshell screws</strong> and the <strong>standoff and support screws</strong>.
+        </p>
+        <p>
+          For each group, the script adds up the mass of every part those screws hold and applies the three rulebook load cases with a 1.5 factor of safety: <strong>20g vertical</strong>, which puts the screws in tension, and <strong>40g longitudinal and 40g lateral</strong>, which put them in shear. It then checks every way a single screw can fail. In tension, it checks the <strong>screw breaking</strong>, the <strong>nylon threads stripping</strong>, the <strong>heat-set insert pulling out</strong> of the printed part, and the <strong>screw head pulling through</strong> the clamped plate. In shear, it checks the <strong>screw shearing</strong> and the <strong>hole bearing</strong> on the clamped part. The nylon's strength is knocked down for absorbed moisture and for cell operating temperature, and a load-share factor accounts for screws never splitting load perfectly evenly.
+        </p>
+        <p>
+          The script sweeps screw sizes from <strong>M3 to M8</strong> and counts from 1 to 16, then plots the <strong>margin of safety</strong> of the most heavily loaded screw. Where each curve crosses zero is the minimum screw count for that size. The clearest result is that <strong>shear drives the count</strong>: with M4 screws, the clamshell joint needs about 4 screws for the 20g tension case but about 14 for the 40g shear cases. That points to the best way to cut fasteners: let <strong>geometric features such as pins, lips, or tongue-and-groove joints carry the shear</strong>, so the screws only need to clamp the parts together, which brings each joint down to roughly 3 to 4 screws. The script has a switch to model exactly that.
+        </p>
+        <p>
+          The thread-engagement sweep answered the thread-stripping question. A nylon M4 only needs about 3 mm of engagement before the screw body becomes the weak point, so the nylon threads will not strip out of an 8 mm brass insert. The real limit for larger screws in tension is the <strong>insert pulling out</strong> of the printed standoff.
+        </p>
+        <div class="project-images stack">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/fastener_ms_vs_count.png" alt="Margin of safety versus screw count for each joint and load case" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Margin of safety vs. screw count · every joint and load case</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/fastener_min_count.png" alt="Minimum screws required per screw size for each load case" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Minimum screws per size · shear cases govern</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/fastener_failure_modes.png" alt="Failure mode capacities compared to the load per screw for M4 nylon screws" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Failure-mode breakdown · M4 nylon</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/fastener_thread_engagement.png" alt="Screw capacity versus thread engagement length for each failure mode" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Thread stripping vs. insert pull-out vs. engagement length</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 07 - NEXT STEPS -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">07</span>
           <div>
             <div class="stage-eyebrow">Status</div>
             <h3 class="stage-title">Next Steps</h3>
           </div>
         </div>
         <p>
-          With the architecture and the plate sizing locked in, I am currently working on three things to take the module from analysis to a build-ready design. First, <strong>ANSYS simulation to validate airflow</strong> through the module, checking that the cooling air actually reaches the cells rather than slipping around them. Second, the <strong>tolerance stack-up</strong>, making sure the cell counterbores, standoffs, clamshells, and current collectors line up across manufacturing variation so every cell seats properly and the collectors make reliable contact. Third, the <strong>fastener calculations</strong> for the module, sizing the bolts that hold the clamshells and stack together so the joints keep their clamp load under the same crash accelerations the plate was designed for.
+          With the architecture, plate sizing, and fastener method in place, I am currently working on three things to take the module from analysis to a build-ready design. First, <strong>ANSYS simulation to validate airflow</strong> through the module, checking that the cooling air actually reaches the cells rather than slipping around them. Second, the <strong>tolerance stack-up</strong> for the gap between the tops of the wirebonds and the ceiling of the vsense cover, using measured loop heights from our built modules so the cover can never crush a bond. Third, <strong>finalizing the fastener count</strong> by pull-testing heat-set inserts in our printed material and adding shear features so the nylon screws only have to work in tension.
         </p>
       </div>
 
