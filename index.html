@@ -1134,24 +1134,36 @@
           For each group, the script adds up the mass of every part those screws hold and applies the three rulebook load cases with a 1.5 factor of safety: <strong>20g vertical</strong>, which puts the screws in tension, and <strong>40g longitudinal and 40g lateral</strong>, which put them in shear. It then checks every way a single screw can fail. In tension, it checks the <strong>screw breaking</strong>, the <strong>nylon threads stripping</strong>, the <strong>heat-set insert pulling out</strong> of the printed part, and the <strong>screw head pulling through</strong> the clamped plate. In shear, it checks the <strong>screw shearing</strong> and the <strong>hole bearing</strong> on the clamped part. The nylon's strength is knocked down for absorbed moisture and for cell operating temperature, and a load-share factor accounts for screws never splitting load perfectly evenly.
         </p>
         <p>
-          The script sweeps screw sizes from <strong>M3 to M8</strong> and counts from 1 to 16, then plots the <strong>margin of safety</strong> of the most heavily loaded screw. Where each curve crosses zero is the minimum screw count for that size. The clearest result is that <strong>shear drives the count</strong>: with M4 screws, the clamshell joint needs about 4 screws for the 20g tension case but about 14 for the 40g shear cases. That points to the best way to cut fasteners: let <strong>geometric features such as pins, lips, or tongue-and-groove joints carry the shear</strong>, so the screws only need to clamp the parts together, which brings each joint down to roughly 3 to 4 screws. The script has a switch to model exactly that.
+          The chart below compares each failure mode's capacity against the actual load on one M4 screw. Tension modes are in dark blue, and shear modes are in teal. The red and magenta lines are the tension and shear load per screw, so the bar closest to its line is the weakest link. Screw shear sits right at its load line, while modes like head pull-through have huge margin.
         </p>
+        <div class="project-images stack">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/fastener_failure_modes.png" alt="Failure mode capacities compared to the load per screw for M4 nylon screws" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Failure-mode breakdown · M4 nylon</span>
+          </div>
+        </div>
         <p>
-          The thread-engagement sweep answered the thread-stripping question. A nylon M4 only needs about 3 mm of engagement before the screw body becomes the weak point, so the nylon threads will not strip out of an 8 mm brass insert. The real limit for larger screws in tension is the <strong>insert pulling out</strong> of the printed standoff.
+          Next, the script sweeps screw sizes from <strong>M3 to M8</strong> and counts from 1 to 16, then plots the <strong>margin of safety</strong> of the most heavily loaded screw for every joint and load case. Each line is one screw size, and the point where it crosses the red zero line is the minimum number of screws that size needs.
         </p>
         <div class="project-images stack">
           <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
             <img src="images/fastener_ms_vs_count.png" alt="Margin of safety versus screw count for each joint and load case" onload="phHide(this)" onerror="imgHide(this)">
             <span class="label">Margin of safety vs. screw count · every joint and load case</span>
           </div>
+        </div>
+        <p>
+          Pulling those crossing points into one chart makes the main result clear: <strong>shear drives the count</strong>. With M4 screws, the clamshell joint needs about 4 screws for the 20g tension case but about 14 for the 40g shear cases. That points to the best way to cut fasteners: let <strong>geometric features such as pins, lips, or tongue-and-groove joints carry the shear</strong>, so the screws only need to clamp the parts together. That brings each joint down to roughly 3 to 4 screws, and the script has a switch to model exactly that.
+        </p>
+        <div class="project-images stack">
           <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
             <img src="images/fastener_min_count.png" alt="Minimum screws required per screw size for each load case" onload="phHide(this)" onerror="imgHide(this)">
             <span class="label">Minimum screws per size · shear cases govern</span>
           </div>
-          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
-            <img src="images/fastener_failure_modes.png" alt="Failure mode capacities compared to the load per screw for M4 nylon screws" onload="phHide(this)" onerror="imgHide(this)">
-            <span class="label">Failure-mode breakdown · M4 nylon</span>
-          </div>
+        </div>
+        <p>
+          Finally, I checked thread stripping by sweeping thread engagement length. A nylon M4 only needs about 3 mm of engagement before the screw body becomes the weak point, so the nylon threads will not strip out of an 8 mm brass insert. The real limit for larger screws in tension is the <strong>insert pulling out</strong> of the printed standoff, shown by the dashed line.
+        </p>
+        <div class="project-images stack">
           <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
             <img src="images/fastener_thread_engagement.png" alt="Screw capacity versus thread engagement length for each failure mode" onload="phHide(this)" onerror="imgHide(this)">
             <span class="label">Thread stripping vs. insert pull-out vs. engagement length</span>
