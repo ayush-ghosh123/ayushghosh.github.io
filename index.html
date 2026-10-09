@@ -103,6 +103,8 @@
     .card-thumb { position: relative; aspect-ratio: 16 / 10; background: #0a0e16; overflow: hidden; }
     .card-thumb img { width: 100%; height: 100%; object-fit: contain; padding: 1rem; display: block; transition: transform .4s ease; }
     .project-card:hover .card-thumb img { transform: scale(1.04); }
+    .card-thumb svg.nda-art { width: 100%; height: 100%; display: block; transition: transform .4s ease; }
+    .project-card:hover .card-thumb svg.nda-art { transform: scale(1.04); }
     .card-thumb .tick { display: none; }
     .thumb-badge {
       position: absolute; top: 10px; right: 10px; font: 500 0.68rem var(--mono); color: var(--muted);
@@ -165,6 +167,16 @@
     .stage-title { font-family: var(--display); font-size: 1.35rem; line-height: 1.25; margin: 0; }
     .stage p, .project-block p { color: var(--muted); font-size: 1rem; line-height: 1.8; margin: 0 0 1.2rem; max-width: 75ch; }
     .stage p strong, .project-block p strong, .lead-sub strong, .hero p strong { color: var(--text); font-weight: 600; }
+    .stage ul { color: var(--muted); font-size: 1rem; line-height: 1.8; margin: 0 0 1.2rem; padding-left: 1.2rem; max-width: 75ch; }
+    .stage ul li { margin-bottom: 0.35rem; }
+    .stage ul li strong { color: var(--text); font-weight: 600; }
+    .nda-note {
+      display: flex; gap: 0.7rem; align-items: flex-start; margin-top: 2.4rem; padding: 0.9rem 1.1rem;
+      background: var(--surface); border: 1px solid var(--line-2); border-radius: var(--radius);
+      color: var(--muted); font-size: 0.88rem; line-height: 1.6;
+    }
+    .nda-note .glyph { color: var(--accent); font-family: var(--mono); flex-shrink: 0; }
+    .lead-media .shot svg.nda-art { display: block; width: 100%; height: auto; }
 
     .project-block h3 { font-family: var(--display); font-size: clamp(1.6rem, 3.5vw, 2.2rem); line-height: 1.15; margin: 0 0 0.6rem; }
     .project-block .work-date { font: 500 0.78rem var(--mono); color: var(--accent); margin: 0 0 1.6rem; }
@@ -282,6 +294,43 @@
       </div>
     </div>
     <div class="card-grid">
+
+      <article class="project-card" data-project="esb" data-cat="hardware" data-badge="Under NDA" tabindex="0"
+               onclick="openProject('esb')" onkeydown="cardKey(event,'esb')">
+        <div class="card-thumb">
+          <span class="tick tl"></span><span class="tick br"></span>
+          <span class="thumb-badge"></span>
+          <svg class="nda-art" viewBox="0 0 320 200" role="img" aria-label="Abstract illustration of an adjustable mechanism; project details under NDA">
+            <defs>
+              <pattern id="grid-esb-card" width="16" height="16" patternUnits="userSpaceOnUse">
+                <path d="M16 0H0V16" fill="none" stroke="rgba(214,228,246,0.06)" stroke-width="1"/>
+              </pattern>
+            </defs>
+            <rect width="320" height="200" fill="url(#grid-esb-card)"/>
+            <g fill="none" stroke="#3fa9ff" stroke-width="3" stroke-linecap="round">
+              <path d="M70 168 L70 150"/>
+              <path d="M70 150 L128 92"/>
+              <path d="M128 92 L196 108"/>
+              <path d="M196 108 L238 66"/>
+            </g>
+            <rect x="46" y="166" width="48" height="8" rx="2" fill="#3fa9ff" opacity="0.5"/>
+            <g fill="#07090f" stroke="#3fa9ff" stroke-width="2.5">
+              <circle cx="70" cy="150" r="7"/>
+              <circle cx="128" cy="92" r="7"/>
+              <circle cx="196" cy="108" r="7"/>
+            </g>
+            <rect x="226" y="44" width="46" height="22" rx="4" transform="rotate(45 249 55)" fill="rgba(63,169,255,0.18)" stroke="#3fa9ff" stroke-width="2"/>
+            <path d="M128 92 m-18 0 a18 18 0 0 1 9 -15.6" fill="none" stroke="#8b97a8" stroke-width="1.2" stroke-dasharray="3 3"/>
+            <path d="M196 108 m14 6 a15 15 0 0 0 4 -16" fill="none" stroke="#8b97a8" stroke-width="1.2" stroke-dasharray="3 3"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span class="card-date">September 2026 - Present</span><span class="card-cat">Hardware</span></div>
+          <h3>Mechanism Design for a Novel Consumer Device</h3>
+          <p class="card-brief">Client engagement through Engineering Solutions at Berkeley: positioning, hold, and motion-tolerance mechanisms for a first-of-its-kind device, from open-ended brief to bench prototype. Details under NDA.</p>
+          <span class="card-cta">View Project <span class="arw">→</span></span>
+        </div>
+      </article>
 
       <article class="project-card" data-project="module" data-cat="hardware" tabindex="0"
                onclick="openProject('module')" onkeydown="cardKey(event,'module')">
@@ -436,6 +485,162 @@
   </div>
 
   <!-- ---- DETAIL VIEWS ---- -->
+
+  <!-- DETAIL: ESB Client Engagement (under NDA) -->
+  <div class="detail-view" id="detail-esb">
+    <button class="back-btn" onclick="closeProject()" aria-label="Close project">or press esc <span class="x">✕</span></button>
+    <div class="dossier">
+
+      <!-- LEAD / OVERVIEW -->
+      <div class="detail-lead">
+        <div class="lead-eyebrow">Project File // ESB-01 · Engineering Solutions at Berkeley · Client Engagement</div>
+        <div class="lead-grid">
+          <div>
+            <h2 class="lead-title">Mechanism Design for a Novel Consumer Device</h2>
+            <p class="lead-sub">
+              <strong>Engineering Solutions at Berkeley (ESB)</strong> is a student-run hardware engineering consulting club at UC Berkeley that partners with companies to take on real engineering projects, from early concepts through working prototypes.
+            </p>
+            <p class="lead-sub" style="margin-top:1rem;">
+              As an <strong>engineering consultant with ESB</strong>, I'm working with an <strong>early-stage hardware startup</strong> on a <strong>first-of-its-kind device</strong> with no existing product to copy. Our team owns the core mechanical problems: positioning the device precisely, holding it steady once set, and keeping it aligned while the user moves, all while adapting to a wide range of users and staying fast and intuitive for the operator.
+            </p>
+            <div class="spec-strip">
+              <div class="spec"><span>Role</span><b>Engineering Consultant</b></div>
+              <div class="spec"><span>Organization</span><b>ESB · UC Berkeley</b></div>
+              <div class="spec"><span>Client</span><b>Hardware Startup</b></div>
+              <div class="spec"><span>Focus</span><b>Mechanism Design</b></div>
+              <div class="spec"><span>Timeline</span><b>Sept – Nov 2026</b></div>
+              <div class="spec"><span>Status</span><b>In Progress</b></div>
+            </div>
+          </div>
+          <div class="lead-media">
+            <div class="shot">
+              <svg class="nda-art" viewBox="0 0 640 300" role="img" aria-label="Abstract illustration of an adjustable mechanism; project images withheld under NDA">
+                <defs>
+                  <pattern id="grid-esb-lead" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <path d="M20 0H0V20" fill="none" stroke="rgba(214,228,246,0.06)" stroke-width="1"/>
+                  </pattern>
+                </defs>
+                <rect width="640" height="300" fill="url(#grid-esb-lead)"/>
+                <g fill="none" stroke="#3fa9ff" stroke-width="4" stroke-linecap="round">
+                  <path d="M190 250 L190 222"/>
+                  <path d="M190 222 L270 140"/>
+                  <path d="M270 140 L370 162"/>
+                  <path d="M370 162 L430 100"/>
+                </g>
+                <rect x="158" y="248" width="64" height="10" rx="3" fill="#3fa9ff" opacity="0.5"/>
+                <g fill="#07090f" stroke="#3fa9ff" stroke-width="3">
+                  <circle cx="190" cy="222" r="9"/>
+                  <circle cx="270" cy="140" r="9"/>
+                  <circle cx="370" cy="162" r="9"/>
+                </g>
+                <rect x="414" y="70" width="66" height="30" rx="5" transform="rotate(45 447 85)" fill="rgba(63,169,255,0.18)" stroke="#3fa9ff" stroke-width="2.5"/>
+                <path d="M270 140 m-26 0 a26 26 0 0 1 13 -22.5" fill="none" stroke="#8b97a8" stroke-width="1.5" stroke-dasharray="4 4"/>
+                <path d="M370 162 m20 8 a22 22 0 0 0 6 -23" fill="none" stroke="#8b97a8" stroke-width="1.5" stroke-dasharray="4 4"/>
+                <text x="320" y="34" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#5b6577" letter-spacing="2">CLIENT PROJECT · UNDER NDA</text>
+              </svg>
+              <span class="label">Illustrative only · project images withheld under NDA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 01 - CHALLENGE -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">01</span>
+          <div>
+            <div class="stage-eyebrow">Requirements</div>
+            <h3 class="stage-title">The Challenge</h3>
+          </div>
+        </div>
+        <p>
+          The client came to ESB with an open-ended brief for a device that doesn't exist yet. Because there's <strong>no prior product to benchmark against</strong>, the problem isn't refining a known design, it's figuring out what the mechanism needs to do in the first place and proving it can be done. The device has to be <strong>easy for an operator to position</strong>, <strong>hold its position once set</strong>, and <strong>stay aligned while the user moves</strong>, without adding steps or time to the operator's workflow.
+        </p>
+        <p>
+          On top of that, it has to work across a <strong>wide range of user sizes and configurations</strong>, stay <strong>safe in direct proximity to the user</strong>, and fit inside the <strong>thermal, ergonomic, and space constraints</strong> defined by the client's engineering team.
+        </p>
+      </div>
+
+      <!-- STAGE 02 - MY ROLE -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">02</span>
+          <div>
+            <div class="stage-eyebrow">Scope</div>
+            <h3 class="stage-title">My Role</h3>
+          </div>
+        </div>
+        <ul>
+          <li>Designing a <strong>manually adjustable positioning and support system</strong> that moves freely, then holds position once set, with no motorized components</li>
+          <li>Developing mechanisms that <strong>maintain alignment as the user shifts and tilts</strong> during operation</li>
+          <li>Designing for <strong>safety</strong>: eliminating pinch points, ensuring fail-safe behavior on sudden movement, and keeping all load off the user's body</li>
+          <li>Engineering <strong>adjustability</strong> so a single mechanism accommodates a wide range of user sizes and configurations</li>
+          <li>Working within <strong>thermal, ergonomic, and packaging constraints</strong> set by the client's engineering team</li>
+        </ul>
+      </div>
+
+      <!-- STAGE 03 - APPROACH -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">03</span>
+          <div>
+            <div class="stage-eyebrow">Process</div>
+            <h3 class="stage-title">Approach</h3>
+          </div>
+        </div>
+        <p>
+          <strong>Scoping an ambiguous problem.</strong> We started by working with the client to turn the open-ended brief into a <strong>prioritized problem list</strong>, concrete <strong>success criteria</strong>, and the <strong>test methods</strong> used to judge each one, so "does it work?" has a measurable answer.
+        </p>
+        <p>
+          <strong>Exploring architectures.</strong> With the form factor left open, we generated and compared multiple concepts, documenting the trade-offs of each in <strong>decision matrices</strong>. A recurring theme was <strong>cost versus complexity</strong>: weighing motorized, actively controlled solutions against simpler passive mechanisms, and choosing the passive route wherever it meets the requirement.
+        </p>
+        <p>
+          <strong>Building early.</strong> Rather than a long paper phase, we move to <strong>rough physical prototypes</strong> as soon as a concept is worth testing, then refine the promising ones in <strong>SolidWorks</strong>. Bench builds and <strong>custom test fixtures</strong> let us check each mechanism against the agreed success criteria instead of relying on intuition.
+        </p>
+        <p>
+          <strong>Adapting to change.</strong> Midway through the engagement, the client shifted the product direction. We re-scoped with them, carried forward the findings that still applied, and restarted concept work on the new objectives without moving the final deadline.
+        </p>
+      </div>
+
+      <!-- STAGE 04 - DELIVERABLES -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">04</span>
+          <div>
+            <div class="stage-eyebrow">Handoff</div>
+            <h3 class="stage-title">Deliverables</h3>
+          </div>
+        </div>
+        <p>
+          The engagement closes with a <strong>proof of concept</strong>: a report that makes the case, backed by evidence, that the proposed mechanics will work. It includes <strong>CAD models</strong>, <strong>trade studies</strong>, <strong>bench-level prototypes</strong>, at least one <strong>physical demonstration</strong>, a <strong>bill of materials</strong>, and <strong>assembly and test documentation</strong>, presented to the client's leadership team. Along the way, we provide biweekly written progress updates and hold a mid-project <strong>design review</strong> with the client before committing to final concepts.
+        </p>
+      </div>
+
+      <!-- STAGE 05 - LEARNING -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">05</span>
+          <div>
+            <div class="stage-eyebrow">Reflection</div>
+            <h3 class="stage-title">What I'm Learning</h3>
+          </div>
+        </div>
+        <ul>
+          <li>How to <strong>scope an ambiguous, first-of-its-kind problem</strong> into measurable requirements and test methods</li>
+          <li>Balancing <strong>performance against cost</strong>, and recognizing when a simple passive mechanism beats an expensive active one</li>
+          <li>Running a <strong>real client engagement</strong>: progress updates, design reviews, and adapting quickly when the client changes direction</li>
+        </ul>
+        <p>
+          <strong>Skills:</strong> Mechanism design · SolidWorks · Rapid prototyping · Test fixture design · Design for safety · Trade studies · Client communication
+        </p>
+        <div class="nda-note">
+          <span class="glyph">◈</span>
+          <span>This project is covered by a confidentiality agreement, so the client, product, technical details, and images can't be shared here. I'm happy to talk about my process and what I learned in conversation.</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
   <!-- DETAIL: Mechanical Water Filtration System -->
   <div class="detail-view" id="detail-filter">
@@ -1899,11 +2104,13 @@
   function phHide(img){ var ph = img.parentElement.querySelector('.ph'); if(ph) ph.style.display='none'; }
   function imgHide(img){ img.style.display='none'; }
 
-  /* image-count badges */
+  /* image-count badges (cards can override with data-badge) */
   document.querySelectorAll('.project-card').forEach(card => {
     const detail = document.getElementById('detail-' + card.dataset.project);
     const badge = card.querySelector('.thumb-badge');
-    if (detail && badge) {
+    if (!badge) return;
+    if (card.dataset.badge) { badge.textContent = card.dataset.badge; return; }
+    if (detail) {
       const n = detail.querySelectorAll('.project-images img, .lead-media img').length;
       badge.textContent = n + (n === 1 ? ' image' : ' images');
     }
