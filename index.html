@@ -1390,17 +1390,51 @@
         </div>
       </div>
 
-      <!-- STAGE 07 - NEXT STEPS -->
+      <!-- STAGE 07 - TOLERANCE STACK-UPS -->
       <div class="stage">
         <div class="stage-head">
           <span class="stage-no">07</span>
+          <div>
+            <div class="stage-eyebrow">Hand Calcs · Tolerancing</div>
+            <h3 class="stage-title">Tolerance Stack-Ups: Wirebonds &amp; Fasteners</h3>
+          </div>
+        </div>
+        <p>
+          <strong>Wirebond clearance.</strong> The cells are wirebonded to the current collectors, and the 3D-printed <strong>vsense cover</strong> sits directly above the bond loops, so I checked that the cover can never crush a bond. The wirebonder's own precision (about ±2 µm) is not a useful number here, because bonds bend, spring back, and settle on their own after bonding. Instead I measured loop heights on our built modules: the tallest loop sits about <strong>3 mm above the copper</strong>, so I used <strong>2.8 ± 0.2 mm</strong>. The printed cover is <strong>6.25 ± 0.3 mm</strong> tall. The worst case pairs the tallest loop with the shortest cover, <strong>5.95 − 3.0 = 2.95 mm of clearance</strong>, so the cover cannot reach the bonds even when both parts land at their limits.
+        </p>
+        <p>
+          <strong>Fastener fit.</strong> The module is held together by M4 screws that pass through <strong>4.5 mm clearance holes</strong> in the CNC-machined polycarbonate plates and sensing PCBs, then thread into <strong>heat-set inserts</strong> in the printed standoffs and side supports. I ran a 2D positional stack-up to confirm every screw can reach its insert. Because the standoffs float between the plates, located only by their own screws, the room in both holes adds up: <strong>0.25 mm per hole, 0.50 mm total</strong>. Against that I combined each error source with <strong>RSS</strong>.
+        </p>
+        <ul>
+          <li><strong>Plate ↔ standoff ↔ plate:</strong> CNC hole position (0.05 mm), insert offset from printing and installation (0.10 mm), and insert tilt drifting the screw across the 6.35 mm plate (6.35 · tan 2° = 0.22 mm), each counted at the top and bottom interface. RSS = <strong>0.35 mm &lt; 0.50 mm</strong>.</li>
+          <li><strong>PCB hole ↔ plate hole:</strong> where one screw passes through both the voltage-sensing PCB and the plate, the errors are plate hole position (0.05 mm), locating pin position (0.05 mm), PCB float on the 3 mm pin (0.02 mm), PCB fab hole position (0.075 mm), and tilt across the full 7.95 mm stack (0.28 mm). RSS = <strong>0.30 mm &lt; 0.50 mm</strong>.</li>
+        </ul>
+        <p>
+          Both joints assemble, but the stack-up showed that <strong>insert tilt is the largest contributor</strong> in each check. The quarter-inch plates give a slightly crooked insert a lot of height over which to push the screw sideways. The insert offset and tilt values are typical for hand-installed inserts, so the next step is to measure them on installed parts and use an installation guide to keep tilt low.
+        </p>
+        <div class="project-images calcs">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/module_wirebond_stackup.png" alt="Hand calculation of wirebond loop height versus vsense cover clearance" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Wirebond loop vs. vsense cover clearance</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/module_fastener_stackup.png" alt="Hand calculation of the RSS fastener positional tolerance stack-up" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Fastener positional stack-up · RSS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 08 - NEXT STEPS -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">08</span>
           <div>
             <div class="stage-eyebrow">Status</div>
             <h3 class="stage-title">Next Steps</h3>
           </div>
         </div>
         <p>
-          With the architecture, plate sizing, and fastener method in place, I am currently working on three things to take the module from analysis to a build-ready design. First, <strong>ANSYS simulation to validate airflow</strong> through the module, checking that the cooling air actually reaches the cells rather than slipping around them. Second, the <strong>tolerance stack-up</strong> for the gap between the tops of the wirebonds and the ceiling of the vsense cover, using measured loop heights from our built modules so the cover can never crush a bond. Third, <strong>finalizing the fastener count</strong> by pull-testing heat-set inserts in our printed material and adding shear features so the nylon screws only have to work in tension.
+          With the architecture, plate sizing, fastener method, and tolerance stack-ups in place, I am currently working on three things to take the module from analysis to a build-ready design. First, <strong>ANSYS simulation to validate airflow</strong> through the module, checking that the cooling air actually reaches the cells rather than slipping around them. Second, <strong>measuring heat-set insert offset and tilt</strong> on installed parts to replace the assumed values in the fastener stack-up. Third, <strong>finalizing the fastener count</strong> by pull-testing heat-set inserts in our printed material and adding shear features so the nylon screws only have to work in tension.
         </p>
       </div>
 
