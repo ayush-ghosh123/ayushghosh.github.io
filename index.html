@@ -178,6 +178,18 @@
     .nda-note .glyph { color: var(--accent); font-family: var(--mono); flex-shrink: 0; }
     .lead-media .shot svg.nda-art { display: block; width: 100%; height: auto; }
 
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); margin: 0.4rem 0 1.6rem; }
+    .spec-table { width: 100%; border-collapse: collapse; font-size: 0.94rem; line-height: 1.55; }
+    .spec-table th { font: 600 0.74rem var(--mono); letter-spacing: 0.04em; color: var(--accent); background: var(--surface); text-align: left; padding: 0.7rem 0.9rem; border-bottom: 1px solid var(--line-2); white-space: nowrap; }
+    .spec-table td { color: var(--muted); padding: 0.65rem 0.9rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .spec-table tr:last-child td { border-bottom: 0; }
+    .spec-table td:first-child { color: var(--text); font-weight: 600; white-space: nowrap; }
+    .spec-table td.num { font-family: var(--mono); font-size: 0.86rem; white-space: nowrap; }
+    .verdict { display: inline-block; font: 600 0.72rem var(--mono); padding: 0.15rem 0.55rem; border-radius: 999px; }
+    .verdict.pass { color: #6fd39b; background: rgba(111,211,155,0.12); }
+    .verdict.fail { color: #ff8a7a; background: rgba(255,138,122,0.12); }
+    .eq-block { font: 500 0.88rem var(--mono); color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 0.9rem 1.1rem; margin: 0 0 1.2rem; max-width: 75ch; line-height: 1.9; overflow-x: auto; }
+    .project-images.tall img { height: 520px; }
     .project-block h3 { font-family: var(--display); font-size: clamp(1.6rem, 3.5vw, 2.2rem); line-height: 1.15; margin: 0 0 0.6rem; }
     .project-block .work-date { font: 500 0.78rem var(--mono); color: var(--accent); margin: 0 0 1.6rem; }
 
@@ -1204,7 +1216,7 @@
           </div>
           <div class="lead-media">
             <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
-              <img src="images/module_exploded.png" alt="Exploded view of the battery module" onload="phHide(this)" onerror="imgHide(this)">
+              <img src="images/module_exploded_layers.png" alt="Labeled exploded view of every layer in the battery module" onload="phHide(this)" onerror="imgHide(this)">
               <span class="label">Module stack-up</span>
             </div>
           </div>
@@ -1236,12 +1248,68 @@
             <span class="label">Side view · current collector tabs</span>
           </div>
         </div>
+        <p>
+          <strong>Layer by layer.</strong> Each layer has a structural, electrical, or sensing job, and the stack had to close around 42 cells while keeping ~504 V isolated from the low-voltage boards.
+        </p>
+        <div class="table-wrap">
+          <table class="spec-table">
+            <tr><th>Layer</th><th>What it does and how it's built</th></tr>
+            <tr><td>Module clamshells</td><td>3D-printed halves that enclose the stack and carry the current collectors</td></tr>
+            <tr><td>Current collectors</td><td>Copper; tie each 3P group together and route current to the next module</td></tr>
+            <tr><td>Temperature board</td><td>Thermistors under every cell, read through a hole in each counterbore; located by a dowel pin</td></tr>
+            <tr><td>Cell holder plate</td><td>Positions all 42 cells in the 14s3p pattern</td></tr>
+            <tr><td>Cells</td><td>Reliance RS50 21700s, seated on silicone thermal pads and bonded with thermally conductive adhesive</td></tr>
+            <tr><td>Standoffs &amp; supports</td><td>3D-printed; set the plate-to-plate spacing, with M4 and M5 screws into brass heat-set inserts</td></tr>
+            <tr><td>Polycarbonate plates</td><td>1/4 in CNC-machined; isolate the stack and carry the 40g and 20g crash loads</td></tr>
+            <tr><td>Voltage sensing PCB</td><td>Carries the copper busbars the cells are wirebonded to; located by a dowel pin</td></tr>
+            <tr><td>Insulation cover</td><td>6.25 mm printed cover over the wirebonds that closes the high-voltage side</td></tr>
+            <tr><td>BMS</td><td>Mounts on the outside of the stack for service access</td></tr>
+          </table>
+        </div>
+        <div class="project-images stack">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/module_exploded_vertical.png" alt="Vertical exploded view showing clamshells, boards, plates, cells, standoffs and side supports" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Exploded view · top to bottom</span>
+          </div>
+        </div>
       </div>
 
-      <!-- STAGE 02 - MATERIAL SELECTION -->
+      <!-- STAGE 02 - CELL RETENTION & INTEGRATION -->
       <div class="stage">
         <div class="stage-head">
           <span class="stage-no">02</span>
+          <div>
+            <div class="stage-eyebrow">CAD · Design Decisions</div>
+            <h3 class="stage-title">Holding, Connecting, and Sensing 42 Cells</h3>
+          </div>
+        </div>
+        <ul>
+          <li><strong>Cell retention:</strong> on the temperature-sensing side, each cell seats in a counterbore in the CNC-machined polycarbonate and is held with a thermally conductive adhesive. The plate on the voltage-sensing side uses through-holes, so the cells are never clamped axially and never end up in the screw load path.</li>
+          <li><strong>Thermal sensing path:</strong> every counterbore has a hole through its center. A silicone thermal pad sits at the bottom of the counterbore, the cell is bonded on top of it, and the pad presses against a thermistor on the temperature board below, so each cell’s temperature is read through a direct conductive path.</li>
+          <li><strong>Current path:</strong> copper busbars on the voltage-sensing PCB parallel each 3P group, and the cells are wirebonded to them through openings around each cell end. Ring-terminal tabs at the module edge carry current to the next module. Loop heights measured on built modules set the cover clearance.</li>
+          <li><strong>Sensing integration:</strong> the voltage sensing PCB and temperature board are each located by a dowel pin in the plate, so the pin sets their position and their screws only clamp. The BMS mounts outside the stack for service.</li>
+          <li><strong>Fastening and damping:</strong> nylon M4 screws pass through 4.5 mm clearance holes into brass heat-set inserts in the printed standoffs. Foam fills the designed clearance inside the clamshell to damp vibration.</li>
+        </ul>
+        <div class="project-images">
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/module_vsense_busbars.png" alt="Voltage sensing PCB with copper busbars over the cells and ring-terminal tabs" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Voltage-sensing side · copper busbars and tabs</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/module_tsense_counterbores.png" alt="Temperature-sensing-side plate with counterbores and a center hole for each thermistor" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Temperature-sensing side · counterbores with thermistor holes</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/module_vsense_plate.png" alt="CAD of the polycarbonate plate on the voltage sensing side, with through-holes for 42 cells" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Voltage-sensing-side plate · through-holes for 42 cells</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 03 - MATERIAL SELECTION -->
+      <div class="stage">
+        <div class="stage-head">
+          <span class="stage-no">03</span>
           <div>
             <div class="stage-eyebrow">Material Selection</div>
             <h3 class="stage-title">Choosing the Insulating Plate Material</h3>
@@ -1261,10 +1329,10 @@
         </div>
       </div>
 
-      <!-- STAGE 03 - ELECTRICAL SIZING -->
+      <!-- STAGE 04 - ELECTRICAL SIZING -->
       <div class="stage">
         <div class="stage-head">
-          <span class="stage-no">03</span>
+          <span class="stage-no">04</span>
           <div>
             <div class="stage-eyebrow">Hand Calcs · Electrical</div>
             <h3 class="stage-title">Thickness Check: Breakdown &amp; Insulation Resistance</h3>
@@ -1276,6 +1344,11 @@
         <p>
           Next was <strong>insulation resistance</strong>. The rulebook (EV.8.6.3 and IN.10.2.2) sets a floor of 500 Ω/V, so the insulation monitoring device trips at <strong>500 Ω/V × 504 V = 252 kΩ</strong>. The plate's resistance through its thickness is R = ρ · t / A; with polycarbonate's volume resistivity of about 10¹⁵ Ω·cm, a 0.64 cm plate, and 411 cm² of area, that is on the order of <strong>10¹² Ω</strong>, millions of times above the trip threshold. Both checks pass with huge margin, so the conclusion was clear: <strong>thickness is not set by the electrical properties</strong>, and the mechanical loads would govern.
         </p>
+        <div class="eq-block">
+          t = FoS · V / E = 2 × 504 V / 15 kV/mm = 0.08 mm<br>
+          R_min = 500 Ω/V × 504 V = 252 kΩ<br>
+          R = ρ · t / A = 10¹⁵ Ω·cm × 0.64 cm / 411 cm² ≈ 10¹² Ω
+        </div>
         <div class="project-images calcs">
           <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
             <img src="images/polycarb_calc_electrical.png" alt="Hand calculations for dielectric strength and insulation resistance" onload="phHide(this)" onerror="imgHide(this)">
@@ -1284,10 +1357,10 @@
         </div>
       </div>
 
-      <!-- STAGE 04 - MECHANICAL SIZING -->
+      <!-- STAGE 05 - MECHANICAL SIZING -->
       <div class="stage">
         <div class="stage-head">
-          <span class="stage-no">04</span>
+          <span class="stage-no">05</span>
           <div>
             <div class="stage-eyebrow">Hand Calcs · Mechanical</div>
             <h3 class="stage-title">Thickness Check: Crash Loads</h3>
@@ -1302,6 +1375,13 @@
         <p>
           The out-of-plane case governs. It needs a minimum of <strong>2.08 mm</strong> and sees about <strong>17.7 MPa</strong> at the design thickness, while the 40g in-plane case needs only <strong>0.15 mm</strong> and sees <strong>1.9 MPa</strong>. That 2.08 mm is actually conservative, since it stacks two safety margins: the rulebook crash accelerations themselves and the 1.5 factor of safety on top. On paper that would allow stepping down to a 1/8-inch plate, but I kept the thicker plate because a thinner one would not leave enough depth for the cells to seat in their <strong>counterbores</strong>. Sometimes the governing constraint is the manufacturing feature, not the stress.
         </p>
+        <div class="table-wrap">
+          <table class="spec-table">
+            <tr><th>Load case</th><th>Load (F = m·a)</th><th>Model</th><th>t min</th><th>Stress at 1/4 in</th></tr>
+            <tr><td>40g long. / lateral</td><td class="num">1154 N · 28.1 kPa</td><td>In plane, σ = F / (w·t)</td><td class="num">0.15 mm</td><td class="num">1.9 MPa</td></tr>
+            <tr><td>20g vertical</td><td class="num">577 N · 14.0 kPa</td><td>Out of plane, σ = βqb² / t²</td><td class="num">2.08 mm</td><td class="num">17.7 MPa</td></tr>
+          </table>
+        </div>
         <div class="project-images calcs">
           <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
             <img src="images/polycarb_calc_mech1.png" alt="Load definition and plate stress formulas" onload="phHide(this)" onerror="imgHide(this)">
@@ -1314,10 +1394,10 @@
         </div>
       </div>
 
-      <!-- STAGE 05 - FEA -->
+      <!-- STAGE 06 - FEA -->
       <div class="stage">
         <div class="stage-head">
-          <span class="stage-no">05</span>
+          <span class="stage-no">06</span>
           <div>
             <div class="stage-eyebrow">Simulation · FEA</div>
             <h3 class="stage-title">Plate FEA Validation</h3>
@@ -1337,10 +1417,10 @@
         </div>
       </div>
 
-      <!-- STAGE 06 - FASTENER SIZING -->
+      <!-- STAGE 07 - FASTENER SIZING -->
       <div class="stage">
         <div class="stage-head">
-          <span class="stage-no">06</span>
+          <span class="stage-no">07</span>
           <div>
             <div class="stage-eyebrow">Analysis · MATLAB</div>
             <h3 class="stage-title">Fastener Sizing for Nylon Screws</h3>
@@ -1390,26 +1470,47 @@
         </div>
       </div>
 
-      <!-- STAGE 07 - TOLERANCE STACK-UPS -->
+      <!-- STAGE 08 - TOLERANCE STACK-UPS -->
       <div class="stage">
         <div class="stage-head">
-          <span class="stage-no">07</span>
+          <span class="stage-no">08</span>
           <div>
             <div class="stage-eyebrow">Hand Calcs · Tolerancing</div>
             <h3 class="stage-title">Tolerance Stack-Ups: Wirebonds &amp; Fasteners</h3>
           </div>
         </div>
         <p>
-          <strong>Wirebond clearance.</strong> The cells are wirebonded to the current collectors, and the 3D-printed <strong>vsense cover</strong> sits directly above the bond loops, so I checked that the cover can never crush a bond. The wirebonder's own precision (about ±2 µm) is not a useful number here, because bonds bend, spring back, and settle on their own after bonding. Instead I measured loop heights on our built modules: the tallest loop sits about <strong>3 mm above the copper</strong>, so I used <strong>2.8 ± 0.2 mm</strong>. The printed cover is <strong>6.25 ± 0.3 mm</strong> tall. The worst case pairs the tallest loop with the shortest cover, <strong>5.95 − 3.0 = 2.95 mm of clearance</strong>, so the cover cannot reach the bonds even when both parts land at their limits.
+          <strong>Wirebond clearance.</strong> The cells are wirebonded to the copper busbars on the voltage sensing PCB, and the 3D-printed <strong>vsense cover</strong> sits directly above the bond loops, so I checked that the cover can never crush a bond. The wirebonder's own precision (about ±2 µm) is not a useful number here, because bonds bend, spring back, and settle on their own after bonding. Instead I measured loop heights on our built modules: the tallest loop sits about <strong>3 mm above the copper</strong>, so I used <strong>2.8 ± 0.2 mm</strong>. The printed cover is <strong>6.25 ± 0.3 mm</strong> tall. The worst case pairs the tallest loop with the shortest cover, <strong>5.95 − 3.0 = 2.95 mm of clearance</strong>, so the cover cannot reach the bonds even when both parts land at their limits.
         </p>
+        <div class="eq-block">
+          Worst case: (6.25 − 0.3) − (2.8 + 0.2) = 2.95 mm<br>
+          RSS: (6.25 − 2.8) − √(0.2² + 0.3²) = 3.45 − 0.36 = 3.09 mm
+        </div>
         <p>
           <strong>Fastener fit.</strong> I then ran a 2D positional stack-up on every screwed joint in the module, seven checks in all, to confirm each screw can pass through its clearance holes and reach its thread. Each check compares the RSS of the position errors in the joint against the <strong>slack</strong> the clearance holes give: (hole − screw) / 2 per hole. The error sources are CNC hole and tap position (0.05 mm), PCB fab hole position (0.05 to 0.075 mm), printed hole and insert position (0.10 mm), locating pin position and float, and <strong>tilt</strong>, where a slightly crooked insert or tap drifts the screw sideways by height · tan θ over everything it passes through.
         </p>
+        <div class="eq-block">
+          slack per hole = (H − F) / 2 = (4.5 − 4.0) / 2 = 0.25 mm<br>
+          tilt drift = t · tan θ<br>
+          RSS = √(Σ eᵢ²) ≤ total slack
+        </div>
         <ul>
           <li><strong>Checks 1–2, plate ↔ standoff or side support ↔ plate:</strong> the M4 standoffs and M5 side supports thread into heat-set inserts and float between the two polycarbonate plates, so the room in both holes adds up to <strong>0.50 mm</strong> of slack. With 2° insert tilt across the 6.35 mm plate, RSS = <strong>0.35 mm &lt; 0.50 mm</strong>. Pass.</li>
           <li><strong>Checks 3–7, parts screwed into tapped polycarbonate:</strong> the vsense board, vsense cover, BMS, temperature sensing board, and both clamshells screw into threads tapped into the plates. The plates cannot shift, so each hole only gets its own <strong>0.25 mm</strong> of slack. The pin-located vsense and tsense boards pass (RSS 0.17 mm), and the bottom clamshell passes at 0.22 mm.</li>
           <li><strong>Where it fails:</strong> the <strong>vsense cover, BMS, and top clamshell holes</strong> exceed 0.25 mm. These parts sit on tall stacks (17 to 23 mm above the tap), so even a 1° tilt drifts the screw 0.30 to 0.40 mm, and the cover can also shift up to 0.25 mm because nothing locates it.</li>
         </ul>
+        <div class="table-wrap">
+          <table class="spec-table">
+            <tr><th>Check</th><th>Joint · hole checked</th><th>RSS (mm)</th><th>Slack (mm)</th><th>Result</th></tr>
+            <tr><td>1</td><td>Plate · M4 standoff · plate</td><td class="num">0.35</td><td class="num">0.50</td><td><span class="verdict pass">Pass</span></td></tr>
+            <tr><td>2</td><td>Plate · M5 side support · plate</td><td class="num">0.35</td><td class="num">0.50</td><td><span class="verdict pass">Pass</span></td></tr>
+            <tr><td>3, 6</td><td>Vsense and tsense PCB holes (pin-located)</td><td class="num">0.17</td><td class="num">0.25</td><td><span class="verdict pass">Pass</span></td></tr>
+            <tr><td>3, 4</td><td>Insulation cover hole (17.3 mm stack)</td><td class="num">0.30–0.40</td><td class="num">0.25</td><td><span class="verdict fail">Fail</span></td></tr>
+            <tr><td>4</td><td>BMS hole (18.9 mm stack)</td><td class="num">0.34</td><td class="num">0.25</td><td><span class="verdict fail">Fail</span></td></tr>
+            <tr><td>5</td><td>Top clamshell hole (22.8 mm stack)</td><td class="num">0.41</td><td class="num">0.25</td><td><span class="verdict fail">Fail</span></td></tr>
+            <tr><td>7</td><td>Bottom clamshell hole (10.85 mm stack)</td><td class="num">0.22</td><td class="num">0.25</td><td><span class="verdict pass">Pass</span></td></tr>
+          </table>
+        </div>
         <p>
           The stack-up's main lesson is that <strong>tilt dominates every joint</strong>, and it grows with the height of the stack. The short, pin-located joints have margin to spare, while the tall stacks on top of the module do not. Those three holes need to be opened up, or the cover and clamshell need their own locating features, before the next build. The tilt values are assumptions, so measuring them on installed parts comes next.
         </p>
@@ -1433,10 +1534,10 @@
         </div>
       </div>
 
-      <!-- STAGE 08 - NEXT STEPS -->
+      <!-- STAGE 09 - NEXT STEPS -->
       <div class="stage">
         <div class="stage-head">
-          <span class="stage-no">08</span>
+          <span class="stage-no">09</span>
           <div>
             <div class="stage-eyebrow">Status</div>
             <h3 class="stage-title">Next Steps</h3>
