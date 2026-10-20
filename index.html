@@ -1403,14 +1403,15 @@
           <strong>Wirebond clearance.</strong> The cells are wirebonded to the current collectors, and the 3D-printed <strong>vsense cover</strong> sits directly above the bond loops, so I checked that the cover can never crush a bond. The wirebonder's own precision (about ±2 µm) is not a useful number here, because bonds bend, spring back, and settle on their own after bonding. Instead I measured loop heights on our built modules: the tallest loop sits about <strong>3 mm above the copper</strong>, so I used <strong>2.8 ± 0.2 mm</strong>. The printed cover is <strong>6.25 ± 0.3 mm</strong> tall. The worst case pairs the tallest loop with the shortest cover, <strong>5.95 − 3.0 = 2.95 mm of clearance</strong>, so the cover cannot reach the bonds even when both parts land at their limits.
         </p>
         <p>
-          <strong>Fastener fit.</strong> The module is held together by M4 screws that pass through <strong>4.5 mm clearance holes</strong> in the CNC-machined polycarbonate plates and sensing PCBs, then thread into <strong>heat-set inserts</strong> in the printed standoffs and side supports. I ran a 2D positional stack-up to confirm every screw can reach its insert. Because the standoffs float between the plates, located only by their own screws, the room in both holes adds up: <strong>0.25 mm per hole, 0.50 mm total</strong>. Against that I combined each error source with <strong>RSS</strong>.
+          <strong>Fastener fit.</strong> I then ran a 2D positional stack-up on every screwed joint in the module, seven checks in all, to confirm each screw can pass through its clearance holes and reach its thread. Each check compares the RSS of the position errors in the joint against the <strong>slack</strong> the clearance holes give: (hole − screw) / 2 per hole. The error sources are CNC hole and tap position (0.05 mm), PCB fab hole position (0.05 to 0.075 mm), printed hole and insert position (0.10 mm), locating pin position and float, and <strong>tilt</strong>, where a slightly crooked insert or tap drifts the screw sideways by height · tan θ over everything it passes through.
         </p>
         <ul>
-          <li><strong>Plate ↔ standoff ↔ plate:</strong> CNC hole position (0.05 mm), insert offset from printing and installation (0.10 mm), and insert tilt drifting the screw across the 6.35 mm plate (6.35 · tan 2° = 0.22 mm), each counted at the top and bottom interface. RSS = <strong>0.35 mm &lt; 0.50 mm</strong>.</li>
-          <li><strong>PCB hole ↔ plate hole:</strong> where one screw passes through both the voltage-sensing PCB and the plate, the errors are plate hole position (0.05 mm), locating pin position (0.05 mm), PCB float on the 3 mm pin (0.02 mm), PCB fab hole position (0.075 mm), and tilt across the full 7.95 mm stack (0.28 mm). RSS = <strong>0.30 mm &lt; 0.50 mm</strong>.</li>
+          <li><strong>Checks 1–2, plate ↔ standoff or side support ↔ plate:</strong> the M4 standoffs and M5 side supports thread into heat-set inserts and float between the two polycarbonate plates, so the room in both holes adds up to <strong>0.50 mm</strong> of slack. With 2° insert tilt across the 6.35 mm plate, RSS = <strong>0.35 mm &lt; 0.50 mm</strong>. Pass.</li>
+          <li><strong>Checks 3–7, parts screwed into tapped polycarbonate:</strong> the vsense board, vsense cover, BMS, temperature sensing board, and both clamshells screw into threads tapped into the plates. The plates cannot shift, so each hole only gets its own <strong>0.25 mm</strong> of slack. The pin-located vsense and tsense boards pass (RSS 0.17 mm), and the bottom clamshell passes at 0.22 mm.</li>
+          <li><strong>Where it fails:</strong> the <strong>vsense cover, BMS, and top clamshell holes</strong> exceed 0.25 mm. These parts sit on tall stacks (17 to 23 mm above the tap), so even a 1° tilt drifts the screw 0.30 to 0.40 mm, and the cover can also shift up to 0.25 mm because nothing locates it.</li>
         </ul>
         <p>
-          Both joints assemble, but the stack-up showed that <strong>insert tilt is the largest contributor</strong> in each check. The quarter-inch plates give a slightly crooked insert a lot of height over which to push the screw sideways. The insert offset and tilt values are typical for hand-installed inserts, so the next step is to measure them on installed parts and use an installation guide to keep tilt low.
+          The stack-up's main lesson is that <strong>tilt dominates every joint</strong>, and it grows with the height of the stack. The short, pin-located joints have margin to spare, while the tall stacks on top of the module do not. Those three holes need to be opened up, or the cover and clamshell need their own locating features, before the next build. The tilt values are assumptions, so measuring them on installed parts comes next.
         </p>
         <div class="project-images calcs">
           <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
@@ -1418,8 +1419,16 @@
             <span class="label">Wirebond loop vs. vsense cover clearance</span>
           </div>
           <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
-            <img src="images/module_fastener_stackup.png" alt="Hand calculation of the RSS fastener positional tolerance stack-up" onload="phHide(this)" onerror="imgHide(this)">
-            <span class="label">Fastener positional stack-up · RSS</span>
+            <img src="images/module_fastener_stackup_1.png" alt="Hand calculation of fastener stack-up checks 1 through 3" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Fastener stack-up · checks 1–3</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/module_fastener_stackup_2.png" alt="Hand calculation of fastener stack-up checks 4 through 6" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Fastener stack-up · checks 4–6</span>
+          </div>
+          <div class="shot"><span class="tick tl"></span><span class="tick br"></span>
+            <img src="images/module_fastener_stackup_3.png" alt="Hand calculation of fastener stack-up check 7" onload="phHide(this)" onerror="imgHide(this)">
+            <span class="label">Fastener stack-up · check 7</span>
           </div>
         </div>
       </div>
@@ -1434,7 +1443,7 @@
           </div>
         </div>
         <p>
-          With the architecture, plate sizing, fastener method, and tolerance stack-ups in place, I am currently working on three things to take the module from analysis to a build-ready design. First, <strong>ANSYS simulation to validate airflow</strong> through the module, checking that the cooling air actually reaches the cells rather than slipping around them. Second, <strong>measuring heat-set insert offset and tilt</strong> on installed parts to replace the assumed values in the fastener stack-up. Third, <strong>finalizing the fastener count</strong> by pull-testing heat-set inserts in our printed material and adding shear features so the nylon screws only have to work in tension.
+          With the architecture, plate sizing, fastener method, and tolerance stack-ups in place, I am currently working on three things to take the module from analysis to a build-ready design. First, <strong>ANSYS simulation to validate airflow</strong> through the module, checking that the cooling air actually reaches the cells rather than slipping around them. Second, <strong>closing out the fastener stack-up</strong>: measuring insert and tap tilt on installed parts to replace the assumed values, then resizing the vsense cover, BMS, and top clamshell holes that failed. Third, <strong>finalizing the fastener count</strong> by pull-testing heat-set inserts in our printed material and adding shear features so the nylon screws only have to work in tension.
         </p>
       </div>
 
